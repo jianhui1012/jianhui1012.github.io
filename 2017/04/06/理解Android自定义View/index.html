@@ -15,18 +15,14 @@
 
 
 
-<meta name="description" content="欢迎您捐赠本站，您的支持是我最大的动力！–">
-<meta property="og:type" content="website">
-<meta property="og:title" content="2017面试整理">
-<meta property="og:url" content="http://jianhui1012.github.io/about/index.html">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="理解Android自定义View">
+<meta property="og:url" content="http://jianhui1012.github.io/2017/04/06/理解Android自定义View/index.html">
 <meta property="og:site_name" content="2017面试整理">
-<meta property="og:description" content="欢迎您捐赠本站，您的支持是我最大的动力！–">
-<meta property="og:image" content="https://avatars0.githubusercontent.com/u/8265384?v=3&s=72">
-<meta property="og:updated_time" content="2017-04-04T03:33:49.363Z">
+<meta property="og:updated_time" content="2017-04-06T15:38:11.482Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2017面试整理">
-<meta name="twitter:description" content="欢迎您捐赠本站，您的支持是我最大的动力！–">
-<meta name="twitter:image" content="https://avatars0.githubusercontent.com/u/8265384?v=3&s=72">
+<meta name="twitter:title" content="理解Android自定义View">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -58,7 +54,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>2017面试整理</title>
+<title>理解Android自定义View | 2017面试整理</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -68,7 +64,7 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
+        isPost: true,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -262,11 +258,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-理解Android自定义View" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/about/index.html" class="article-date">
-      <time datetime="2017-04-04T03:33:49.363Z" itemprop="datePublished">2017-04-04</time>
+      <a href="/2017/04/06/理解Android自定义View/" class="article-date">
+      <time datetime="2017-04-06T15:38:11.000Z" itemprop="datePublished">2017-04-06</time>
 </a>
 
 
@@ -277,40 +273,87 @@
       <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      理解Android自定义View
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
     <div class="article-entry" itemprop="articleBody">
       
           
-              <style>
-    .article-meta { display: none; }
-    #container .article .article-title { padding-right: 0; }
-    .article-header {
-        padding: 0;
-        padding-top: 26px;
-        border-left: none;
-        text-align: center;
-    }
-    .article-header:hover { border-left: none; }
-    .article-title { font-size: 1.6em }
-    .article-entry hr { margin: 0;}
-    .article-meta,
-    #container .article-info-post.article-info { display: none;}
-    #container .article .article-title { padding: 0; }
-</style>
-
-
-          
-        <center><br>欢迎您捐赠本站，您的支持是我最大的动力！<br>–<br><img src="https://avatars0.githubusercontent.com/u/8265384?v=3&amp;s=72" alt=""><br><br><br></center>
-
+        
       
     </div>
     
   </div>
   
     
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/04/06/理解Android自定义View/">理解Android自定义View</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">golike</a></p>
+        <p><span>发布时间:</span>2017-04-06, 23:38:11</p>
+        <p><span>最后更新:</span>2017-04-06, 23:38:11</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/04/06/理解Android自定义View/" title="理解Android自定义View">http://jianhui1012.github.io/2017/04/06/理解Android自定义View/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://jianhui1012.github.io/2017/04/06/理解Android自定义View/　　作者: golike" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
 
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/04/05/排序算法的时间复杂度与空间复杂度/">
+                    常见的排序算法介绍与分析
+                </a>
+            </div>
+        
+        
+    </nav>
 
   
 </article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
 
 
 
@@ -328,7 +371,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"　| 2017面试整理　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"理解Android自定义View　| 2017面试整理　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -357,6 +400,24 @@
 </section>
     
 
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/04/05/排序算法的时间复杂度与空间复杂度/" title="上一篇: 常见的排序算法介绍与分析">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/04/06/理解Android自定义View/">理解Android自定义View</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/05/排序算法的时间复杂度与空间复杂度/">常见的排序算法介绍与分析</a></li></ul>
 
 
 
