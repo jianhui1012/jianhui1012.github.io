@@ -22,7 +22,7 @@
 <meta property="og:url" content="http://jianhui1012.github.io/2017/04/06/理解Android自定义View/index.html">
 <meta property="og:site_name" content="2017面试整理">
 <meta property="og:description" content="面对Android机型碎片化系统自带的控件往往无法满足开发的需求，学习掌握自定义View的实现过程与原理，提高自身开发水平与增加了对android中view模块的理解。">
-<meta property="og:updated_time" content="2017-04-17T15:00:27.417Z">
+<meta property="og:updated_time" content="2017-05-25T15:36:31.370Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解Android自定义View">
 <meta name="twitter:description" content="面对Android机型碎片化系统自带的控件往往无法满足开发的需求，学习掌握自定义View的实现过程与原理，提高自身开发水平与增加了对android中view模块的理解。">
@@ -307,11 +307,14 @@
 <h3 id="几个重要概念介绍"><a href="#几个重要概念介绍" class="headerlink" title="几个重要概念介绍"></a>几个重要概念介绍</h3></li>
 </ul>
 <ul>
-<li>坐标系与View的位置模型概述</li>
-<li>ViewGroup与View概述</li>
-<li>测量模式概述</li>
+<li>坐标系与View的位置模型概述<br>屏幕的左上角为原点，沿上屏幕边线为X轴，沿左屏幕边线为Y轴<br>View在坐标系的位置产生了四个具体距离值，即left,right,top,bottom</li>
+<li>ViewGroup与View概述<br>ViewGroup继承自View,View是构成基本布局的用户界面组件，它在屏幕中占据一块矩形区域并负责绘制与事件处理。<br>ViewGroup是容器，它的中间可以存放View并控制内部View的摆放。<br>View是控件，可以创建自定义控件或者系统提供的控件进行页面布局。</li>
+<li>测量模式概述<br>3中测量模式：<br>EXACTLY：表示设置了精确的值，一般当childView设置其宽、高为精确值、match_parent时，ViewGroup会将其设置为EXACTLY；</li>
 </ul>
-<h3 id="3个重要方法onMeasure-onLayout-onDraw"><a href="#3个重要方法onMeasure-onLayout-onDraw" class="headerlink" title="3个重要方法onMeasure().onLayout(),onDraw()"></a>3个重要方法onMeasure().onLayout(),onDraw()</h3><h3 id="自定义View"><a href="#自定义View" class="headerlink" title="自定义View"></a>自定义View</h3><h4 id="实现一个指定半径的圆"><a href="#实现一个指定半径的圆" class="headerlink" title="实现一个指定半径的圆"></a>实现一个指定半径的圆</h4><h4 id="实现一个线性横向布局的ViewGroup"><a href="#实现一个线性横向布局的ViewGroup" class="headerlink" title="实现一个线性横向布局的ViewGroup"></a>实现一个线性横向布局的ViewGroup</h4>
+<p>AT_MOST：表示子布局被限制在一个最大值内，一般当childView设置其宽、高为wrap_content时，ViewGroup会将其设置为AT_MOST；</p>
+<p>UNSPECIFIED：表示子布局想要多大就多大，一般出现在AadapterView的item的heightMode中、ScrollView的childView的heightMode中；此种模式比较少见。</p>
+<h3 id="3个重要方法onMeasure-onLayout-onDraw"><a href="#3个重要方法onMeasure-onLayout-onDraw" class="headerlink" title="3个重要方法onMeasure().onLayout(),onDraw()"></a>3个重要方法onMeasure().onLayout(),onDraw()</h3><p>onMeasure()方法用来测量子视图及其所有子项的大小<br>onLayout()方法当确定View大小时，根据top,left,bottom,right四个值摆放控件位置<br>onDraw()方法使用画笔绘制视图，呈现其内容</p>
+<h3 id="自定义View"><a href="#自定义View" class="headerlink" title="自定义View"></a>自定义View</h3><h4 id="实现一个指定半径的圆"><a href="#实现一个指定半径的圆" class="headerlink" title="实现一个指定半径的圆"></a>实现一个指定半径的圆</h4><h4 id="实现一个线性横向布局的ViewGroup"><a href="#实现一个线性横向布局的ViewGroup" class="headerlink" title="实现一个线性横向布局的ViewGroup"></a>实现一个线性横向布局的ViewGroup</h4>
       
     </div>
     
@@ -322,7 +325,7 @@
         <p><span>本文标题:</span><a href="/2017/04/06/理解Android自定义View/">理解Android自定义View</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">golike</a></p>
         <p><span>发布时间:</span>2017-04-06, 23:38:11</p>
-        <p><span>最后更新:</span>2017-04-17, 23:00:27</p>
+        <p><span>最后更新:</span>2017-05-25, 23:36:31</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/04/06/理解Android自定义View/" title="理解Android自定义View">http://jianhui1012.github.io/2017/04/06/理解Android自定义View/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jianhui1012.github.io/2017/04/06/理解Android自定义View/　　作者: golike" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
