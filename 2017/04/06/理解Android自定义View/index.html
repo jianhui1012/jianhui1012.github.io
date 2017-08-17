@@ -22,7 +22,8 @@
 <meta property="og:url" content="http://jianhui1012.github.io/2017/04/06/理解Android自定义View/index.html">
 <meta property="og:site_name" content="2017面试整理">
 <meta property="og:description" content="面对Android机型碎片化系统自带的控件往往无法满足开发的需求，学习掌握自定义View的实现过程与原理，提高自身开发水平与增加了对android中view模块的理解。">
-<meta property="og:updated_time" content="2017-05-25T15:36:31.370Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-13T15:01:13.429Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解Android自定义View">
 <meta name="twitter:description" content="面对Android机型碎片化系统自带的控件往往无法满足开发的需求，学习掌握自定义View的实现过程与原理，提高自身开发水平与增加了对android中view模块的理解。">
@@ -301,12 +302,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>面对Android机型碎片化系统自带的控件往往无法满足开发的需求，学习掌握自定义View的实现过程与原理，提高自身开发水平与增加了对android中view模块的理解。</p>
-<ul>
-<li><a id="more"></a>
-<h3 id="几个重要概念介绍"><a href="#几个重要概念介绍" class="headerlink" title="几个重要概念介绍"></a>几个重要概念介绍</h3></li>
-</ul>
-<ul>
+        <p>面对Android机型碎片化系统自带的控件往往无法满足开发的需求，学习掌握自定义View的实现过程与原理，提高自身开发水平与增加了对android中view模块的理解。<br><a id="more"></a></p>
+<h3 id="几个重要概念介绍"><a href="#几个重要概念介绍" class="headerlink" title="几个重要概念介绍"></a>几个重要概念介绍</h3><ul>
 <li>坐标系与View的位置模型概述<br>屏幕的左上角为原点，沿上屏幕边线为X轴，沿左屏幕边线为Y轴<br>View在坐标系的位置产生了四个具体距离值，即left,right,top,bottom</li>
 <li>ViewGroup与View概述<br>ViewGroup继承自View,View是构成基本布局的用户界面组件，它在屏幕中占据一块矩形区域并负责绘制与事件处理。<br>ViewGroup是容器，它的中间可以存放View并控制内部View的摆放。<br>View是控件，可以创建自定义控件或者系统提供的控件进行页面布局。</li>
 <li>测量模式概述<br>3中测量模式：<br>EXACTLY：表示设置了精确的值，一般当childView设置其宽、高为精确值、match_parent时，ViewGroup会将其设置为EXACTLY；</li>
@@ -325,7 +322,7 @@
         <p><span>本文标题:</span><a href="/2017/04/06/理解Android自定义View/">理解Android自定义View</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">golike</a></p>
         <p><span>发布时间:</span>2017-04-06, 23:38:11</p>
-        <p><span>最后更新:</span>2017-05-25, 23:36:31</p>
+        <p><span>最后更新:</span>2017-08-13, 23:01:13</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/04/06/理解Android自定义View/" title="理解Android自定义View">http://jianhui1012.github.io/2017/04/06/理解Android自定义View/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jianhui1012.github.io/2017/04/06/理解Android自定义View/　　作者: golike" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -341,15 +338,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/04/05/排序算法的时间复杂度与空间复杂度/">
-                    常见的排序算法介绍与分析
+                <a href="/2017/04/16/QuestioningSkills/">
+                    提问的智慧
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/04/16/QuestioningSkills/">
-                    提问的智慧
+                <a href="/2017/04/05/排序算法的时间复杂度与空间复杂度/">
+                    常见的排序算法介绍与分析
                 </a>
             </div>
         
@@ -431,7 +428,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/04/05/排序算法的时间复杂度与空间复杂度/" title="上一篇: 常见的排序算法介绍与分析">
+            <a href="/2017/04/16/QuestioningSkills/" title="上一篇: 提问的智慧">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -439,13 +436,13 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/04/16/QuestioningSkills/" title="下一篇: 提问的智慧">
+            <a href="/2017/04/05/排序算法的时间复杂度与空间复杂度/" title="下一篇: 常见的排序算法介绍与分析">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/计算机网络发展史/">计算机网络发展史</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/11/如何在APP应用基于Token的验证/">如何在APP应用基于Token的验证</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/16/QuestioningSkills/">提问的智慧</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/06/理解Android自定义View/">理解Android自定义View</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/05/排序算法的时间复杂度与空间复杂度/">常见的排序算法介绍与分析</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/计算机网络体系结构/">计算机网络体系结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/计算机网络发展史/">计算机网络发展史</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/11/如何在APP应用基于Token的验证/">如何在APP应用基于Token的验证</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/16/QuestioningSkills/">提问的智慧</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/06/理解Android自定义View/">理解Android自定义View</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/05/排序算法的时间复杂度与空间复杂度/">常见的排序算法介绍与分析</a></li></ul>
 
 
 
