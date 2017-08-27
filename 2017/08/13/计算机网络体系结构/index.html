@@ -23,10 +23,12 @@
 <meta property="og:site_name" content="2017面试整理">
 <meta property="og:description" content="前文简单讲了早期计算机网络发展史，本文主要概述OSI的7层协议结构，TCP/IP的4层协议，5层协议的来由与具体内容。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-17T15:28:26.608Z">
+<meta property="og:image" content="http://jianhui1012.github.io/2017/08/13/计算机网络体系结构/计算机体系结构.jpg">
+<meta property="og:updated_time" content="2017-08-27T10:52:17.426Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络体系结构">
 <meta name="twitter:description" content="前文简单讲了早期计算机网络发展史，本文主要概述OSI的7层协议结构，TCP/IP的4层协议，5层协议的来由与具体内容。">
+<meta name="twitter:image" content="http://jianhui1012.github.io/2017/08/13/计算机网络体系结构/计算机体系结构.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -322,7 +324,35 @@
 <li>前面讲到因特网的前身ARPANET的研制经验告诉我们,对于复杂的计算机网络协议,需要分层设计。</li>
 </ul>
 <h4 id="详解5层体系协议"><a href="#详解5层体系协议" class="headerlink" title="详解5层体系协议"></a>详解5层体系协议</h4><ul>
-<li>五层体系是由7层体系与TCP/IP的4层体系的中庸之道简化的产物。  </li>
+<li>五层体系是由7层体系与TCP/IP的4层体系的中庸之道简化的产物,如下图所示:</li>
+<li>QAQ!小伙伴们知道是哪5层协议吗?承上启下网络层,上层应用层,上层之下传输层,下层数据链路层,下层之下物理层;</li>
+</ul>
+<p><img src="/2017/08/13/计算机网络体系结构/计算机体系结构.jpg" alt="计算机网络体系结构as"></p>
+<ul>
+<li>听完上面的,小伙伴们肯定对各层如何运作十分好奇吧？下面具体讲下各层的作用吧！</li>
+</ul>
+<h5 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h5><ul>
+<li>作为体系结构中的最上层,帮助应用进程之间进行交互是它的使命,他旗下的协议主要有:HTTP,STMP,FTP等;</li>
+<li>基本单位是报文;</li>
+</ul>
+<h5 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h5><ul>
+<li>传输层的名字与TCP英文翻译过来一样,容易记忆,它呢？有TCP与UDP两种协议,前一种是连接的,可靠的,后一种是无连接的,不可靠的;</li>
+<li>TCP的基本单位是报文段;UDP的基本单位是用户数据报;</li>
+</ul>
+<h5 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h5><ul>
+<li>网络层的名字也与其协议IP的名字符合,它的任务主要是分组交换网上的不同主机提供通信服务;在发送数据时,网络层把上层运输层的报文段或用户数据报封装成分组或包进行传送。网络层的另一个任务是寻找合适路由;</li>
+<li>数据基本单位是数据报;</li>
+</ul>
+<h5 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h5><ul>
+<li>它的作用主要是cha把网络层交下来的IP数据报组装成帧,在两个相邻节点间的链路上传送帧;帧的包括了控制信息(如同步信息,差错控制等);</li>
+</ul>
+<h5 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h5><ul>
+<li>物理层传递的是熟悉的二进制数据(0,1);</li>
+<li>很明显,它的基本单位是比特;</li>
+</ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
+<li>上面讲的主要是计算机体系结构的相关内容,当然,还有很多细节与计算机性能指标的部分没有延伸开来讲;</li>
+<li>记住5层协议与其的基本任务;</li>
 </ul>
 
       
@@ -335,7 +365,7 @@
         <p><span>本文标题:</span><a href="/2017/08/13/计算机网络体系结构/">计算机网络体系结构</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">golike</a></p>
         <p><span>发布时间:</span>2017-08-13, 22:32:58</p>
-        <p><span>最后更新:</span>2017-08-17, 23:28:26</p>
+        <p><span>最后更新:</span>2017-08-27, 18:52:17</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/08/13/计算机网络体系结构/" title="计算机网络体系结构">http://jianhui1012.github.io/2017/08/13/计算机网络体系结构/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jianhui1012.github.io/2017/08/13/计算机网络体系结构/　　作者: golike" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -365,7 +395,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#网络划分"><span class="toc-number">1.</span> <span class="toc-text">网络划分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网络性能指标"><span class="toc-number">2.</span> <span class="toc-text">网络性能指标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算机网络体系结构"><span class="toc-number">3.</span> <span class="toc-text">计算机网络体系结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#如何形成？"><span class="toc-number">3.1.</span> <span class="toc-text">如何形成？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#详解5层体系协议"><span class="toc-number">3.2.</span> <span class="toc-text">详解5层体系协议</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#网络划分"><span class="toc-number">1.</span> <span class="toc-text">网络划分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网络性能指标"><span class="toc-number">2.</span> <span class="toc-text">网络性能指标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算机网络体系结构"><span class="toc-number">3.</span> <span class="toc-text">计算机网络体系结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#如何形成？"><span class="toc-number">3.1.</span> <span class="toc-text">如何形成？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#详解5层体系协议"><span class="toc-number">3.2.</span> <span class="toc-text">详解5层体系协议</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#应用层"><span class="toc-number">3.2.1.</span> <span class="toc-text">应用层</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#传输层"><span class="toc-number">3.2.2.</span> <span class="toc-text">传输层</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#网络层"><span class="toc-number">3.2.3.</span> <span class="toc-text">网络层</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#数据链路层"><span class="toc-number">3.2.4.</span> <span class="toc-text">数据链路层</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#物理层"><span class="toc-number">3.2.5.</span> <span class="toc-text">物理层</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">3.3.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
         
     </div>
     <style>
