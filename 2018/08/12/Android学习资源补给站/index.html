@@ -15,20 +15,18 @@
 
 
 
-<meta name="description" content="前文简单讲了早期计算机网络发展史，本文主要概述OSI的7层协议结构，TCP/IP的4层协议，5层协议的来由与具体内容。">
-<meta name="keywords" content="计算机网络">
+<meta name="description" content="你想要的都在这里哦。">
+<meta name="keywords" content="Android,资源">
 <meta property="og:type" content="article">
-<meta property="og:title" content="计算机网络体系结构">
-<meta property="og:url" content="http://jianhui1012.github.io/2017/08/13/计算机网络体系结构/index.html">
+<meta property="og:title" content="Android学习资源补给站">
+<meta property="og:url" content="http://jianhui1012.github.io/2018/08/12/Android学习资源补给站/index.html">
 <meta property="og:site_name" content="2017面试整理">
-<meta property="og:description" content="前文简单讲了早期计算机网络发展史，本文主要概述OSI的7层协议结构，TCP/IP的4层协议，5层协议的来由与具体内容。">
+<meta property="og:description" content="你想要的都在这里哦。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://jianhui1012.github.io/2017/08/13/计算机网络体系结构/计算机体系结构.jpg">
-<meta property="og:updated_time" content="2018-07-23T15:35:31.165Z">
+<meta property="og:updated_time" content="2018-08-12T15:37:45.669Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="计算机网络体系结构">
-<meta name="twitter:description" content="前文简单讲了早期计算机网络发展史，本文主要概述OSI的7层协议结构，TCP/IP的4层协议，5层协议的来由与具体内容。">
-<meta name="twitter:image" content="http://jianhui1012.github.io/2017/08/13/计算机网络体系结构/计算机体系结构.jpg">
+<meta name="twitter:title" content="Android学习资源补给站">
+<meta name="twitter:description" content="你想要的都在这里哦。">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -60,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>计算机网络体系结构 | 2017面试整理</title>
+<title>Android学习资源补给站 | 2017面试整理</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -264,11 +262,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-计算机网络体系结构" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Android学习资源补给站" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/08/13/计算机网络体系结构/" class="article-date">
-      <time datetime="2017-08-13T14:32:58.000Z" itemprop="datePublished">2017-08-13</time>
+      <a href="/2018/08/12/Android学习资源补给站/" class="article-date">
+      <time datetime="2018-08-12T15:28:26.000Z" itemprop="datePublished">2018-08-12</time>
 </a>
 
 
@@ -283,7 +281,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      计算机网络体系结构
+      Android学习资源补给站
     </h1>
   
 
@@ -294,7 +292,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机网络/">计算机网络</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/资源/">资源</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -304,56 +302,53 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>前文简单讲了早期计算机网络发展史，本文主要概述OSI的7层协议结构，TCP/IP的4层协议，5层协议的来由与具体内容。<br><a id="more"></a></p>
-<h3 id="网络划分"><a href="#网络划分" class="headerlink" title="网络划分"></a>网络划分</h3><ul>
-<li>计算机网络是把许多计算机连接在一起;互联网是由许多计算机网络组成的;因特网是世界上最大的互联网;</li>
-<li>互联网所用的通信协议可以是任意的，而因特网所用的通信协议是TCP/IP协议族，且其前身是美国的ARPANET;</li>
-<li>因特网数据交换的方式通过存储转发的分组交换技术,以及3层ISP结构;</li>
-<li>因特网主要分为核心部分与边缘部分,计算机处于边缘部分;路由器处在核心部分,起作用是按存储转发进行分组交换</li>
-<li>按作用范围划分,计算机网络分为广域网,城域网,局域网,个人区域网</li>
-</ul>
-<h3 id="网络性能指标"><a href="#网络性能指标" class="headerlink" title="网络性能指标"></a>网络性能指标</h3><ul>
-<li>关键指标:速率,带宽,吞吐量,时延,时延带宽积,往返时间和信道利用率</li>
-</ul>
-<h3 id="计算机网络体系结构"><a href="#计算机网络体系结构" class="headerlink" title="计算机网络体系结构"></a>计算机网络体系结构</h3><h4 id="如何形成？"><a href="#如何形成？" class="headerlink" title="如何形成？"></a>如何形成？</h4><blockquote>
-<p>  1974年,美国的IBM公司宣布了系统网络体系结构SNA,这个著名的网络标准就是按照分层的方法制定的。</p>
-<p>  在1983年形成了开发系统互联基本参考模型的正式文件,即著名的ISO 7498国际标准，也就是所谓的七层协议的体系结构。</p>
-</blockquote>
-<ul>
-<li>协议主要由三部分组成:语法,语义,同步;其中,语法负责数据的结构;语义负责发送何种操作;同步负责事件实现顺序的详细说明;</li>
-<li>前面讲到因特网的前身ARPANET的研制经验告诉我们,对于复杂的计算机网络协议,需要分层设计。</li>
-</ul>
-<h4 id="详解5层体系协议"><a href="#详解5层体系协议" class="headerlink" title="详解5层体系协议"></a>详解5层体系协议</h4><ul>
-<li>五层体系是由7层体系与TCP/IP的4层体系的中庸之道简化的产物,如下图所示:</li>
-<li>QAQ!小伙伴们知道是哪5层协议吗?承上启下网络层,上层应用层,上层之下传输层,下层数据链路层,下层之下物理层;</li>
-</ul>
-<p><img src="/2017/08/13/计算机网络体系结构/计算机体系结构.jpg" alt="计算机网络体系结构as"></p>
-<ul>
-<li>听完上面的,小伙伴们肯定对各层如何运作十分好奇吧？下面具体讲下各层的作用吧！</li>
-</ul>
-<h5 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h5><ul>
-<li>作为体系结构中的最上层,帮助应用进程之间进行交互是它的使命,他旗下的协议主要有:HTTP,STMP,FTP等;</li>
-<li>基本单位是报文;</li>
-</ul>
-<h5 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h5><ul>
-<li>传输层的名字与TCP英文翻译过来一样,容易记忆,它呢？有TCP与UDP两种协议,前一种是连接的,可靠的,后一种是无连接的,不可靠的;</li>
-<li>TCP的基本单位是报文段;UDP的基本单位是用户数据报;</li>
-</ul>
-<h5 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h5><ul>
-<li>网络层的名字也与其协议IP的名字符合,它的任务主要是分组交换网上的不同主机提供通信服务;在发送数据时,网络层把上层运输层的报文段或用户数据报封装成分组或包进行传送。网络层的另一个任务是寻找合适路由;</li>
-<li>数据基本单位是数据报;</li>
-</ul>
-<h5 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h5><ul>
-<li>它的作用主要是cha把网络层交下来的IP数据报组装成帧,在两个相邻节点间的链路上传送帧;帧的包括了控制信息(如同步信息,差错控制等);</li>
-</ul>
-<h5 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h5><ul>
-<li>物理层传递的是熟悉的二进制数据(0,1);</li>
-<li>很明显,它的基本单位是比特;</li>
-</ul>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
-<li>上面讲的主要是计算机体系结构的相关内容,当然,还有很多细节与计算机性能指标的部分没有延伸开来讲;</li>
-<li>记住5层协议与其的基本任务;</li>
-</ul>
+        <p>你想要的都在这里哦。<br><a id="more"></a></p>
+<h3 id="一、GitHub部分"><a href="#一、GitHub部分" class="headerlink" title="一、GitHub部分"></a>一、GitHub部分</h3><p>1.github强大源码搜索平台</p>
+<p><a href="http://www.codota.com/" target="_blank" rel="external">网站地址</a></p>
+<p>收藏了yzhixiang常看的开源项目和优秀博文。 </p>
+<p><a href="https://github.com/yzhixiang?tab=repositories" target="_blank" rel="external">github地址</a></p>
+<p>2.android sdk 源码解析——旨在帮助Android开发者更好的学习Android！<br>此博文在持续更新源码每个模块的解析。 </p>
+<p><a href="https://github.com/LittleFriendsGroup/AndroidSdkSourceAnalysis" target="_blank" rel="external">github地址</a></p>
+<p>3.Android开发相关的网址导航<br>里面有丰富的学习资源，分为八个模块，基本上总结了所有可以学习的资料，一定要时常翻看。 </p>
+<p><a href="https://github.com/ColorfulCat/AndroidGuide" target="_blank" rel="external">github地址</a></p>
+<ol>
+<li>资源文档 </li>
+<li>技术社区 </li>
+<li>技术教程 </li>
+<li>开源代码 </li>
+<li>大神博客 </li>
+<li>开发框架 </li>
+<li>技术资讯 </li>
+<li>开发服务 </li>
+</ol>
+<p>4.Android开源的app项目源码<br>第一个开源项目汇总简介：</p>
+<p>Android 开源项目第一篇——个性化控件(View)篇<br>包括ListView、ActionBar、Menu、ViewPager、Gallery、GridView、ImageView、ProgressBar、TextView、ScrollView、TimeView、TipView、FlipView、ColorPickView、GraphView、UI Style、其他<br>Android 开源项目第二篇——工具库篇<br>包括依赖注入、图片缓存、网络请求、数据库 ORM 工具包、Android 公共库、高版本向低版本兼容库、多媒体、事件总线、传感器、安全、插件化、文件、其他<br>Android 开源项目第三篇——优秀项目篇<br>比较有意思的完整的 Android 项目<br>Android 开源项目第四篇——开发及测试工具篇<br>包括开发效率工具、开发自测相关、测试工具、开发及编译环境、其他<br>Android 开源项目第五篇——优秀个人和团体篇<br>乐于分享并且有一些很不错的开源项目的个人和组织，包括 JakeWharton、Chris Banes、Koushik Dutta 等大牛</p>
+<p><a href="https://github.com/Trinea/android-open-project" target="_blank" rel="external">github地址</a></p>
+<p>第二个开源项目汇总：<br><a href="https://github.com/pcqpcq/open-source-android-apps" target="_blank" rel="external">github地址</a> </p>
+<p>第三个开源项目汇总：<br><a href="http://www.tuicool.com/articles/2yEBzqM" target="_blank" rel="external">网页地址</a></p>
+<p>第四个开源项目汇总：<br><a href="http://android-arsenal.com/free" target="_blank" rel="external">网站地址</a> </p>
+<p>第五个开源项目汇总：<br><a href="http://a.codekk.com/" target="_blank" rel="external">网站地址</a> </p>
+<p>第五个开源项目汇总(160多个android开源代码汇总)：<br><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2014/0714/1633.html" target="_blank" rel="external">网站地址</a> </p>
+<p>第五个开源项目汇总(Android开源项目博客)：<br><a href="http://www.cnblogs.com/mythou/" target="_blank" rel="external">网站地址</a> </p>
+<p>第六个开源项目汇总(安卓应用游戏APP源码下载)：<br><a href="http://www.javaapk.com/page/1" target="_blank" rel="external">网站地址</a></p>
+<p>5.常用的Android开源库和框架<br>很棒的Android UI库</p>
+<p>其中包括：Material、Layout、Button、List / Grid、ViewPager、Label /Form、Image、SeekBar、Progress、Menu、ActionBar、Dialog、Calendar、Graph、Animation、Parallax、Effect(Blur… etc)和Other这些分类。</p>
+<p>github地址：<a href="https://github.com/wasabeef/awesome-android-ui" target="_blank" rel="external">https://github.com/wasabeef/awesome-android-ui</a></p>
+<p>多媒体编程库和网络编程框架</p>
+<p>其中包括：图片加载库、图片处理库、图片加载相关博文、图片处理相关博文、网络加载框架、网络加载相关博文</p>
+<p>github地址：<a href="https://github.com/itheima1/Android" target="_blank" rel="external">https://github.com/itheima1/Android</a></p>
+<p>6.AndroidDevTools(Android开发工具集合)<br>收集整理Android开发所需的Android SDK、开发中用到的工具、Android开发教程、Android设计规范，免费的设计素材等。<br>github地址：<a href="https://github.com/inferjay/AndroidDevTools" target="_blank" rel="external">https://github.com/inferjay/AndroidDevTools</a></p>
+<p>7.Java资源大全中文版<br>目录简介如下</p>
+<p>Java资源大全中文版：<br>古董级工具、构建工具、字节码操作、集群管理、代码分析、编译器生成工具、外部配置工具、约束满足问题求解程序、持续集成、CSV解析、数据结构、数据库、时间日期工具库、依赖注入、开发流程增强工具、分布式应用、分布式数据库、发布、文档处理工具、函数式编程、游戏开发、GUI、高性能计算、IDE、图像处理、JSON、JVM与JDK、基于JVM的语言、日志、机器学习、消息传递、杂项、应用监控工具、原生开发库、自然语言处理、网络、ORM、PDF、性能分析、响应式开发库、REST框架、科学计算与分析、搜索引擎、安全、序列化、应用服务器、模板引擎、测试、通用工具库、网络爬虫、Web框架、业务流程管理套件<br>资源：<br>社区、有影响力的书、播客、微博微信公众号、Twitter、知名网站、博客</p>
+<p>github地址：<a href="https://github.com/yzhixiang/awesome-java-cn" target="_blank" rel="external">https://github.com/yzhixiang/awesome-java-cn</a></p>
+<p>8.大牛级Android 开发者<br>中国部分 Android 开发者<br>github地址：<a href="https://github.com/android-cn/android-dev-cn" target="_blank" rel="external">https://github.com/android-cn/android-dev-cn</a><br>国外著名 Android 开发者及公司信息<br>github地址：<a href="https://github.com/android-cn/android-dev-com" target="_blank" rel="external">https://github.com/android-cn/android-dev-com</a></p>
+<p>二、网站部分<br>1.视频学习网站<br>慕课网：<a href="http://www.imooc.com/course/list" target="_blank" rel="external">http://www.imooc.com/course/list</a><br>MOOC学院：<a href="http://mooc.guokr.com/" target="_blank" rel="external">http://mooc.guokr.com/</a><br>极客学院：<a href="http://www.jikexueyuan.com/course/android/" target="_blank" rel="external">http://www.jikexueyuan.com/course/android/</a></p>
+<p>2.学习论坛和代码托管平台<br>API Store 为开发者提供最全面的API服务：<a href="http://apistore.baidu.com/" target="_blank" rel="external">http://apistore.baidu.com/</a> (2016.6.17添加)<br>Mob官网(提供了ShareSDK，短信验证SDK，Mob API)：<a href="http://www.mob.com/#/" target="_blank" rel="external">http://www.mob.com/#/</a> (2016.7.28添加)<br>极光推送：<a href="https://www.jiguang.cn/" target="_blank" rel="external">https://www.jiguang.cn/</a> (2016.7.30添加)<br>讯飞语音云：<a href="http://www.voicecloud.cn/" target="_blank" rel="external">http://www.voicecloud.cn/</a> (2016.7.30添加)<br>友盟数据统计：<a href="http://www.umeng.com/" target="_blank" rel="external">http://www.umeng.com/</a> (2016.7.30添加)<br>GitHub：<a href="https://github.com/" target="_blank" rel="external">https://github.com/</a><br>stackoverflow：<a href="http://stackoverflow.com/" target="_blank" rel="external">http://stackoverflow.com/</a><br>码云：<a href="https://git.oschina.net/" target="_blank" rel="external">https://git.oschina.net/</a><br>CSDN：<a href="http://www.csdn.net/" target="_blank" rel="external">http://www.csdn.net/</a><br>稀土：<a href="http://gold.xitu.io/" target="_blank" rel="external">http://gold.xitu.io/</a><br>开源中国：<a href="http://www.oschina.net/" target="_blank" rel="external">http://www.oschina.net/</a><br>码农网：<a href="http://www.codeceo.com/" target="_blank" rel="external">http://www.codeceo.com/</a><br>WEB前端开发博客：<a href="http://caibaojian.com/" target="_blank" rel="external">http://caibaojian.com/</a><br>Trinea博客：<a href="http://www.trinea.cn/" target="_blank" rel="external">http://www.trinea.cn/</a><br>胡凯博客：<a href="http://hukai.me/" target="_blank" rel="external">http://hukai.me/</a><br>Gityuan博客：<a href="http://gityuan.com/" target="_blank" rel="external">http://gityuan.com/</a><br>FOOKWOOD的Launcher源码分析：<br><a href="http://www.fookwood.com/android" target="_blank" rel="external">http://www.fookwood.com/android</a><br>songweilin的个人空间博客：<br><a href="http://bbs.9ria.com/home.php?mod=space&amp;uid=346496&amp;do=thread&amp;view=me&amp;order=dateline&amp;from=space&amp;page=19" target="_blank" rel="external">http://bbs.9ria.com/home.php?mod=space&amp;uid=346496&amp;do=thread&amp;view=me&amp;order=dateline&amp;from=space&amp;page=19</a><br>玩Android：<a href="http://www.wanandroid.com/" target="_blank" rel="external">http://www.wanandroid.com/</a> (2016.7.4)<br>eoe移动开发者论坛：<a href="http://www.eoeandroid.com/forum.php" target="_blank" rel="external">http://www.eoeandroid.com/forum.php</a> (2016.7.11)</p>
+<p>3.云后台服务<br>Bmob：<a href="http://www.bmob.cn/" target="_blank" rel="external">http://www.bmob.cn/</a><br>环信：<a href="http://www.easemob.com/" target="_blank" rel="external">http://www.easemob.com/</a></p>
+<p>4.学习方法<br>如何自学Android？-掘金：<a href="http://gold.xitu.io/entry/571edd652e958a006517044f" target="_blank" rel="external">http://gold.xitu.io/entry/571edd652e958a006517044f</a><br>从微软到谷歌，应届计算机毕业生的2012求职之路：<br><a href="http://www.cnblogs.com/figure9/archive/2013/01/09/2853649.html#!comments" target="_blank" rel="external">http://www.cnblogs.com/figure9/archive/2013/01/09/2853649.html#!comments</a></p>
+<p>程序员必读的书，StackOverflow 创始人推荐：<br><a href="http://blog.jobbole.com/100450/" target="_blank" rel="external">http://blog.jobbole.com/100450/</a></p>
+<p>Android 面试知识库：<a href="https://github.com/GeniusVJR/LearningNotes" target="_blank" rel="external">https://github.com/GeniusVJR/LearningNotes</a> (2016.6.27添加)<br>Android 名企面试题及涉及知识点整理：<a href="https://github.com/yzhixiang/ForAndroidInterview" target="_blank" rel="external">https://github.com/yzhixiang/ForAndroidInterview</a> (2016.6.28添加)</p>
+<p>5.其他<br>IT蓝豹，一个专业android特效分享网站：<a href="http://www.itlanbao.com/" target="_blank" rel="external">http://www.itlanbao.com/</a><br>公开图标库：<br><a href="http://iconfont.cn/collectionsspm=a313x.7781069.0.0.3M77Ko&amp;personal=1" target="_blank" rel="external">http://iconfont.cn/collectionsspm=a313x.7781069.0.0.3M77Ko&amp;personal=1</a><br>Android系统源码在线：<a href="http://androidxref.com/" target="_blank" rel="external">http://androidxref.com/</a><br>Android开发技术周报：<a href="http://www.androidweekly.cn/" target="_blank" rel="external">http://www.androidweekly.cn/</a><br>2015最流行的Android组件、工具、框架大全：<br><a href="http://www.open-open.com/lib/view/open1436262653692.html" target="_blank" rel="external">http://www.open-open.com/lib/view/open1436262653692.html</a><br>Android通用流行框架大全：<br><a href="http://toutiao.com/i6282242776079794690/" target="_blank" rel="external">http://toutiao.com/i6282242776079794690/</a><br>安卓巴士-安卓开发：<a href="http://www.apkbus.com/" target="_blank" rel="external">http://www.apkbus.com/</a><br>爱开发-开发者市场：<a href="http://akaifa.com/" target="_blank" rel="external">http://akaifa.com/</a><br>Angle - 超炫酷的后台模板：<a href="https://wrapbootstrap.com/theme/angle-bootstrap-admin-template-WB04HF123" target="_blank" rel="external">https://wrapbootstrap.com/theme/angle-bootstrap-admin-template-WB04HF123</a></p>
 
       
     </div>
@@ -362,13 +357,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/08/13/计算机网络体系结构/">计算机网络体系结构</a></p>
+        <p><span>本文标题:</span><a href="/2018/08/12/Android学习资源补给站/">Android学习资源补给站</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">golike</a></p>
-        <p><span>发布时间:</span>2017-08-13, 22:32:58</p>
-        <p><span>最后更新:</span>2018-07-23, 23:35:31</p>
+        <p><span>发布时间:</span>2018-08-12, 23:28:26</p>
+        <p><span>最后更新:</span>2018-08-12, 23:37:45</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/08/13/计算机网络体系结构/" title="计算机网络体系结构">http://jianhui1012.github.io/2017/08/13/计算机网络体系结构/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://jianhui1012.github.io/2017/08/13/计算机网络体系结构/　　作者: golike" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/08/12/Android学习资源补给站/" title="Android学习资源补给站">http://jianhui1012.github.io/2018/08/12/Android学习资源补给站/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://jianhui1012.github.io/2018/08/12/Android学习资源补给站/　　作者: golike" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -380,16 +375,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/09/11/阅图API/">
-                    阅图API
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/05/26/计算机网络发展史/">
-                    计算机网络发展史
+                <a href="/2018/07/24/一些心得/">
+                    一些心得
                 </a>
             </div>
         
@@ -401,7 +390,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#网络划分"><span class="toc-number">1.</span> <span class="toc-text">网络划分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网络性能指标"><span class="toc-number">2.</span> <span class="toc-text">网络性能指标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算机网络体系结构"><span class="toc-number">3.</span> <span class="toc-text">计算机网络体系结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#如何形成？"><span class="toc-number">3.1.</span> <span class="toc-text">如何形成？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#详解5层体系协议"><span class="toc-number">3.2.</span> <span class="toc-text">详解5层体系协议</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#应用层"><span class="toc-number">3.2.1.</span> <span class="toc-text">应用层</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#传输层"><span class="toc-number">3.2.2.</span> <span class="toc-text">传输层</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#网络层"><span class="toc-number">3.2.3.</span> <span class="toc-text">网络层</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#数据链路层"><span class="toc-number">3.2.4.</span> <span class="toc-text">数据链路层</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#物理层"><span class="toc-number">3.2.5.</span> <span class="toc-text">物理层</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、GitHub部分"><span class="toc-number">1.</span> <span class="toc-text">一、GitHub部分</span></a></li></ol>
         
     </div>
     <style>
@@ -437,7 +426,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"计算机网络体系结构　| 2017面试整理　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Android学习资源补给站　| 2017面试整理　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -471,15 +460,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/09/11/阅图API/" title="上一篇: 阅图API">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/05/26/计算机网络发展史/" title="下一篇: 计算机网络发展史">
+            <a href="/2018/07/24/一些心得/" title="下一篇: 一些心得">
                 <i class="fa fa-angle-right"></i>
             </a>
         
