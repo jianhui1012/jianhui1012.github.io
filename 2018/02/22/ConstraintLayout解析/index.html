@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="golike" />
+
+
+
+<meta name="description" content="年前有个面试，面试中问到是否熟悉ConstraintLayout(约束布局)？我答了用过，脑袋里有个印象但是实际上是模糊的，趁此机会写篇文章重新认识下ConstraintLayout。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ConstraintLayout解析">
+<meta property="og:url" content="http://jianhui1012.github.io/2018/02/22/ConstraintLayout%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:site_name" content="jianhui1012的博客">
+<meta property="og:description" content="年前有个面试，面试中问到是否熟悉ConstraintLayout(约束布局)？我答了用过，脑袋里有个印象但是实际上是模糊的，趁此机会写篇文章重新认识下ConstraintLayout。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-02-22T06:41:45.000Z">
+<meta property="article:modified_time" content="2020-08-29T14:40:35.072Z">
+<meta property="article:author" content="golike">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="jianhui1012的博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>ConstraintLayout解析 | jianhui1012的博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="https://avatars1.githubusercontent.com/u/8265384?v=3&amp;s=460" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">undefined</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:golikeholdon@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" rel="noopener" href="https://github.com/jianhui1012" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/" rel="tag">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E5%9F%BA%E7%A1%80/" rel="tag">Android基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ReactNative/" rel="tag">ReactNative</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%8A%80%E5%B7%A7/" rel="tag">学习技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/" rel="tag">工作总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">源码分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" rel="tag">网络安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%AD%A6/" rel="tag">自学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%BD%E4%B9%A6%E7%A5%9E%E5%99%A8/" rel="tag">追书神器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" target="_blank" rel="noopener" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" target="_blank" rel="noopener" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">hold on</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">undefined</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="https://avatars1.githubusercontent.com/u/8265384?v=3&amp;s=460" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">undefined</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:golikeholdon@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/jianhui1012" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-ConstraintLayout解析" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/02/22/ConstraintLayout%E8%A7%A3%E6%9E%90/" class="article-date">
+      <time datetime="2018-02-22T06:41:45.000Z" itemprop="datePublished">2018-02-22</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ConstraintLayout解析
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>年前有个面试，面试中问到是否熟悉ConstraintLayout(约束布局)？我答了用过，脑袋里有个印象但是实际上是模糊的，趁此机会写篇文章重新认识下ConstraintLayout。<br><a id="more"></a></p>
+<h3 id="源起"><a href="#源起" class="headerlink" title="源起"></a>源起</h3><ul>
+<li>聪明的小伙伴，我们先来猜测下ConstraintLayout怎么产生的？或者换种方式问，是为了解决什么问题？</li>
+</ul>
+<blockquote>
+<p>在年前的面试中，我首先问了下面试官是否可以猜测下它的作用？笑 我就说了碎片化，一看脸色，我就感觉答的不对哈，然后，转念一想约束布局，重点是约束两个字，想了一会儿，是在没什么想法,当然面试官告诉作用，说是布局的时候可以拖拽，这个题就gg了。(┬＿┬)</p>
+</blockquote>
+<ul>
+<li>过年快过完了，我也开始重新梳理。先吹一波😄，万能的度娘上搜了鸿洋大大写的一篇<a target="_blank" rel="noopener" href="http://blog.csdn.net/lmj623565791/article/details/78011599?utm_source=tuicool&amp;utm_medium=referral">ConstraintLayout 完全解析 快来优化你的布局吧</a>开始入手。回到正题，ConstraintLayout库出现被用来解决什么问题呢？这里我就不卖关子了，他主要是解决复杂UI多层嵌套的性能差，维护成本高。如果需要看详细的分析，可以看下Google中文官方推出了一篇<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/gGR2itbY7hh9fo61SxaMQQ">解析ConstraintLayout的性能优势</a>文章。</li>
+</ul>
+<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><table>
+<thead>
+<tr>
+<th>ConstraintLayout使用方式</th>
+<th style="text-align:center">优点</th>
+<th style="text-align:center">缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>可视化拖拽布局</td>
+<td style="text-align:center">对于简单布局，容易操作</td>
+<td style="text-align:center">学习成本低，复杂布局不适合</td>
+</tr>
+<tr>
+<td>手写式布局</td>
+<td style="text-align:center">对于复杂布局，手写往往更快速并清晰</td>
+<td style="text-align:center">学习成本相对高，需要熟悉约束布局的属性</td>
+</tr>
+</tbody>
+</table>
+<h4 id="如何可视化拖拽布局"><a href="#如何可视化拖拽布局" class="headerlink" title="如何可视化拖拽布局"></a>如何可视化拖拽布局</h4><ul>
+<li>可视化拖拽控件，进行布局</li>
+</ul>
+<h4 id="如何手写式布局"><a href="#如何手写式布局" class="headerlink" title="如何手写式布局"></a>如何手写式布局</h4><ul>
+<li>可视化拖拽控件，进行布局</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/02/22/ConstraintLayout%E8%A7%A3%E6%9E%90/">ConstraintLayout解析</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">undefined</a></p>
+        <p><span>发布时间:</span>2018-02-22, 14:41:45</p>
+        <p><span>最后更新:</span>2020-08-29, 22:40:35</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/02/22/ConstraintLayout%E8%A7%A3%E6%9E%90/" title="ConstraintLayout解析">http://jianhui1012.github.io/2018/02/22/ConstraintLayout%E8%A7%A3%E6%9E%90/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://jianhui1012.github.io/2018/02/22/ConstraintLayout%E8%A7%A3%E6%9E%90/　　作者: undefined" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2018/04/21/Handler%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">
+                    Handler源码分析
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/12/30/2017%E5%B9%B4%E5%B7%A5%E4%BD%9C%E5%86%85%E5%AE%B9%E6%A2%B3%E7%90%86/">
+                    2017年工作内容梳理
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BA%90%E8%B5%B7"><span class="toc-number">1.</span> <span class="toc-text">源起</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">如何使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%8F%AF%E8%A7%86%E5%8C%96%E6%8B%96%E6%8B%BD%E5%B8%83%E5%B1%80"><span class="toc-number">2.1.</span> <span class="toc-text">如何可视化拖拽布局</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%89%8B%E5%86%99%E5%BC%8F%E5%B8%83%E5%B1%80"><span class="toc-number">2.2.</span> <span class="toc-text">如何手写式布局</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">4.</span> <span class="toc-text">参考</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"ConstraintLayout解析　| jianhui1012的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2129884';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/04/21/Handler%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" title="上一篇: Handler源码分析">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/12/30/2017%E5%B9%B4%E5%B7%A5%E4%BD%9C%E5%86%85%E5%AE%B9%E6%A2%B3%E7%90%86/" title="下一篇: 2017年工作内容梳理">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/09/17/%E9%87%8D%E6%96%B0%E5%BC%80%E5%A7%8B/">重新开始</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/24/%E4%B8%80%E4%BA%9B%E5%BF%83%E5%BE%97/">一些心得</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/21/%E8%AE%B02-10%E4%B8%80%E5%AE%B6%E5%A4%96%E5%8C%85%E5%85%AC%E5%8F%B8Android%E9%9D%A2%E8%AF%95/">记2.10一家外包公司Android面试</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/21/%E8%AE%B0%E5%A4%A7%E6%90%9C%E8%BD%A6%E9%9D%A2%E8%AF%95%E4%B8%80%E9%9D%A2/">记大搜车面试一面</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/21/420%E5%B0%8F%E6%97%B6%E5%AD%A6%E4%B9%A0%E4%BB%A3%E7%A0%81%E4%B9%8B%E5%90%8E-%E5%A6%82%E4%BD%95%E6%95%99%E4%BD%A0%E5%85%8D%E8%B4%B9%E8%87%AA%E5%AD%A6Python/">420小时学习代码之后:如何教你免费自学Python</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/21/React-Redux%E4%BB%BFWeb%E8%BF%BD%E4%B9%A6%E7%A5%9E%E5%99%A8/">React+Redux仿Web追书神器</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/21/%E5%85%B3%E4%BA%8E%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF%E7%9A%84%E6%95%85%E4%BA%8B/">关于贝塞尔曲线的故事</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/21/Handler%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">Handler源码分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/22/ConstraintLayout%E8%A7%A3%E6%9E%90/">ConstraintLayout解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/30/2017%E5%B9%B4%E5%B7%A5%E4%BD%9C%E5%86%85%E5%AE%B9%E6%A2%B3%E7%90%86/">2017年工作内容梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/11/%E9%98%85%E5%9B%BEAPI/">阅图API</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">计算机网络体系结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8F%91%E5%B1%95%E5%8F%B2/">计算机网络发展史</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/11/%E5%A6%82%E4%BD%95%E5%9C%A8APP%E5%BA%94%E7%94%A8%E5%9F%BA%E4%BA%8EToken%E7%9A%84%E9%AA%8C%E8%AF%81/">如何在APP应用基于Token的验证</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/16/QuestioningSkills/">提问的智慧</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/06/%E7%90%86%E8%A7%A3Android%E8%87%AA%E5%AE%9A%E4%B9%89View/">理解Android自定义View</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/05/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">常见的排序算法介绍与分析</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2020 golike
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="golike" />
+
+
+
+<meta name="description" content="这是一次游览Android源码世界的开始，现在从Handler源码开始，描述和记录看到的东西，有错误的地方请留言。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Handler源码分析">
+<meta property="og:url" content="http://jianhui1012.github.io/2018/04/21/Handler%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="jianhui1012的博客">
+<meta property="og:description" content="这是一次游览Android源码世界的开始，现在从Handler源码开始，描述和记录看到的东西，有错误的地方请留言。">
+<meta property="og:locale">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/3/27/16265bd34f6230e5?w=1293&amp;h=407&amp;f=png&amp;s=44987">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/3/28/1626ccbc30df1a88?w=967&amp;h=754&amp;f=png&amp;s=84235">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/3/28/1626ccf5ba2836e8?w=625&amp;h=746&amp;f=png&amp;s=72888">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/3/28/1626d393c095d24e?w=1470&amp;h=952&amp;f=png&amp;s=109848">
+<meta property="article:published_time" content="2018-04-21T08:25:49.000Z">
+<meta property="article:modified_time" content="2020-08-29T14:40:35.072Z">
+<meta property="article:author" content="golike">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="源码分析">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/3/27/16265bd34f6230e5?w=1293&amp;h=407&amp;f=png&amp;s=44987">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="jianhui1012的博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Handler源码分析 | jianhui1012的博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="https://avatars1.githubusercontent.com/u/8265384?v=3&amp;s=460" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">undefined</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:golikeholdon@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" rel="noopener" href="https://github.com/jianhui1012" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/" rel="tag">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E5%9F%BA%E7%A1%80/" rel="tag">Android基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ReactNative/" rel="tag">ReactNative</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%8A%80%E5%B7%A7/" rel="tag">学习技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/" rel="tag">工作总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">源码分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" rel="tag">网络安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%AD%A6/" rel="tag">自学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%BD%E4%B9%A6%E7%A5%9E%E5%99%A8/" rel="tag">追书神器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" target="_blank" rel="noopener" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" target="_blank" rel="noopener" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">hold on</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">undefined</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="https://avatars1.githubusercontent.com/u/8265384?v=3&amp;s=460" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">undefined</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:golikeholdon@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/jianhui1012" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Handler源码分析" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/04/21/Handler%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
+      <time datetime="2018-04-21T08:25:49.000Z" itemprop="datePublished">2018-04-21</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Handler源码分析
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">源码分析</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>这是一次游览Android源码世界的开始，现在从Handler源码开始，描述和记录看到的东西，有错误的地方请留言。<br><a id="more"></a></p>
+<h3 id="Handler"><a href="#Handler" class="headerlink" title="Handler"></a>Handler</h3><h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>Handler是为了解决非UI线程中UI更新的问题，这里会产生一个疑问。为啥要在UI线程中更新，一般都知道会产生卡顿问题。</p>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>上张官方关系类图，压压惊：<br><img src="https://user-gold-cdn.xitu.io/2018/3/27/16265bd34f6230e5?w=1293&amp;h=407&amp;f=png&amp;s=44987" alt><br>可以看到他有四个子类，前面两个是与异步数据库操作相关的(contentProvider)，后面两个是与网络请求(一个是处理http授权，另一个是处理SSL错误请求)</p>
+<blockquote>
+<p>MessageQueue与Message，Looper，Handler</p>
+</blockquote>
+<h3 id="Handler作为入口"><a href="#Handler作为入口" class="headerlink" title="Handler作为入口"></a>Handler作为入口</h3><p>Handler 主要功能是发送消息和处理接受消息。一般常用的 <code>handler.sendEmptyMessage(int what)</code> 和 <code>sendMessage(Message msg)</code> 方法，下面就从 <code>sendEmptyMessage(int what)</code> 方法看看它是怎么运作的？</p>
+<p>sendEmptyMessage 内部调用关系如下:</p>
+<blockquote>
+<p>sendEmptyMessage =&gt; sendEmptyMessageDelayed =&gt;  sendMessageDelayed =&gt; enqueueMessage</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">   public final boolean sendEmptyMessageDelayed(int what, long delayMillis) &#123;</span><br><span class="line">       &#x2F;&#x2F;构造新的消息 使用sPool全局池保存回收的消息链表进行空消息缓存 </span><br><span class="line">       Message msg &#x3D; Message.obtain();</span><br><span class="line">       msg.what &#x3D; what;</span><br><span class="line">       return sendMessageDelayed(msg, delayMillis);</span><br><span class="line">   &#125;</span><br><span class="line">   ...</span><br><span class="line">  public final boolean sendMessageDelayed(Message msg, long delayMillis)</span><br><span class="line">   &#123;</span><br><span class="line">       if (delayMillis &lt; 0) &#123;</span><br><span class="line">           delayMillis &#x3D; 0;</span><br><span class="line">       &#125;</span><br><span class="line">       return sendMessageAtTime(msg, SystemClock.uptimeMillis() + delayMillis);</span><br><span class="line">   &#125;</span><br><span class="line">   ...</span><br><span class="line">   public boolean sendMessageAtTime(Message msg, long uptimeMillis) &#123;</span><br><span class="line">       MessageQueue queue &#x3D; mQueue;</span><br><span class="line">       if (queue &#x3D;&#x3D; null) &#123;</span><br><span class="line">           RuntimeException e &#x3D; new RuntimeException(</span><br><span class="line">                   this + &quot; sendMessageAtTime() called with no mQueue&quot;);</span><br><span class="line">           Log.w(&quot;Looper&quot;, e.getMessage(), e);</span><br><span class="line">           return false;</span><br><span class="line">       &#125;</span><br><span class="line">       return enqueueMessage(queue, msg, uptimeMillis);</span><br><span class="line">   &#125;</span><br><span class="line">   ...</span><br><span class="line">private boolean enqueueMessage(MessageQueue queue, Message msg, long uptimeMillis) &#123;</span><br><span class="line">       msg.target &#x3D; this;</span><br><span class="line">       if (mAsynchronous) &#123;</span><br><span class="line">           msg.setAsynchronous(true);</span><br><span class="line">       &#125;</span><br><span class="line">       return queue.enqueueMessage(msg, uptimeMillis);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="疑问："><a href="#疑问：" class="headerlink" title="疑问："></a>疑问：</h4><ul>
+<li>obtain(奥普摊)方法是如何构造消息的？看了后发现recycle与之相关的。</li>
+<li>这里发现产生的 <code>uptimeMillis</code>没有被用到，那他是用来干什么的？(<code>uptimeMillis</code>是开机到现在的毫秒数，内部实现是一个native方法 )</li>
+<li>设置 <code>msg.setAsynchronous</code> 怎么使用其值？</li>
+</ul>
+<h4 id="obtain方法如何构造消息的以及recycle方法的作用"><a href="#obtain方法如何构造消息的以及recycle方法的作用" class="headerlink" title="obtain方法如何构造消息的以及recycle方法的作用"></a>obtain方法如何构造消息的以及recycle方法的作用</h4><p>看了obtain方法后发现，sPool默认是static，所以属于Message类，共享的，没有初始化，那它什么时候进行赋值。答案就在recycle方法,顾名思义其实作用相当于回收那些没用的消息，那这个是怎么工作的?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">&#x2F;&#x2F;recycle内部调用的recycleUnchecked函数</span><br><span class="line">void recycleUnchecked() &#123;</span><br><span class="line">      &#x2F;&#x2F; Mark the message as in use while it remains in the recycled object pool.</span><br><span class="line">      &#x2F;&#x2F; Clear out all other details.</span><br><span class="line">      flags &#x3D; FLAG_IN_USE;</span><br><span class="line">      what &#x3D; 0;</span><br><span class="line">      arg1 &#x3D; 0;</span><br><span class="line">      arg2 &#x3D; 0;</span><br><span class="line">      obj &#x3D; null;</span><br><span class="line">      replyTo &#x3D; null;</span><br><span class="line">      sendingUid &#x3D; -1;</span><br><span class="line">      when &#x3D; 0;</span><br><span class="line">      target &#x3D; null;</span><br><span class="line">      callback &#x3D; null;</span><br><span class="line">      data &#x3D; null;</span><br><span class="line">      &#x2F;&#x2F;关键代码，其实可以回收的话相当于把消息放到单链表的表头</span><br><span class="line">      synchronized (sPoolSync) &#123;</span><br><span class="line">          if (sPoolSize &lt; MAX_POOL_SIZE) &#123;</span><br><span class="line">              next &#x3D; sPool;</span><br><span class="line">              sPool &#x3D; this;</span><br><span class="line">              sPoolSize++;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>可以自己纸上画下，下面看图说话：<br><img src="https://user-gold-cdn.xitu.io/2018/3/28/1626ccbc30df1a88?w=967&amp;h=754&amp;f=png&amp;s=84235" alt><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">private static final Object sPoolSync &#x3D; new Object();</span><br><span class="line">private static Message sPool;</span><br><span class="line">private static int sPoolSize &#x3D; 0;</span><br><span class="line"></span><br><span class="line">private static final int MAX_POOL_SIZE &#x3D; 50;</span><br><span class="line">...</span><br><span class="line">public static Message obtain() &#123;</span><br><span class="line">      synchronized (sPoolSync) &#123;</span><br><span class="line">          if (sPool !&#x3D; null) &#123;</span><br><span class="line">              Message m &#x3D; sPool;</span><br><span class="line">              sPool &#x3D; m.next;</span><br><span class="line">              m.next &#x3D; null;</span><br><span class="line">              m.flags &#x3D; 0; &#x2F;&#x2F; clear in-use flag</span><br><span class="line">              sPoolSize--;</span><br><span class="line">              return m;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      return new Message();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure><br>直接上图：<br><img src="https://user-gold-cdn.xitu.io/2018/3/28/1626ccf5ba2836e8?w=625&amp;h=746&amp;f=png&amp;s=72888" alt></p>
+<ul>
+<li>总结来说，其实生成新消息是取用了类似单链表的全局池，有个前提条件是已经有消息调用recycle方法，不然生成的消息都是new出来的。</li>
+</ul>
+<h3 id="MessageQueue-干了啥"><a href="#MessageQueue-干了啥" class="headerlink" title="MessageQueue 干了啥"></a>MessageQueue 干了啥</h3><p>概括：MessageQueue中使用一个单链表来维护消息队列。通过Looper对象分发消息，但是不能直接把Message入队，需要通过Looper关联的Handler来发送消息。</p>
+<p>关键看两个方法：enqueueMessage 与 next(后续分析) 方法，前面一个是消息入队，后面一个是消息出队。</p>
+<p>先来看看 <code>enqueueMessage</code> 方法，首先它有两个参数：消息–msg 和触发时间–when，简单来说，如果p为空的话直接赋值 <code>mMessages = msg</code>,如果p不为空的话则需要根据触发时间–when插入到链表合适的位置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">boolean enqueueMessage(Message msg, long when) &#123;</span><br><span class="line">      ...</span><br><span class="line">      synchronized (this) &#123;</span><br><span class="line">         ...</span><br><span class="line">          &#x2F;&#x2F;消息被标记使用</span><br><span class="line">          msg.markInUse();</span><br><span class="line">          msg.when &#x3D; when;</span><br><span class="line">          Message p &#x3D; mMessages;</span><br><span class="line">          boolean needWake;</span><br><span class="line">          if (p &#x3D;&#x3D; null || when &#x3D;&#x3D; 0 || when &lt; p.when) &#123;</span><br><span class="line">              &#x2F;&#x2F; New head, wake up the event queue if blocked.</span><br><span class="line">              msg.next &#x3D; p;</span><br><span class="line">              mMessages &#x3D; msg;</span><br><span class="line">              needWake &#x3D; mBlocked;</span><br><span class="line">          &#125; else &#123;</span><br><span class="line">             ...</span><br><span class="line">              &#x2F;&#x2F;关键代码</span><br><span class="line">              Message prev;</span><br><span class="line">              for (;;) &#123;</span><br><span class="line">                  prev &#x3D; p;</span><br><span class="line">                  p &#x3D; p.next;</span><br><span class="line">                  if (p &#x3D;&#x3D; null || when &lt; p.when) &#123;</span><br><span class="line">                      break;</span><br><span class="line">                  &#125;</span><br><span class="line">                  if (needWake &amp;&amp; p.isAsynchronous()) &#123;</span><br><span class="line">                      needWake &#x3D; false;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">              msg.next &#x3D; p; &#x2F;&#x2F; invariant: p &#x3D;&#x3D; prev.next</span><br><span class="line">              prev.next &#x3D; msg;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          &#x2F;&#x2F; We can assume mPtr !&#x3D; 0 because mQuitting is false.</span><br><span class="line">          if (needWake) &#123;</span><br><span class="line">              nativeWake(mPtr);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      return true;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>先看下新消息需要放到队头的情况：p == null || when == 0 || when &lt; p.when。即队列为空，或者新消息需要立即处理，或者新消息处理的事件比队头消息更早被处理。这时只要让新消息的next指向当前队头，让mMessages指向新消息即可完成插入操作。 </li>
+<li>除了上面情况之外，需要遍历链表并比较when的值，由于这个链表根据when时间从小到大的，只要找到第一个链表节点的when比插入消息的when大或者没找到，跳出循环，并插入链表。</li>
+</ul>
+<h3 id="Looper类"><a href="#Looper类" class="headerlink" title="Looper类"></a>Looper类</h3><h4 id="prepare"><a href="#prepare" class="headerlink" title="prepare()"></a>prepare()</h4><p>Looper的构造函数修饰符是private的，那么他是在哪里被实例化？通过搜索，发现 <code>prepare()</code> 和 <code>prepareMainLooper()</code>两个方法。</p>
+<ul>
+<li><p><code>prepare()</code>方法官方说明；</p>
+<blockquote>
+<p> 作为looper初始化当前线程。提供一个机会来创建handler并使用looper。在使用之前，请在此方法之后调用loop()，并在结束时调用quit()</p>
+</blockquote>
+</li>
+<li><p><code>prepareMainLooper()</code>方法官方说明；</p>
+<blockquote>
+<p>作为looper初始化当前线程，并标记其为application主线程的looper。在application主线程中的looper被Android系统创建，因此开发者请永远不要手动调用这个方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> public static void prepareMainLooper() &#123;</span><br><span class="line">        prepare(false);</span><br><span class="line">        synchronized (Looper.class) &#123;</span><br><span class="line">            if (sMainLooper !&#x3D; null) &#123;</span><br><span class="line">                throw new IllegalStateException(&quot;The main Looper has already been prepared.&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            sMainLooper &#x3D; myLooper();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">private static void prepare(boolean quitAllowed) &#123;</span><br><span class="line">    if (sThreadLocal.get() !&#x3D; null) &#123;</span><br><span class="line">        throw new RuntimeException(&quot;Only one Looper may be created per thread&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    sThreadLocal.set(new Looper(quitAllowed));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看上面的<code>prepareMainLooper()</code>代码，发现做了两个事: <code>prepare(false)</code> 和 <code>myLooper()</code>。</p>
+</blockquote>
+</li>
+<li><code>prepare(false)</code>方法中的sThreadLocal字段的类型是 <code>ThreadLocal</code>,用来干什么呢？实现一个线程本地存储，一个让每个线程都有拥有value的变量。另外，可以看看构造函数Looper干了些什么事情？<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">private Looper(boolean quitAllowed) &#123;</span><br><span class="line">     mQueue &#x3D; new MessageQueue(quitAllowed);</span><br><span class="line">     mThread &#x3D; Thread.currentThread();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>对于<code>myLooper()</code>来说，prepare()中提到了会将looper放到线程存储ThreadLocal中，此处只需要从中取出并返回即可，因此代码只有一行return sThreadLocal.get();</p>
+</li>
+<li><p>疑问<br>在activity当中实例的Handler,我们并没有调用loop方法？</p>
+</li>
+</ul>
+<blockquote>
+<p>查看prepareMainLooper()调用者可以看到，在SystemServer.run()与ActivityThread.main()中都在调用Looper.prepareMainLooper()后不远就调用了Looper.loop()。而这两处可以推断一个是系统应用的主线程，一个是用户应用的主线程，而后面这个就是答案。</p>
+</blockquote>
+<h4 id="loop"><a href="#loop" class="headerlink" title="loop()"></a>loop()</h4><ul>
+<li>loop主要是通过死循环来重复做某件事的方法。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static void loop() &#123;</span><br><span class="line">      final Looper me &#x3D; myLooper();</span><br><span class="line">      final MessageQueue queue &#x3D; me.mQueue;</span><br><span class="line">      for (;;) &#123;</span><br><span class="line">          Message msg &#x3D; queue.next(); &#x2F;&#x2F; might block</span><br><span class="line">          if (msg &#x3D;&#x3D; null) &#123;</span><br><span class="line">              return;</span><br><span class="line">          &#125;</span><br><span class="line">          msg.target.dispatchMessage(msg);</span><br><span class="line">          msg.recycleUnchecked();</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>这里就一目了然了：一个死循环，不断从队列中取消息并分发，如果取到null就说明消息队列已经退出或被释放，此时loop终止。msg.target.dispatchMessage(msg)中target便是在发送消息的handler对象，dispatchMessage()便是对消息的处理了。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>上面几个基本概念的关系如下图：<br><img src="https://user-gold-cdn.xitu.io/2018/3/28/1626d393c095d24e?w=1470&amp;h=952&amp;f=png&amp;s=109848" alt></li>
+</ul>
+<h3 id="参考资源"><a href="#参考资源" class="headerlink" title="参考资源"></a>参考资源</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/android/os/Handler.html">Handler官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012827296/article/details/51236614">Handler运行机制</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xmh19936688/article/details/51901338">Message中obtain()与recycle()的来龙去脉</a></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/04/21/Handler%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">Handler源码分析</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">undefined</a></p>
+        <p><span>发布时间:</span>2018-04-21, 16:25:49</p>
+        <p><span>最后更新:</span>2020-08-29, 22:40:35</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/04/21/Handler%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" title="Handler源码分析">http://jianhui1012.github.io/2018/04/21/Handler%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://jianhui1012.github.io/2018/04/21/Handler%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/　　作者: undefined" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2018/04/21/%E5%85%B3%E4%BA%8E%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF%E7%9A%84%E6%95%85%E4%BA%8B/">
+                    关于贝塞尔曲线的故事
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2018/02/22/ConstraintLayout%E8%A7%A3%E6%9E%90/">
+                    ConstraintLayout解析
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Handler"><span class="toc-number">1.</span> <span class="toc-text">Handler</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">2.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">3.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Handler%E4%BD%9C%E4%B8%BA%E5%85%A5%E5%8F%A3"><span class="toc-number">4.</span> <span class="toc-text">Handler作为入口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%96%91%E9%97%AE%EF%BC%9A"><span class="toc-number">4.1.</span> <span class="toc-text">疑问：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#obtain%E6%96%B9%E6%B3%95%E5%A6%82%E4%BD%95%E6%9E%84%E9%80%A0%E6%B6%88%E6%81%AF%E7%9A%84%E4%BB%A5%E5%8F%8Arecycle%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">4.2.</span> <span class="toc-text">obtain方法如何构造消息的以及recycle方法的作用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MessageQueue-%E5%B9%B2%E4%BA%86%E5%95%A5"><span class="toc-number">5.</span> <span class="toc-text">MessageQueue 干了啥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Looper%E7%B1%BB"><span class="toc-number">6.</span> <span class="toc-text">Looper类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#prepare"><span class="toc-number">6.1.</span> <span class="toc-text">prepare()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#loop"><span class="toc-number">6.2.</span> <span class="toc-text">loop()</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90"><span class="toc-number">8.</span> <span class="toc-text">参考资源</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Handler源码分析　| jianhui1012的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2129884';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/04/21/%E5%85%B3%E4%BA%8E%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF%E7%9A%84%E6%95%85%E4%BA%8B/" title="上一篇: 关于贝塞尔曲线的故事">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2018/02/22/ConstraintLayout%E8%A7%A3%E6%9E%90/" title="下一篇: ConstraintLayout解析">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/09/17/%E9%87%8D%E6%96%B0%E5%BC%80%E5%A7%8B/">重新开始</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/24/%E4%B8%80%E4%BA%9B%E5%BF%83%E5%BE%97/">一些心得</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/21/%E8%AE%B02-10%E4%B8%80%E5%AE%B6%E5%A4%96%E5%8C%85%E5%85%AC%E5%8F%B8Android%E9%9D%A2%E8%AF%95/">记2.10一家外包公司Android面试</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/21/%E8%AE%B0%E5%A4%A7%E6%90%9C%E8%BD%A6%E9%9D%A2%E8%AF%95%E4%B8%80%E9%9D%A2/">记大搜车面试一面</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/21/420%E5%B0%8F%E6%97%B6%E5%AD%A6%E4%B9%A0%E4%BB%A3%E7%A0%81%E4%B9%8B%E5%90%8E-%E5%A6%82%E4%BD%95%E6%95%99%E4%BD%A0%E5%85%8D%E8%B4%B9%E8%87%AA%E5%AD%A6Python/">420小时学习代码之后:如何教你免费自学Python</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/21/React-Redux%E4%BB%BFWeb%E8%BF%BD%E4%B9%A6%E7%A5%9E%E5%99%A8/">React+Redux仿Web追书神器</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/21/%E5%85%B3%E4%BA%8E%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF%E7%9A%84%E6%95%85%E4%BA%8B/">关于贝塞尔曲线的故事</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/21/Handler%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">Handler源码分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/22/ConstraintLayout%E8%A7%A3%E6%9E%90/">ConstraintLayout解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/30/2017%E5%B9%B4%E5%B7%A5%E4%BD%9C%E5%86%85%E5%AE%B9%E6%A2%B3%E7%90%86/">2017年工作内容梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/11/%E9%98%85%E5%9B%BEAPI/">阅图API</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">计算机网络体系结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8F%91%E5%B1%95%E5%8F%B2/">计算机网络发展史</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/11/%E5%A6%82%E4%BD%95%E5%9C%A8APP%E5%BA%94%E7%94%A8%E5%9F%BA%E4%BA%8EToken%E7%9A%84%E9%AA%8C%E8%AF%81/">如何在APP应用基于Token的验证</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/16/QuestioningSkills/">提问的智慧</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/06/%E7%90%86%E8%A7%A3Android%E8%87%AA%E5%AE%9A%E4%B9%89View/">理解Android自定义View</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/05/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">常见的排序算法介绍与分析</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2020 golike
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
