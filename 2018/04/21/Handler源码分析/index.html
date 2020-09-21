@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Handler源码分析 | jianhui1012的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这是一次游览Android源码世界的开始，现在从Handler源码开始，描述和记录看到的东西，有错误的地方请留言。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Handler源码分析">
+<meta property="og:url" content="http://jianhui1012.github.io/2018/04/21/Handler%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="jianhui1012的博客">
+<meta property="og:description" content="这是一次游览Android源码世界的开始，现在从Handler源码开始，描述和记录看到的东西，有错误的地方请留言。">
+<meta property="og:locale">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/3/27/16265bd34f6230e5?w=1293&h=407&f=png&s=44987">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/3/28/1626ccbc30df1a88?w=967&h=754&f=png&s=84235">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/3/28/1626ccf5ba2836e8?w=625&h=746&f=png&s=72888">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/3/28/1626d393c095d24e?w=1470&h=952&f=png&s=109848">
+<meta property="article:published_time" content="2018-04-21T08:25:49.000Z">
+<meta property="article:modified_time" content="2020-08-29T14:40:35.072Z">
+<meta property="article:author" content="golike">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="源码分析">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/3/27/16265bd34f6230e5?w=1293&h=407&f=png&s=44987">
+  
+    <link rel="alternate" href="/atom.xml" title="jianhui1012的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">jianhui1012的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://jianhui1012.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Handler源码分析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/21/Handler%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
+  <time datetime="2018-04-21T08:25:49.000Z" itemprop="datePublished">2018-04-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Handler源码分析
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这是一次游览Android源码世界的开始，现在从Handler源码开始，描述和记录看到的东西，有错误的地方请留言。</p>
+<a id="more"></a>
+
+
+<h3 id="Handler"><a href="#Handler" class="headerlink" title="Handler"></a>Handler</h3><h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>Handler是为了解决非UI线程中UI更新的问题，这里会产生一个疑问。为啥要在UI线程中更新，一般都知道会产生卡顿问题。</p>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>上张官方关系类图，压压惊：<br><img src="https://user-gold-cdn.xitu.io/2018/3/27/16265bd34f6230e5?w=1293&h=407&f=png&s=44987"><br>可以看到他有四个子类，前面两个是与异步数据库操作相关的(contentProvider)，后面两个是与网络请求(一个是处理http授权，另一个是处理SSL错误请求)</p>
+<blockquote>
+<p>MessageQueue与Message，Looper，Handler</p>
+</blockquote>
+<h3 id="Handler作为入口"><a href="#Handler作为入口" class="headerlink" title="Handler作为入口"></a>Handler作为入口</h3><p>Handler 主要功能是发送消息和处理接受消息。一般常用的 <code>handler.sendEmptyMessage(int what)</code> 和 <code>sendMessage(Message msg)</code> 方法，下面就从 <code>sendEmptyMessage(int what)</code> 方法看看它是怎么运作的？</p>
+<p>sendEmptyMessage 内部调用关系如下:</p>
+<blockquote>
+<p>sendEmptyMessage =&gt; sendEmptyMessageDelayed =&gt;  sendMessageDelayed =&gt; enqueueMessage</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">   public final boolean sendEmptyMessageDelayed(int what, long delayMillis) &#123;</span><br><span class="line">       &#x2F;&#x2F;构造新的消息 使用sPool全局池保存回收的消息链表进行空消息缓存 </span><br><span class="line">       Message msg &#x3D; Message.obtain();</span><br><span class="line">       msg.what &#x3D; what;</span><br><span class="line">       return sendMessageDelayed(msg, delayMillis);</span><br><span class="line">   &#125;</span><br><span class="line">   ...</span><br><span class="line">  public final boolean sendMessageDelayed(Message msg, long delayMillis)</span><br><span class="line">   &#123;</span><br><span class="line">       if (delayMillis &lt; 0) &#123;</span><br><span class="line">           delayMillis &#x3D; 0;</span><br><span class="line">       &#125;</span><br><span class="line">       return sendMessageAtTime(msg, SystemClock.uptimeMillis() + delayMillis);</span><br><span class="line">   &#125;</span><br><span class="line">   ...</span><br><span class="line">   public boolean sendMessageAtTime(Message msg, long uptimeMillis) &#123;</span><br><span class="line">       MessageQueue queue &#x3D; mQueue;</span><br><span class="line">       if (queue &#x3D;&#x3D; null) &#123;</span><br><span class="line">           RuntimeException e &#x3D; new RuntimeException(</span><br><span class="line">                   this + &quot; sendMessageAtTime() called with no mQueue&quot;);</span><br><span class="line">           Log.w(&quot;Looper&quot;, e.getMessage(), e);</span><br><span class="line">           return false;</span><br><span class="line">       &#125;</span><br><span class="line">       return enqueueMessage(queue, msg, uptimeMillis);</span><br><span class="line">   &#125;</span><br><span class="line">   ...</span><br><span class="line">private boolean enqueueMessage(MessageQueue queue, Message msg, long uptimeMillis) &#123;</span><br><span class="line">       msg.target &#x3D; this;</span><br><span class="line">       if (mAsynchronous) &#123;</span><br><span class="line">           msg.setAsynchronous(true);</span><br><span class="line">       &#125;</span><br><span class="line">       return queue.enqueueMessage(msg, uptimeMillis);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="疑问："><a href="#疑问：" class="headerlink" title="疑问："></a>疑问：</h4><ul>
+<li>obtain(奥普摊)方法是如何构造消息的？看了后发现recycle与之相关的。</li>
+<li>这里发现产生的 <code>uptimeMillis</code>没有被用到，那他是用来干什么的？(<code>uptimeMillis</code>是开机到现在的毫秒数，内部实现是一个native方法 )</li>
+<li>设置 <code>msg.setAsynchronous</code> 怎么使用其值？</li>
+</ul>
+<h4 id="obtain方法如何构造消息的以及recycle方法的作用"><a href="#obtain方法如何构造消息的以及recycle方法的作用" class="headerlink" title="obtain方法如何构造消息的以及recycle方法的作用"></a>obtain方法如何构造消息的以及recycle方法的作用</h4><p>看了obtain方法后发现，sPool默认是static，所以属于Message类，共享的，没有初始化，那它什么时候进行赋值。答案就在recycle方法,顾名思义其实作用相当于回收那些没用的消息，那这个是怎么工作的?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">&#x2F;&#x2F;recycle内部调用的recycleUnchecked函数</span><br><span class="line">void recycleUnchecked() &#123;</span><br><span class="line">      &#x2F;&#x2F; Mark the message as in use while it remains in the recycled object pool.</span><br><span class="line">      &#x2F;&#x2F; Clear out all other details.</span><br><span class="line">      flags &#x3D; FLAG_IN_USE;</span><br><span class="line">      what &#x3D; 0;</span><br><span class="line">      arg1 &#x3D; 0;</span><br><span class="line">      arg2 &#x3D; 0;</span><br><span class="line">      obj &#x3D; null;</span><br><span class="line">      replyTo &#x3D; null;</span><br><span class="line">      sendingUid &#x3D; -1;</span><br><span class="line">      when &#x3D; 0;</span><br><span class="line">      target &#x3D; null;</span><br><span class="line">      callback &#x3D; null;</span><br><span class="line">      data &#x3D; null;</span><br><span class="line">      &#x2F;&#x2F;关键代码，其实可以回收的话相当于把消息放到单链表的表头</span><br><span class="line">      synchronized (sPoolSync) &#123;</span><br><span class="line">          if (sPoolSize &lt; MAX_POOL_SIZE) &#123;</span><br><span class="line">              next &#x3D; sPool;</span><br><span class="line">              sPool &#x3D; this;</span><br><span class="line">              sPoolSize++;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>可以自己纸上画下，下面看图说话：<br><img src="https://user-gold-cdn.xitu.io/2018/3/28/1626ccbc30df1a88?w=967&h=754&f=png&s=84235"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">private static final Object sPoolSync &#x3D; new Object();</span><br><span class="line">private static Message sPool;</span><br><span class="line">private static int sPoolSize &#x3D; 0;</span><br><span class="line"></span><br><span class="line">private static final int MAX_POOL_SIZE &#x3D; 50;</span><br><span class="line">...</span><br><span class="line">public static Message obtain() &#123;</span><br><span class="line">      synchronized (sPoolSync) &#123;</span><br><span class="line">          if (sPool !&#x3D; null) &#123;</span><br><span class="line">              Message m &#x3D; sPool;</span><br><span class="line">              sPool &#x3D; m.next;</span><br><span class="line">              m.next &#x3D; null;</span><br><span class="line">              m.flags &#x3D; 0; &#x2F;&#x2F; clear in-use flag</span><br><span class="line">              sPoolSize--;</span><br><span class="line">              return m;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      return new Message();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>直接上图：<br><img src="https://user-gold-cdn.xitu.io/2018/3/28/1626ccf5ba2836e8?w=625&h=746&f=png&s=72888"></p>
+<ul>
+<li>总结来说，其实生成新消息是取用了类似单链表的全局池，有个前提条件是已经有消息调用recycle方法，不然生成的消息都是new出来的。</li>
+</ul>
+<h3 id="MessageQueue-干了啥"><a href="#MessageQueue-干了啥" class="headerlink" title="MessageQueue 干了啥"></a>MessageQueue 干了啥</h3><p>概括：MessageQueue中使用一个单链表来维护消息队列。通过Looper对象分发消息，但是不能直接把Message入队，需要通过Looper关联的Handler来发送消息。</p>
+<p>关键看两个方法：enqueueMessage 与 next(后续分析) 方法，前面一个是消息入队，后面一个是消息出队。</p>
+<p>先来看看 <code>enqueueMessage</code> 方法，首先它有两个参数：消息–msg 和触发时间–when，简单来说，如果p为空的话直接赋值 <code>mMessages = msg</code>,如果p不为空的话则需要根据触发时间–when插入到链表合适的位置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">boolean enqueueMessage(Message msg, long when) &#123;</span><br><span class="line">      ...</span><br><span class="line">      synchronized (this) &#123;</span><br><span class="line">         ...</span><br><span class="line">          &#x2F;&#x2F;消息被标记使用</span><br><span class="line">          msg.markInUse();</span><br><span class="line">          msg.when &#x3D; when;</span><br><span class="line">          Message p &#x3D; mMessages;</span><br><span class="line">          boolean needWake;</span><br><span class="line">          if (p &#x3D;&#x3D; null || when &#x3D;&#x3D; 0 || when &lt; p.when) &#123;</span><br><span class="line">              &#x2F;&#x2F; New head, wake up the event queue if blocked.</span><br><span class="line">              msg.next &#x3D; p;</span><br><span class="line">              mMessages &#x3D; msg;</span><br><span class="line">              needWake &#x3D; mBlocked;</span><br><span class="line">          &#125; else &#123;</span><br><span class="line">             ...</span><br><span class="line">              &#x2F;&#x2F;关键代码</span><br><span class="line">              Message prev;</span><br><span class="line">              for (;;) &#123;</span><br><span class="line">                  prev &#x3D; p;</span><br><span class="line">                  p &#x3D; p.next;</span><br><span class="line">                  if (p &#x3D;&#x3D; null || when &lt; p.when) &#123;</span><br><span class="line">                      break;</span><br><span class="line">                  &#125;</span><br><span class="line">                  if (needWake &amp;&amp; p.isAsynchronous()) &#123;</span><br><span class="line">                      needWake &#x3D; false;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">              msg.next &#x3D; p; &#x2F;&#x2F; invariant: p &#x3D;&#x3D; prev.next</span><br><span class="line">              prev.next &#x3D; msg;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          &#x2F;&#x2F; We can assume mPtr !&#x3D; 0 because mQuitting is false.</span><br><span class="line">          if (needWake) &#123;</span><br><span class="line">              nativeWake(mPtr);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      return true;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>先看下新消息需要放到队头的情况：p == null || when == 0 || when &lt; p.when。即队列为空，或者新消息需要立即处理，或者新消息处理的事件比队头消息更早被处理。这时只要让新消息的next指向当前队头，让mMessages指向新消息即可完成插入操作。 </li>
+<li>除了上面情况之外，需要遍历链表并比较when的值，由于这个链表根据when时间从小到大的，只要找到第一个链表节点的when比插入消息的when大或者没找到，跳出循环，并插入链表。</li>
+</ul>
+<h3 id="Looper类"><a href="#Looper类" class="headerlink" title="Looper类"></a>Looper类</h3><h4 id="prepare"><a href="#prepare" class="headerlink" title="prepare()"></a>prepare()</h4><p>Looper的构造函数修饰符是private的，那么他是在哪里被实例化？通过搜索，发现 <code>prepare()</code> 和 <code>prepareMainLooper()</code>两个方法。</p>
+<ul>
+<li><p><code>prepare()</code>方法官方说明；</p>
+<blockquote>
+<p> 作为looper初始化当前线程。提供一个机会来创建handler并使用looper。在使用之前，请在此方法之后调用loop()，并在结束时调用quit()</p>
+</blockquote>
+</li>
+<li><p><code>prepareMainLooper()</code>方法官方说明；</p>
+<blockquote>
+<p>作为looper初始化当前线程，并标记其为application主线程的looper。在application主线程中的looper被Android系统创建，因此开发者请永远不要手动调用这个方法。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> public static void prepareMainLooper() &#123;</span><br><span class="line">        prepare(false);</span><br><span class="line">        synchronized (Looper.class) &#123;</span><br><span class="line">            if (sMainLooper !&#x3D; null) &#123;</span><br><span class="line">                throw new IllegalStateException(&quot;The main Looper has already been prepared.&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            sMainLooper &#x3D; myLooper();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">private static void prepare(boolean quitAllowed) &#123;</span><br><span class="line">    if (sThreadLocal.get() !&#x3D; null) &#123;</span><br><span class="line">        throw new RuntimeException(&quot;Only one Looper may be created per thread&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    sThreadLocal.set(new Looper(quitAllowed));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看上面的<code>prepareMainLooper()</code>代码，发现做了两个事: <code>prepare(false)</code> 和 <code>myLooper()</code>。</p>
+</li>
+<li><p><code>prepare(false)</code>方法中的sThreadLocal字段的类型是 <code>ThreadLocal</code>,用来干什么呢？实现一个线程本地存储，一个让每个线程都有拥有value的变量。另外，可以看看构造函数Looper干了些什么事情？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">private Looper(boolean quitAllowed) &#123;</span><br><span class="line">     mQueue &#x3D; new MessageQueue(quitAllowed);</span><br><span class="line">     mThread &#x3D; Thread.currentThread();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>对于<code>myLooper()</code>来说，prepare()中提到了会将looper放到线程存储ThreadLocal中，此处只需要从中取出并返回即可，因此代码只有一行return sThreadLocal.get();</p>
+</li>
+<li><p>疑问<br>在activity当中实例的Handler,我们并没有调用loop方法？</p>
+</li>
+</ul>
+<blockquote>
+<p>查看prepareMainLooper()调用者可以看到，在SystemServer.run()与ActivityThread.main()中都在调用Looper.prepareMainLooper()后不远就调用了Looper.loop()。而这两处可以推断一个是系统应用的主线程，一个是用户应用的主线程，而后面这个就是答案。</p>
+</blockquote>
+<h4 id="loop"><a href="#loop" class="headerlink" title="loop()"></a>loop()</h4><ul>
+<li>loop主要是通过死循环来重复做某件事的方法。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static void loop() &#123;</span><br><span class="line">      final Looper me &#x3D; myLooper();</span><br><span class="line">      final MessageQueue queue &#x3D; me.mQueue;</span><br><span class="line">      for (;;) &#123;</span><br><span class="line">          Message msg &#x3D; queue.next(); &#x2F;&#x2F; might block</span><br><span class="line">          if (msg &#x3D;&#x3D; null) &#123;</span><br><span class="line">              return;</span><br><span class="line">          &#125;</span><br><span class="line">          msg.target.dispatchMessage(msg);</span><br><span class="line">          msg.recycleUnchecked();</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>这里就一目了然了：一个死循环，不断从队列中取消息并分发，如果取到null就说明消息队列已经退出或被释放，此时loop终止。msg.target.dispatchMessage(msg)中target便是在发送消息的handler对象，dispatchMessage()便是对消息的处理了。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>上面几个基本概念的关系如下图：<br><img src="https://user-gold-cdn.xitu.io/2018/3/28/1626d393c095d24e?w=1470&h=952&f=png&s=109848"></li>
+</ul>
+<h3 id="参考资源"><a href="#参考资源" class="headerlink" title="参考资源"></a>参考资源</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/android/os/Handler.html">Handler官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012827296/article/details/51236614">Handler运行机制</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xmh19936688/article/details/51901338">Message中obtain()与recycle()的来龙去脉</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jianhui1012.github.io/2018/04/21/Handler%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" data-id="ckfc694a80005rjx07av1314a" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">源码分析</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/21/%E5%85%B3%E4%BA%8E%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF%E7%9A%84%E6%95%85%E4%BA%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          关于贝塞尔曲线的故事
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/02/22/ConstraintLayout%E8%A7%A3%E6%9E%90/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ConstraintLayout解析</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/" rel="tag">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E5%9F%BA%E7%A1%80/" rel="tag">Android基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ReactNative/" rel="tag">ReactNative</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%8A%80%E5%B7%A7/" rel="tag">学习技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/" rel="tag">工作总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">源码分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" rel="tag">网络安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%AD%A6/" rel="tag">自学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%BD%E4%B9%A6%E7%A5%9E%E5%99%A8/" rel="tag">追书神器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">Android基础</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/ReactNative/" style="font-size: 10px;">ReactNative</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%8A%80%E5%B7%A7/" style="font-size: 10px;">学习技巧</a> <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/" style="font-size: 10px;">工作总结</a> <a href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" style="font-size: 15px;">源码分析</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">生活</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" style="font-size: 10px;">网络安全</a> <a href="/tags/%E7%BF%BB%E8%AF%91/" style="font-size: 10px;">翻译</a> <a href="/tags/%E8%87%AA%E5%AD%A6/" style="font-size: 10px;">自学</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 15px;">计算机网络</a> <a href="/tags/%E8%BF%BD%E4%B9%A6%E7%A5%9E%E5%99%A8/" style="font-size: 10px;">追书神器</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 15px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/17/%E9%87%8D%E6%96%B0%E5%BC%80%E5%A7%8B/">重新开始</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/24/%E4%B8%80%E4%BA%9B%E5%BF%83%E5%BE%97/">一些心得</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/21/%E8%AE%B02-10%E4%B8%80%E5%AE%B6%E5%A4%96%E5%8C%85%E5%85%AC%E5%8F%B8Android%E9%9D%A2%E8%AF%95/">记2.10一家外包公司Android面试</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/21/%E8%AE%B0%E5%A4%A7%E6%90%9C%E8%BD%A6%E9%9D%A2%E8%AF%95%E4%B8%80%E9%9D%A2/">记大搜车面试一面</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/21/420%E5%B0%8F%E6%97%B6%E5%AD%A6%E4%B9%A0%E4%BB%A3%E7%A0%81%E4%B9%8B%E5%90%8E-%E5%A6%82%E4%BD%95%E6%95%99%E4%BD%A0%E5%85%8D%E8%B4%B9%E8%87%AA%E5%AD%A6Python/">420小时学习代码之后:如何教你免费自学Python</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 golike<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
