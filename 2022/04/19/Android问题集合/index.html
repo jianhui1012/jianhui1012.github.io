@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"jianhui1012.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Android单元测试学习与使用">
+  <meta name="description" content="记录平时工作和学习中遇到问题。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android单元测试">
-<meta property="og:url" content="http://jianhui1012.github.io/2020/12/17/Android%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/index.html">
+<meta property="og:title" content="Android问题集合">
+<meta property="og:url" content="http://jianhui1012.github.io/2022/04/19/Android%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/index.html">
 <meta property="og:site_name" content="jianhui1012的博客">
-<meta property="og:description" content="Android单元测试学习与使用">
+<meta property="og:description" content="记录平时工作和学习中遇到问题。">
 <meta property="og:locale">
-<meta property="article:published_time" content="2020-12-17T03:05:48.000Z">
-<meta property="article:modified_time" content="2020-12-17T03:26:40.206Z">
+<meta property="article:published_time" content="2022-04-19T01:54:26.000Z">
+<meta property="article:modified_time" content="2022-04-19T02:05:43.987Z">
 <meta property="article:author" content="golike">
-<meta property="article:tag" content="单元测试,Android">
+<meta property="article:tag" content="Android,AndroidStudio">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://jianhui1012.github.io/2020/12/17/Android%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
+<link rel="canonical" href="http://jianhui1012.github.io/2022/04/19/Android%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>Android单元测试 | jianhui1012的博客</title>
+  <title>Android问题集合 | jianhui1012的博客</title>
   
 
 
@@ -152,7 +152,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jianhui1012.github.io/2020/12/17/Android%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
+    <link itemprop="mainEntityOfPage" href="http://jianhui1012.github.io/2022/04/19/Android%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -165,7 +165,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Android单元测试
+          Android问题集合
         </h1>
 
         <div class="post-meta">
@@ -176,7 +176,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-12-17 11:05:48 / Modified: 11:26:40" itemprop="dateCreated datePublished" datetime="2020-12-17T11:05:48+08:00">2020-12-17</time>
+              <time title="Created: 2022-04-19 09:54:26 / Modified: 10:05:43" itemprop="dateCreated datePublished" datetime="2022-04-19T09:54:26+08:00">2022-04-19</time>
             </span>
 
           
@@ -190,21 +190,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Android单元测试学习与使用</p>
+        <p>记录平时工作和学习中遇到问题。</p>
 <a id="more"></a>
 
-<h2 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><h4 id="Android配置测试环境"><a href="#Android配置测试环境" class="headerlink" title="Android配置测试环境"></a>Android配置测试环境</h4><blockquote>
-<p>根据执行环境组织整理测试目录,Android Studio 中的典型项目包含两个用于放置测试的目录。请按以下方式组织整理您的测试：</p>
-</blockquote>
-<ul>
-<li><p>androidTest 目录应包含在真实或虚拟设备上运行的测试。此类测试包括集成测试、端到端测试，以及仅靠 JVM 无法完成应用功能验证的其他测试。</p>
-</li>
-<li><p>test 目录应包含在本地计算机上运行的测试，如单元测试。</p>
+<h2 id="AndroidStudio"><a href="#AndroidStudio" class="headerlink" title="AndroidStudio"></a>AndroidStudio</h2><h3 id="构建问题"><a href="#构建问题" class="headerlink" title="构建问题"></a>构建问题</h3><ul>
+<li><p>打包时候报错误信息如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error:Execution failed for task &#39;:app:kaptDebugKotlin&#39;</span><br></pre></td></tr></table></figure>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3></li>
+<li><p>前面使用重新构建，清理缓存和重启AndroidStudio，发现都不行。</p>
 </li>
 </ul>
-<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><blockquote>
-<p>现在做的不够的，可以改进的。<br>接下来，要做的东西。</p>
-</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;gradlew clean build</span><br></pre></td></tr></table></figure>
+
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/46850060/errorexecution-failed-for-task-appkaptdebugkotlin">errorexecution-failed-for-task-appkaptdebugkotlin</a></p>
 
     </div>
 
@@ -214,7 +212,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-Android/" rel="tag"># 单元测试,Android</a>
+              <a href="/tags/Android-AndroidStudio/" rel="tag"># Android,AndroidStudio</a>
           </div>
 
         
@@ -223,13 +221,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/12/14/AndroidStudio%E4%BB%A3%E7%90%86%E8%AE%BE%E7%BD%AE/" rel="prev" title="AndroidStudio代理设置">
-      <i class="fa fa-chevron-left"></i> AndroidStudio代理设置
+    <a href="/2022/04/11/%E9%9A%8F%E8%AE%B0/" rel="prev" title="随记">
+      <i class="fa fa-chevron-left"></i> 随记
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/01/13/greendao%E6%B3%A8%E8%A7%A3/" rel="next" title="greendao注解">
-      greendao注解 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -288,7 +283,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="nav-number">1.</span> <span class="nav-text">单元测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Android%E9%85%8D%E7%BD%AE%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.1.</span> <span class="nav-text">Android配置测试环境</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E8%B7%B5"><span class="nav-number">1.3.</span> <span class="nav-text">实践</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#AndroidStudio"><span class="nav-number">1.</span> <span class="nav-text">AndroidStudio</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">构建问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-number">1.2.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">1.3.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
