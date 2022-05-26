@@ -169,10 +169,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-05-19 17:14:45 / Modified: 17:36:42" itemprop="dateCreated datePublished" datetime="2022-05-19T17:14:45+08:00">2022-05-19</time>
+              <time title="Created: 2022-05-19 17:14:45" itemprop="dateCreated datePublished" datetime="2022-05-19T17:14:45+08:00">2022-05-19</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-26 15:58:23" itemprop="dateModified" datetime="2022-05-26T15:58:23+08:00">2022-05-26</time>
+              </span>
 
           
 
@@ -188,7 +194,25 @@
           <h1 id="Android蓝牙介绍"><a href="#Android蓝牙介绍" class="headerlink" title="Android蓝牙介绍"></a>Android蓝牙介绍</h1><h2 id="系统版本"><a href="#系统版本" class="headerlink" title="系统版本"></a>系统版本</h2><ul>
 <li>Android4.4系统以下使用的是传统蓝牙(经典蓝牙)，4.4以上的话使用低功耗蓝牙(也就是经常俗称的ble),蓝牙连接有距离限制，大概几十米左右(根据当前环境的障碍物多少)。</li>
 </ul>
-<h1 id="Android建立连接过程"><a href="#Android建立连接过程" class="headerlink" title="Android建立连接过程"></a>Android建立连接过程</h1><h2 id="介绍低功耗蓝牙"><a href="#介绍低功耗蓝牙" class="headerlink" title="介绍低功耗蓝牙"></a>介绍低功耗蓝牙</h2><h3 id="建立连接"><a href="#建立连接" class="headerlink" title="建立连接"></a>建立连接</h3><ul>
+<h1 id="Android建立连接过程"><a href="#Android建立连接过程" class="headerlink" title="Android建立连接过程"></a>Android建立连接过程</h1><h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><pre class="mermaid">graph TD
+A(gatt.connectGatt-其中的参数:BluetoothGattCallback回调) 
+--> B[BGCB的onConnectionStateChange回调]
+B --> C{判断status值}
+C --> |不等于GATT_SUCCESS| D[断开连接+关闭服务]
+C --> |等于GATT_SUCCESS| E{判断newState的值}
+E --> |等于STATE_DISCONNECTED| G[close关闭服务]
+E --> |等于STATE_CONNECTED| F{判断需要requestMtu}
+F --> |请求则协商数据交互包大小| J[BGCB的onMtuChanged回调-获取协商结果]
+J --> H[gatt.discoverServices]
+F --> |不请求则默认23字节| H
+H --> I[BGCB的onServicesDiscovered回调]
+I --> K[发现服务成功则获取对应的特征-mGattService.getCharacteristic] --> L[订阅特征值-gatt.setCharacteristicNotification]
+L --> N[连接建立-可通信]
+G --> M[一次连接结束]
+D --> M
+12[BluetoothGattCallback简称BGCB]</pre>
+
+<h2 id="介绍低功耗蓝牙"><a href="#介绍低功耗蓝牙" class="headerlink" title="介绍低功耗蓝牙"></a>介绍低功耗蓝牙</h2><h3 id="建立连接"><a href="#建立连接" class="headerlink" title="建立连接"></a>建立连接</h3><ul>
 <li>connect方法</li>
 <li>发现服务</li>
 <li>寻找指定特征(写入和读取)</li>
@@ -199,6 +223,7 @@
 <li>构建数据写入特征到设备，然后通过订阅通知获取到设备响应数据，来进行交互。</li>
 </ul>
 <h1 id="常见错误与解决方法"><a href="#常见错误与解决方法" class="headerlink" title="常见错误与解决方法"></a>常见错误与解决方法</h1><h2 id="错误码"><a href="#错误码" class="headerlink" title="错误码"></a>错误码</h2><p>staus    说明<br>0    连接成功或者失败<br>8    设备端已经断开（可能是复位或者断点等原因），手机端没有收到回应，等到一定时间会自动断开<br>19    设备端主动发起的断开。比如关机等<br>22    获取不到服务<br>40    应该是环境不好，或者射频新能不好，或者距离太远，导致这些命令包slave没有收到，然后Master一直重传到connection event counter超过instant值导致。<br>133    设备不在附近，或者手机端之前的连接没有断开（有时候closegatt没有效果） 或者是连接数量超过了最大值</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36749906/article/details/107336329?spm=1001.2101.3001.6650.3&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-3-107336329-blog-86551379.pc_relevant_antiscanv3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-3-107336329-blog-86551379.pc_relevant_antiscanv3&utm_relevant_index=6">蓝牙学习笔记</a></p>
 
       
     </div>
@@ -325,7 +350,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-25 11:04:32" itemprop="dateModified" datetime="2022-05-25T11:04:32+08:00">2022-05-25</time>
+                <time title="Modified: 2022-05-25 16:24:59" itemprop="dateModified" datetime="2022-05-25T16:24:59+08:00">2022-05-25</time>
               </span>
 
           
@@ -610,7 +635,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-25 11:15:24" itemprop="dateModified" datetime="2022-05-25T11:15:24+08:00">2022-05-25</time>
+                <time title="Modified: 2022-05-26 14:29:11" itemprop="dateModified" datetime="2022-05-26T14:29:11+08:00">2022-05-26</time>
               </span>
 
           
@@ -967,6 +992,16 @@
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
 
+
+
+  <script src='https://unpkg.com/mermaid@8.8.4/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: theme.mermaid.theme});
+    }
+  </script>
+
+
         
 
 
@@ -1010,8 +1045,41 @@
 
 
 
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
 
 
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
 
 
   
