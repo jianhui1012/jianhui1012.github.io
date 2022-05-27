@@ -20,18 +20,20 @@
     var CONFIG = {"hostname":"jianhui1012.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Android蓝牙介绍系统版本 Android4.4系统以下使用的是传统蓝牙(经典蓝牙)，4.4以上的话使用低功耗蓝牙(也就是经常俗称的ble),蓝牙连接有距离限制，大概几十米左右(根据当前环境的障碍物多少)。  Android建立连接过程流程graph TD A(gatt.connectGatt-其中的参数:BluetoothGattCallback回调)  --&gt; B[BGCB的onConne">
+  <meta name="description" content="蓝牙的介绍，建立连接过程，错误码说明">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android蓝牙开发">
 <meta property="og:url" content="http://jianhui1012.github.io/2022/05/19/Android%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/index.html">
 <meta property="og:site_name" content="jianhui1012的博客">
-<meta property="og:description" content="Android蓝牙介绍系统版本 Android4.4系统以下使用的是传统蓝牙(经典蓝牙)，4.4以上的话使用低功耗蓝牙(也就是经常俗称的ble),蓝牙连接有距离限制，大概几十米左右(根据当前环境的障碍物多少)。  Android建立连接过程流程graph TD A(gatt.connectGatt-其中的参数:BluetoothGattCallback回调)  --&gt; B[BGCB的onConne">
+<meta property="og:description" content="蓝牙的介绍，建立连接过程，错误码说明">
 <meta property="og:locale">
+<meta property="og:image" content="http://jianhui1012.github.io/2022/05/19/Android%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/1.png">
 <meta property="article:published_time" content="2022-05-19T09:14:45.000Z">
-<meta property="article:modified_time" content="2022-05-26T07:58:23.563Z">
+<meta property="article:modified_time" content="2022-05-26T09:48:59.244Z">
 <meta property="article:author" content="golike">
 <meta property="article:tag" content="Android,蓝牙,蓝牙开发">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jianhui1012.github.io/2022/05/19/Android%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/1.png">
 
 <link rel="canonical" href="http://jianhui1012.github.io/2022/05/19/Android%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/">
 
@@ -182,7 +184,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-26 15:58:23" itemprop="dateModified" datetime="2022-05-26T15:58:23+08:00">2022-05-26</time>
+                <time title="Modified: 2022-05-26 17:48:59" itemprop="dateModified" datetime="2022-05-26T17:48:59+08:00">2022-05-26</time>
               </span>
 
           
@@ -196,7 +198,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Android蓝牙介绍"><a href="#Android蓝牙介绍" class="headerlink" title="Android蓝牙介绍"></a>Android蓝牙介绍</h1><h2 id="系统版本"><a href="#系统版本" class="headerlink" title="系统版本"></a>系统版本</h2><ul>
+        <p>蓝牙的介绍，建立连接过程，错误码说明</p>
+<a id="more"></a>
+<h1 id="Android蓝牙介绍"><a href="#Android蓝牙介绍" class="headerlink" title="Android蓝牙介绍"></a>Android蓝牙介绍</h1><h2 id="系统版本"><a href="#系统版本" class="headerlink" title="系统版本"></a>系统版本</h2><ul>
 <li>Android4.4系统以下使用的是传统蓝牙(经典蓝牙)，4.4以上的话使用低功耗蓝牙(也就是经常俗称的ble),蓝牙连接有距离限制，大概几十米左右(根据当前环境的障碍物多少)。</li>
 </ul>
 <h1 id="Android建立连接过程"><a href="#Android建立连接过程" class="headerlink" title="Android建立连接过程"></a>Android建立连接过程</h1><h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><pre class="mermaid">graph TD
@@ -217,7 +221,18 @@ G --> M[一次连接结束]
 D --> M
 12[BluetoothGattCallback简称BGCB]</pre>
 
-<h2 id="介绍低功耗蓝牙"><a href="#介绍低功耗蓝牙" class="headerlink" title="介绍低功耗蓝牙"></a>介绍低功耗蓝牙</h2><h3 id="建立连接"><a href="#建立连接" class="headerlink" title="建立连接"></a>建立连接</h3><ul>
+<h2 id="介绍低功耗蓝牙"><a href="#介绍低功耗蓝牙" class="headerlink" title="介绍低功耗蓝牙"></a>介绍低功耗蓝牙</h2><ul>
+<li> 低功耗蓝牙体系结构主要分为三个部分：控制器、主机和应用程序。在控制器内既有物理层和链路层，又有直接测试模式和主机控制接口(HCI)层的下半部分。在主机内包含三个协议：逻辑链路控制和适配协议(L2CAP)、属性协议(Attribute Protocol)和安全管理器协议(Security Manager Protocol)，此外还包括通用属性规范(GATT)、通用访问规范(GAP)和模式(Mode)。<br><img src="/2022/05/19/Android%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/1.png" alt="image-20220526172058056"></li>
+</ul>
+<h3 id="控制器"><a href="#控制器" class="headerlink" title="控制器"></a>控制器</h3><pre><code>物理设备，收发无线电信号。控制器与外界通过天线相连，与主机通过主机控制接口(HCI)相连。</code></pre>
+<h3 id="主机"><a href="#主机" class="headerlink" title="主机"></a>主机</h3><pre><code>软件栈，管理多台设备之间的通信以及提供服务。主机构建位于主机控制器的上层部分，其上为逻辑链路控制和适配协议(L2CAP)。在它上面是系统的两个基本构建块：安全管理器(用于处理所有认证和安全连接等事务)以及属性协议(用于公开设备上的状态数据)。属性协议之上为通用属性规范(GATT),定义属性协议如何实现可重用的服务，而这些服务公开了设备的标准特性。最后，通用访问规范(GAP)定义了设备如何以一种可交互方式找到对方，并与之进行连接。
+主机并未对其上层接口做明确规定，每个操作系统或者环境都会用不同的方式公开主机上层接口API。</code></pre>
+<h3 id="应用程序"><a href="#应用程序" class="headerlink" title="应用程序"></a>应用程序</h3><pre><code>使用软件栈和控制器实现用户实例。</code></pre>
+<h3 id="3-应用层"><a href="#3-应用层" class="headerlink" title="3.应用层"></a>3.应用层</h3><p>  控制器和主机之上是应用层。应用层规范定义了三种类型：特性(characteristic)、服务(service)和规范(profile)。</p>
+<h4 id="3-1特性-characterisitic"><a href="#3-1特性-characterisitic" class="headerlink" title="3.1特性(characterisitic)"></a>3.1特性(characterisitic)</h4><p>  特性是采用已知格式，以通用唯一识别码(UUID)作为标记的一小块数据。由于特性要求能够重复使用，因而设计时没有设计行为。</p>
+<h4 id="3-2服务-service"><a href="#3-2服务-service" class="headerlink" title="3.2服务(service)"></a>3.2服务(service)</h4><p>  服务只定义了位于服务器上的相关特性行为，而不定义客户端的行为。服务有两种类型：首要服务和次要服务。首要服务表征一个给定的设备主要做些什么。次要服务是协助主要服务或者其他次要服务的服务。</p>
+<h4 id="3-3规范-profile"><a href="#3-3规范-profile" class="headerlink" title="3.3规范(profile)"></a>3.3规范(profile)</h4><p>  规范是描述两个或者多个设备的说明，每个设备提供一个或者多个服务。规范描述了如何发现并连接设备，从而为每台设备确定所需的拓扑结构。规范还描述了客户端特性，用于发现服务和服务特性。规范和服务是一对多对多的功能。</p>
+<h3 id="建立连接"><a href="#建立连接" class="headerlink" title="建立连接"></a>建立连接</h3><ul>
 <li>connect方法</li>
 <li>发现服务</li>
 <li>寻找指定特征(写入和读取)</li>
@@ -226,9 +241,11 @@ D --> M
 <h1 id="Android蓝牙通信"><a href="#Android蓝牙通信" class="headerlink" title="Android蓝牙通信"></a>Android蓝牙通信</h1><ul>
 <li>获取连接过程中的特征(有写入权限的)</li>
 <li>构建数据写入特征到设备，然后通过订阅通知获取到设备响应数据，来进行交互。</li>
+<li>实际开发过程中，去连接设备的时候，在上面的流程图的过程中，比如说connectGatt，discoverServices,requestMtu这些方法中都可能出现onConnectionStateChange回调报状态码错误-133(最多),19,22，为了更好的用户体验需要进行重连，重连之前需要close下。</li>
+<li>另外，一般开始连接的时候，需要停止扫描，等连接结束了之后，再重新开始扫描。</li>
 </ul>
 <h1 id="常见错误与解决方法"><a href="#常见错误与解决方法" class="headerlink" title="常见错误与解决方法"></a>常见错误与解决方法</h1><h2 id="错误码"><a href="#错误码" class="headerlink" title="错误码"></a>错误码</h2><p>staus    说明<br>0    连接成功或者失败<br>8    设备端已经断开（可能是复位或者断点等原因），手机端没有收到回应，等到一定时间会自动断开<br>19    设备端主动发起的断开。比如关机等<br>22    获取不到服务<br>40    应该是环境不好，或者射频新能不好，或者距离太远，导致这些命令包slave没有收到，然后Master一直重传到connection event counter超过instant值导致。<br>133    设备不在附近，或者手机端之前的连接没有断开（有时候closegatt没有效果） 或者是连接数量超过了最大值</p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36749906/article/details/107336329?spm=1001.2101.3001.6650.3&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-3-107336329-blog-86551379.pc_relevant_antiscanv3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-3-107336329-blog-86551379.pc_relevant_antiscanv3&utm_relevant_index=6">蓝牙学习笔记</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36749906/article/details/107336329?spm=1001.2101.3001.6650.3&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-3-107336329-blog-86551379.pc_relevant_antiscanv3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-3-107336329-blog-86551379.pc_relevant_antiscanv3&utm_relevant_index=6">蓝牙学习笔记</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2dba7f067372">android蓝牙BLE</a></p>
 
     </div>
 
@@ -309,7 +326,7 @@ D --> M
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android%E8%93%9D%E7%89%99%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">Android蓝牙介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E7%89%88%E6%9C%AC"><span class="nav-number">1.1.</span> <span class="nav-text">系统版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Android%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5%E8%BF%87%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">Android建立连接过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D%E4%BD%8E%E5%8A%9F%E8%80%97%E8%93%9D%E7%89%99"><span class="nav-number">2.2.</span> <span class="nav-text">介绍低功耗蓝牙</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.2.1.</span> <span class="nav-text">建立连接</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Android%E8%93%9D%E7%89%99%E9%80%9A%E4%BF%A1"><span class="nav-number">3.</span> <span class="nav-text">Android蓝牙通信</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">常见错误与解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E7%A0%81"><span class="nav-number">4.1.</span> <span class="nav-text">错误码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">4.1.1.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android%E8%93%9D%E7%89%99%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">Android蓝牙介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E7%89%88%E6%9C%AC"><span class="nav-number">1.1.</span> <span class="nav-text">系统版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Android%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5%E8%BF%87%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">Android建立连接过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D%E4%BD%8E%E5%8A%9F%E8%80%97%E8%93%9D%E7%89%99"><span class="nav-number">2.2.</span> <span class="nav-text">介绍低功耗蓝牙</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="nav-number">2.2.1.</span> <span class="nav-text">控制器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA"><span class="nav-number">2.2.2.</span> <span class="nav-text">主机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F"><span class="nav-number">2.2.3.</span> <span class="nav-text">应用程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%BA%94%E7%94%A8%E5%B1%82"><span class="nav-number">2.2.4.</span> <span class="nav-text">3.应用层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1%E7%89%B9%E6%80%A7-characterisitic"><span class="nav-number">2.2.4.1.</span> <span class="nav-text">3.1特性(characterisitic)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2%E6%9C%8D%E5%8A%A1-service"><span class="nav-number">2.2.4.2.</span> <span class="nav-text">3.2服务(service)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3%E8%A7%84%E8%8C%83-profile"><span class="nav-number">2.2.4.3.</span> <span class="nav-text">3.3规范(profile)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.2.5.</span> <span class="nav-text">建立连接</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Android%E8%93%9D%E7%89%99%E9%80%9A%E4%BF%A1"><span class="nav-number">3.</span> <span class="nav-text">Android蓝牙通信</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">常见错误与解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E7%A0%81"><span class="nav-number">4.1.</span> <span class="nav-text">错误码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">4.1.1.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
