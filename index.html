@@ -146,1055 +146,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jianhui1012.github.io/2022/07/19/java%E5%90%8E%E5%8F%B0%E9%97%AE%E9%A2%98%E4%B9%8B%E9%81%93/ocs%E9%85%8D%E7%BD%AE%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88%E6%94%B9(1)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="golike">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jianhui1012的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/07/19/java%E5%90%8E%E5%8F%B0%E9%97%AE%E9%A2%98%E4%B9%8B%E9%81%93/ocs%E9%85%8D%E7%BD%AE%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88%E6%94%B9(1)/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-07-19 13:27:58" itemprop="dateCreated datePublished" datetime="2022-07-19T13:27:58+08:00">2022-07-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-07-20 17:34:23" itemprop="dateModified" datetime="2022-07-20T17:34:23+08:00">2022-07-20</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="ocs配置接口技术方案"><a href="#ocs配置接口技术方案" class="headerlink" title="ocs配置接口技术方案"></a>ocs配置接口技术方案</h3><h3 id="hobbits数据库新增ocs-switch表"><a href="#hobbits数据库新增ocs-switch表" class="headerlink" title="hobbits数据库新增ocs_switch表"></a>hobbits数据库新增ocs_switch表</h3><ul>
-<li>ocs_switch表</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>id</td>
-<td>int</td>
-<td>自增</td>
-</tr>
-<tr>
-<td>ocs_id</td>
-<td>String</td>
-<td>凭证，每个ocs服务的唯一标识</td>
-</tr>
-<tr>
-<td>switch</td>
-<td>String</td>
-<td>配置数据，json字符串</td>
-</tr>
-</tbody></table>
-<ul>
-<li>0.校验accessToken合法性</li>
-<li>1.通过之后根据请求参数中的ocs_id查询配置表中的配置数据，获取该配置对象的switch数据</li>
-<li>2.解析switch配置数据成JSONObject，增加时间戳字段后再转成json字符串<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> &#123;</span><br><span class="line">&quot;login&quot;:0,</span><br><span class="line">&quot;linkage&quot;:1,</span><br><span class="line">&quot;timestamp&quot;:11212123232</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>3.加密data数据,加密算法:Aes256</li>
-<li>4.构建返回数据，使用相关的返回对象封装的工具类<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;result&quot;: 200,</span><br><span class="line">	&quot;resultInfo&quot;: &quot;请求成功&quot;,</span><br><span class="line">	&quot;data&quot;:&quot;加密数据&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="配置接口定义说明"><a href="#配置接口定义说明" class="headerlink" title="配置接口定义说明"></a>配置接口定义说明</h3><p><strong>请求URL</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;v1&#x2F;ocs&#x2F;switch</span><br></pre></td></tr></table></figure>
-
-<p><strong>请求方式</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST </span><br></pre></td></tr></table></figure>
-
-<p><strong>content-type</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">application&#x2F;x-www-form-urlencoded</span><br></pre></td></tr></table></figure>
-
-<p><strong>请求参数</strong></p>
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>必选</th>
-<th>类型</th>
-<th>含义说明</th>
-<th>备注说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>accessToken</td>
-<td>是</td>
-<td>string</td>
-<td>凭证</td>
-<td></td>
-</tr>
-<tr>
-<td>data</td>
-<td>是</td>
-<td>string</td>
-<td>ocs唯一码</td>
-<td></td>
-</tr>
-</tbody></table>
-<p><strong>请求参数示例</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;accessToken&quot;:&quot;xxxxx&quot;,</span><br><span class="line">	&quot;data&quot;:&quot;xxxx&quot;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>返回参数</strong></p>
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>必选</th>
-<th>类型</th>
-<th>含义说明</th>
-<th>备注说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>result</td>
-<td>是</td>
-<td>int</td>
-<td>响应状态码</td>
-<td></td>
-</tr>
-<tr>
-<td>resultInfo</td>
-<td>是</td>
-<td>string</td>
-<td>响应说明</td>
-<td></td>
-</tr>
-<tr>
-<td>data</td>
-<td>是</td>
-<td>string</td>
-<td>配置数据对象</td>
-<td></td>
-</tr>
-</tbody></table>
-<p><strong>data说明</strong></p>
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>类型</th>
-<th>含义说明</th>
-<th>备注说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>login</td>
-<td>boolean</td>
-<td>登录开关</td>
-<td></td>
-</tr>
-<tr>
-<td>linkage</td>
-<td>boolean</td>
-<td>联动云端开关</td>
-<td></td>
-</tr>
-<tr>
-<td>timestamp</td>
-<td>Long</td>
-<td>时间戳</td>
-<td>无实际意义</td>
-</tr>
-</tbody></table>
-<p><strong>返回数据示例</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;result&quot;: 200,</span><br><span class="line">	&quot;resultInfo&quot;: &quot;请求成功&quot;,</span><br><span class="line">	&quot;data&quot;: &quot;fhui324yf89hweiufy32fh9u23ydb98231edh23oiher9832r&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jianhui1012.github.io/2022/07/19/java%E5%90%8E%E5%8F%B0%E9%97%AE%E9%A2%98%E4%B9%8B%E9%81%93/%E5%8F%AF%E8%A7%86%E5%AF%B9%E6%8E%A5%20ocs-%E4%B8%BB%E6%9C%BAhttp%E6%8E%A5%E5%8F%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="golike">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jianhui1012的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/07/19/java%E5%90%8E%E5%8F%B0%E9%97%AE%E9%A2%98%E4%B9%8B%E9%81%93/%E5%8F%AF%E8%A7%86%E5%AF%B9%E6%8E%A5%20ocs-%E4%B8%BB%E6%9C%BAhttp%E6%8E%A5%E5%8F%A3/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-07-19 11:17:24" itemprop="dateCreated datePublished" datetime="2022-07-19T11:17:24+08:00">2022-07-19</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="可视对接-ocs-子系统协议"><a href="#可视对接-ocs-子系统协议" class="headerlink" title="可视对接 ocs-子系统协议"></a>可视对接 ocs-子系统协议</h1><h2 id="1、接口说明"><a href="#1、接口说明" class="headerlink" title="1、接口说明"></a>1、接口说明</h2><p><strong>请求url：</strong> <code>http://***/[action]</code></p>
-<p><strong>action：</strong> ***/reformer/interface/lifang<br></p>
-<p><strong>示例：</strong><a target="_blank" rel="noopener" href="http://192.168.30.233:8088/ocs/reformer/interface/lifang">http://192.168.30.233:8088/ocs/reformer/interface/lifang</a></p>
-<p><strong>请求参数</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;time&quot;：1571376463,</span><br><span class="line">	&quot;data&quot;:&quot;IbgLNgZ9ei+u8cJlIHIzv1rG5rfBQF&#x2F;QgAoEKfxvEvkl84KmpL3x&#x2F;KJL&#x2F;Ie5kD9R\r\n&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>必选</th>
-<th>类型</th>
-<th>含义说明</th>
-<th>备注说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>time</td>
-<td>是</td>
-<td>int</td>
-<td>unix时间戳</td>
-<td>1571376463</td>
-</tr>
-<tr>
-<td>data</td>
-<td>是</td>
-<td>string</td>
-<td>加密后的数据</td>
-<td>data为各请求参数的<br>加密内容，加密方式<br>如下</td>
-</tr>
-</tbody></table>
-<p><strong>加密说明</strong></p>
-<p>加密方式为AES加密，秘钥为<code>ASDyguFTDwXCkiNV</code> ,偏移量为<code>1234567890123456</code> .</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public static String encrypt(String key, String initVector, String value) &#123;</span><br><span class="line">       try &#123;</span><br><span class="line">           IvParameterSpec iv &#x3D; new IvParameterSpec(initVector.getBytes(&quot;UTF-8&quot;));</span><br><span class="line">           SecretKeySpec skeySpec &#x3D; new SecretKeySpec(key.getBytes(&quot;UTF-8&quot;), &quot;AES&quot;);</span><br><span class="line">           Cipher cipher &#x3D; Cipher.getInstance(&quot;AES&#x2F;CBC&#x2F;PKCS5PADDING&quot;);</span><br><span class="line">           cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);</span><br><span class="line">           byte[] encrypted &#x3D; cipher.doFinal(value.getBytes());</span><br><span class="line">           return  (new BASE64Encoder()).encodeBuffer(encrypted);</span><br><span class="line"></span><br><span class="line">       &#125; catch (Exception ex) &#123;</span><br><span class="line">           ex.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line">       return null;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h1 id="2、HTTP接口"><a href="#2、HTTP接口" class="headerlink" title="2、HTTP接口"></a>2、HTTP接口</h1><h2 id="2-1-登录验证"><a href="#2-1-登录验证" class="headerlink" title="2.1 登录验证"></a>2.1 登录验证</h2><p><strong>接口地址</strong>：reformer/videophone/login</p>
-<p><strong>data参数说明</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;account&quot;:&quot;admin&quot;,</span><br><span class="line">	&quot;password&quot;:&quot;123456&quot;,</span><br><span class="line">	&quot;sn&quot;:&quot;QWERTYUIOP&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>必选</th>
-<th>类型</th>
-<th>含义说明</th>
-<th>备注说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>account</td>
-<td>是</td>
-<td>String</td>
-<td>账号</td>
-<td></td>
-</tr>
-<tr>
-<td>password</td>
-<td>是</td>
-<td>String</td>
-<td>密码</td>
-<td></td>
-</tr>
-<tr>
-<td>sn</td>
-<td>是</td>
-<td>String</td>
-<td>设备序列号</td>
-<td></td>
-</tr>
-</tbody></table>
-<p><strong>响应示例</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;result&quot;:200,</span><br><span class="line">	&quot;resultInfo&quot;:&quot;Request success&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>必选</th>
-<th>类型</th>
-<th>含义说明</th>
-<th>备注说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>result</td>
-<td>是</td>
-<td>int</td>
-<td>响应状态码</td>
-<td></td>
-</tr>
-<tr>
-<td>resultInfo</td>
-<td>是</td>
-<td>string</td>
-<td>响应说明</td>
-<td></td>
-</tr>
-<tr>
-<td>responseData</td>
-<td>否</td>
-<td>Integer</td>
-<td>管理员id</td>
-<td></td>
-</tr>
-</tbody></table>
-<h2 id="2-2-修改密码"><a href="#2-2-修改密码" class="headerlink" title="2.2 修改密码"></a>2.2 修改密码</h2><p><strong>接口地址</strong>：reformer/videophone/editPassword</p>
-<p><strong>data参数说明</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;adminId&quot;:1,</span><br><span class="line">	&quot;passwordOld&quot;:&quot;123456&quot;,</span><br><span class="line">	&quot;passwordNew&quot;:&quot;654321&quot;,</span><br><span class="line">	&quot;sn&quot;:&quot;QWERTYUIOP&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>必选</th>
-<th>类型</th>
-<th>含义说明</th>
-<th>备注说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>adminId</td>
-<td>是</td>
-<td>Integer</td>
-<td>账号id</td>
-<td></td>
-</tr>
-<tr>
-<td>passwordOld</td>
-<td>是</td>
-<td>String</td>
-<td>旧密码</td>
-<td></td>
-</tr>
-<tr>
-<td>passwordNew</td>
-<td>是</td>
-<td>String</td>
-<td>新密码</td>
-<td></td>
-</tr>
-<tr>
-<td>sn</td>
-<td>是</td>
-<td>String</td>
-<td>设备序列号</td>
-<td></td>
-</tr>
-</tbody></table>
-<p><strong>响应示例</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;result&quot;:200,</span><br><span class="line">	&quot;resultInfo&quot;:&quot;Request success&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>必选</th>
-<th>类型</th>
-<th>含义说明</th>
-<th>备注说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>result</td>
-<td>是</td>
-<td>int</td>
-<td>响应状态码</td>
-<td></td>
-</tr>
-<tr>
-<td>resultInfo</td>
-<td>是</td>
-<td>string</td>
-<td>响应说明</td>
-<td></td>
-</tr>
-</tbody></table>
-<h2 id="2-3-获取通话记录"><a href="#2-3-获取通话记录" class="headerlink" title="2.3 获取通话记录"></a>2.3 获取通话记录</h2><p><strong>接口地址</strong>：reformer/videophone/queryCallRecord</p>
-<p><strong>data参数说明</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;sn&quot;:&quot;QWERTYUIOP&quot;,</span><br><span class="line">	&quot;startTime&quot;:&quot;2021-02-03 20:20:20&quot;,</span><br><span class="line">	&quot;endTime&quot;:&quot;2021-02-04 20:20:20&quot;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>必选</th>
-<th>类型</th>
-<th>含义说明</th>
-<th>备注说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>sn</td>
-<td>是</td>
-<td>Strings</td>
-<td>设备序列号</td>
-<td></td>
-</tr>
-<tr>
-<td>startTime</td>
-<td>否</td>
-<td>String</td>
-<td>开始时间</td>
-<td></td>
-</tr>
-<tr>
-<td>endTime</td>
-<td>否</td>
-<td>String</td>
-<td>结束时间</td>
-<td></td>
-</tr>
-</tbody></table>
-<p><strong>响应示例</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;result&quot;:200,</span><br><span class="line">	&quot;resultInfo&quot;:&quot;Request success&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>必选</th>
-<th>类型</th>
-<th>含义说明</th>
-<th>备注说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>result</td>
-<td>是</td>
-<td>int</td>
-<td>响应状态码</td>
-<td></td>
-</tr>
-<tr>
-<td>resultInfo</td>
-<td>是</td>
-<td>string</td>
-<td>响应说明</td>
-<td></td>
-</tr>
-<tr>
-<td>responseData</td>
-<td>否</td>
-<td>ArrayList<Object></Object></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<p><strong>Object解析</strong></p>
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>必选</th>
-<th>类型</th>
-<th>含义说明</th>
-<th>备注说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>callTime</td>
-<td>是</td>
-<td>Long</td>
-<td>拨打时间</td>
-<td></td>
-</tr>
-<tr>
-<td>sn</td>
-<td>是</td>
-<td>String</td>
-<td>设备序列号</td>
-<td></td>
-</tr>
-<tr>
-<td>faceId</td>
-<td>是</td>
-<td>Integer</td>
-<td>人脸机id</td>
-<td></td>
-</tr>
-<tr>
-<td>faceIp</td>
-<td>是</td>
-<td>Stringr</td>
-<td>人脸机Ip</td>
-<td></td>
-</tr>
-<tr>
-<td>faceName</td>
-<td>是</td>
-<td>String</td>
-<td>人脸机名称</td>
-<td></td>
-</tr>
-<tr>
-<td>facePhone</td>
-<td>是</td>
-<td>String</td>
-<td>人脸机分机号</td>
-<td></td>
-</tr>
-<tr>
-<td>StationIp</td>
-<td>是</td>
-<td>String</td>
-<td>主机ip</td>
-<td></td>
-</tr>
-<tr>
-<td>StationPhone</td>
-<td>是</td>
-<td>String</td>
-<td>主机号</td>
-<td></td>
-</tr>
-<tr>
-<td>talkTime</td>
-<td>否</td>
-<td>String</td>
-<td>HH:mm：ss</td>
-<td></td>
-</tr>
-<tr>
-<td>status</td>
-<td>是</td>
-<td>Integer</td>
-<td>接听状态</td>
-<td>0-未接通 1-接听 2-拒绝</td>
-</tr>
-<tr>
-<td>adminId</td>
-<td>是</td>
-<td>Integer</td>
-<td>管理员Id</td>
-<td></td>
-</tr>
-</tbody></table>
-<p><strong>响应示例</strong></p>
-<h2 id="2-4-上传通话记录"><a href="#2-4-上传通话记录" class="headerlink" title="2.4 上传通话记录"></a>2.4 上传通话记录</h2><p><strong>接口地址</strong>：reformer/videophone/uploadCallRecord</p>
-<p><strong>data参数说明</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;callTime&quot;:1612436585000,</span><br><span class="line">	&quot;sn&quot;:&quot;QWERTYUIOP&quot;,</span><br><span class="line">	&quot;faceId&quot;:1,</span><br><span class="line">	&quot;faceIp&quot;:&quot;192.168.0.1&quot;,</span><br><span class="line">	&quot;faceName&quot;:&quot;人脸机1&quot;,</span><br><span class="line">	&quot;facePhone&quot;:&quot;1443&quot;,</span><br><span class="line">	&quot;StationIp&quot;:&quot;192.168.0.1&quot;,</span><br><span class="line">	&quot;StationPhone&quot;:&quot;6666&quot;,</span><br><span class="line">	&quot;talkTime&quot;:&quot;00:02:30&quot;,</span><br><span class="line">	&quot;adminId&quot;:1,</span><br><span class="line">	&quot;status&quot;:1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>必选</th>
-<th>类型</th>
-<th>含义说明</th>
-<th>备注说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>callTime</td>
-<td>是</td>
-<td>Long</td>
-<td>拨打时间</td>
-<td></td>
-</tr>
-<tr>
-<td>sn</td>
-<td>是</td>
-<td>String</td>
-<td>设备序列号</td>
-<td></td>
-</tr>
-<tr>
-<td>faceId</td>
-<td>是</td>
-<td>Integer</td>
-<td>人脸机id</td>
-<td></td>
-</tr>
-<tr>
-<td>faceIp</td>
-<td>是</td>
-<td>Stringr</td>
-<td>人脸机Ip</td>
-<td></td>
-</tr>
-<tr>
-<td>faceName</td>
-<td>是</td>
-<td>String</td>
-<td>人脸机名称</td>
-<td></td>
-</tr>
-<tr>
-<td>facePhone</td>
-<td>是</td>
-<td>String</td>
-<td>人脸机分机号</td>
-<td></td>
-</tr>
-<tr>
-<td>StationIp</td>
-<td>是</td>
-<td>String</td>
-<td>主机ip</td>
-<td></td>
-</tr>
-<tr>
-<td>StationPhone</td>
-<td>是</td>
-<td>String</td>
-<td>主机号</td>
-<td></td>
-</tr>
-<tr>
-<td>talkTime</td>
-<td>否</td>
-<td>String</td>
-<td>HH:mm：ss</td>
-<td></td>
-</tr>
-<tr>
-<td>status</td>
-<td>是</td>
-<td>Integer</td>
-<td>接听状态</td>
-<td>0-未接通 1-接听 2-拒绝,3-挂断</td>
-</tr>
-<tr>
-<td>adminId</td>
-<td>是</td>
-<td>Integer</td>
-<td>管理员Id</td>
-<td></td>
-</tr>
-</tbody></table>
-<p><strong>响应示例</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;result&quot;:200,</span><br><span class="line">	&quot;resultInfo&quot;:&quot;Request success&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>必选</th>
-<th>类型</th>
-<th>含义说明</th>
-<th>备注说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>result</td>
-<td>是</td>
-<td>int</td>
-<td>响应状态码</td>
-<td></td>
-</tr>
-<tr>
-<td>resultInfo</td>
-<td>是</td>
-<td>string</td>
-<td>响应说明</td>
-<td></td>
-</tr>
-</tbody></table>
-<h2 id="2-5-获取本机关联的人脸机"><a href="#2-5-获取本机关联的人脸机" class="headerlink" title="2.5 获取本机关联的人脸机"></a>2.5 获取本机关联的人脸机</h2><p><strong>接口地址</strong>：reformer/videophone/queryFaceMachine</p>
-<p><strong>data参数说明</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;sn&quot;:&quot;QWERTYUIOP&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>必选</th>
-<th>类型</th>
-<th>含义说明</th>
-<th>备注说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>sn</td>
-<td>是</td>
-<td>String</td>
-<td>设备序列号</td>
-<td></td>
-</tr>
-</tbody></table>
-<p><strong>响应示例</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;result&quot;:200,</span><br><span class="line">	&quot;resultInfo&quot;:&quot;Request success&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>必选</th>
-<th>类型</th>
-<th>含义说明</th>
-<th>备注说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>result</td>
-<td>是</td>
-<td>int</td>
-<td>响应状态码</td>
-<td></td>
-</tr>
-<tr>
-<td>resultInfo</td>
-<td>是</td>
-<td>string</td>
-<td>响应说明</td>
-<td></td>
-</tr>
-<tr>
-<td>responseData</td>
-<td>否</td>
-<td>ArrayList<Object></Object></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<p><strong>Object解析</strong></p>
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>必选</th>
-<th>类型</th>
-<th>含义说明</th>
-<th>备注说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>id</td>
-<td>是</td>
-<td>Integer</td>
-<td>设备id</td>
-<td></td>
-</tr>
-<tr>
-<td>name</td>
-<td>是</td>
-<td>Strings</td>
-<td>设备名称</td>
-<td></td>
-</tr>
-<tr>
-<td>type</td>
-<td>是</td>
-<td>Integers</td>
-<td>设备类型</td>
-<td></td>
-</tr>
-<tr>
-<td>serialNumber</td>
-<td>是</td>
-<td>String</td>
-<td>序列号</td>
-<td></td>
-</tr>
-<tr>
-<td>ip</td>
-<td>是</td>
-<td>String</td>
-<td>人脸机ip</td>
-<td></td>
-</tr>
-<tr>
-<td>phone</td>
-<td>是</td>
-<td>String</td>
-<td>分机号</td>
-<td></td>
-</tr>
-</tbody></table>
-<h2 id="2-6-遥控开门"><a href="#2-6-遥控开门" class="headerlink" title="2.6 遥控开门"></a>2.6 遥控开门</h2><p><strong>接口地址</strong>：reformer/videophone/openDoor</p>
-<p><strong>data参数说明</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;sn&quot;:&quot;QWERTYUIOP&quot;,</span><br><span class="line">	&quot;faceId&quot;:1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>必选</th>
-<th>类型</th>
-<th>含义说明</th>
-<th>备注说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>sn</td>
-<td>是</td>
-<td>String</td>
-<td>设备序列号</td>
-<td></td>
-</tr>
-<tr>
-<td>faceId</td>
-<td>是</td>
-<td>Integer</td>
-<td>人脸机id</td>
-<td></td>
-</tr>
-</tbody></table>
-<p><strong>响应示例</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;result&quot;:200,</span><br><span class="line">	&quot;resultInfo&quot;:&quot;Request success&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>必选</th>
-<th>类型</th>
-<th>含义说明</th>
-<th>备注说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>result</td>
-<td>是</td>
-<td>int</td>
-<td>响应状态码</td>
-<td></td>
-</tr>
-<tr>
-<td>resultInfo</td>
-<td>是</td>
-<td>string</td>
-<td>响应说明</td>
-<td></td>
-</tr>
-</tbody></table>
-<h2 id="2-7-获取报警记录"><a href="#2-7-获取报警记录" class="headerlink" title="2.7 获取报警记录"></a>2.7 获取报警记录</h2><p><strong>接口地址</strong>：reformer/videophone/alarmRecords</p>
-<p><strong>data参数说明</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;sn&quot;:&quot;QWERTYUIOP&quot;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>必选</th>
-<th>类型</th>
-<th>含义说明</th>
-<th>备注说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>sn</td>
-<td>是</td>
-<td>String</td>
-<td>设备序列号</td>
-<td></td>
-</tr>
-</tbody></table>
-<p><strong>响应示例</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;result&quot;:200,</span><br><span class="line">	&quot;resultInfo&quot;:&quot;Request success&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>必选</th>
-<th>类型</th>
-<th>含义说明</th>
-<th>备注说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>result</td>
-<td>是</td>
-<td>int</td>
-<td>响应状态码</td>
-<td></td>
-</tr>
-<tr>
-<td>resultInfo</td>
-<td>是</td>
-<td>string</td>
-<td>响应说明</td>
-<td></td>
-</tr>
-<tr>
-<td>responseData</td>
-<td>否</td>
-<td>ArrayList<Object></Object></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<p><strong>Object解析</strong></p>
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>必选</th>
-<th>类型</th>
-<th>含义说明</th>
-<th>备注说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>id</td>
-<td>是</td>
-<td>Integer</td>
-<td>记录id</td>
-<td></td>
-</tr>
-<tr>
-<td>doorName</td>
-<td>是</td>
-<td>String</td>
-<td>房门名称</td>
-<td></td>
-</tr>
-<tr>
-<td>alarmName</td>
-<td>是</td>
-<td>Integer</td>
-<td>报警类型</td>
-<td></td>
-</tr>
-<tr>
-<td>eventDate</td>
-<td>是</td>
-<td>String</td>
-<td>报警时间</td>
-<td>yyyy-MM-dd hh:mm:ss</td>
-</tr>
-<tr>
-<td>status</td>
-<td>是</td>
-<td>String</td>
-<td>记录状态</td>
-<td>0-未处理 1-已处理</td>
-</tr>
-</tbody></table>
-<h2 id="2-8-报警记录处理"><a href="#2-8-报警记录处理" class="headerlink" title="2.8 报警记录处理"></a>2.8 报警记录处理</h2><p><strong>接口地址</strong>：reformer/videophone/dealRecord</p>
-<p><strong>data参数说明</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;sn&quot;:&quot;QWERTYUIOP&quot;,</span><br><span class="line">	&quot;recordId&quot;:1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>必选</th>
-<th>类型</th>
-<th>含义说明</th>
-<th>备注说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>sn</td>
-<td>是</td>
-<td>String</td>
-<td>设备序列号</td>
-<td></td>
-</tr>
-<tr>
-<td>recordId</td>
-<td>是</td>
-<td>Integer</td>
-<td>记录id</td>
-<td></td>
-</tr>
-</tbody></table>
-<p><strong>响应示例</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;result&quot;:200,</span><br><span class="line">	&quot;resultInfo&quot;:&quot;Request success&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>必选</th>
-<th>类型</th>
-<th>含义说明</th>
-<th>备注说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>result</td>
-<td>是</td>
-<td>int</td>
-<td>响应状态码</td>
-<td></td>
-</tr>
-<tr>
-<td>resultInfo</td>
-<td>是</td>
-<td>string</td>
-<td>响应说明</td>
-<td></td>
-</tr>
-</tbody></table>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://jianhui1012.github.io/2022/07/15/mac%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1739,6 +690,167 @@ E --> H(NullPointerException <br><br> IndexOutOfBoundsException <br><br> ClassCa
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jianhui1012.github.io/2022/05/19/%E6%8B%96%E5%BB%B6%E7%97%87%E7%9A%84%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="golike">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="jianhui1012的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/05/19/%E6%8B%96%E5%BB%B6%E7%97%87%E7%9A%84%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">拖延症的总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-05-19 17:09:17 / Modified: 17:10:56" itemprop="dateCreated datePublished" datetime="2022-05-19T17:09:17+08:00">2022-05-19</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="拖延症的总结"><a href="#拖延症的总结" class="headerlink" title="拖延症的总结"></a>拖延症的总结</h1><h2 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h2><ul>
+<li><p>之前定下的每天上午最先做的事情之一是记录当天要做的事情，然后中午记录下上午进度，再调节下下午的工作清单。现在的情况，是上午定的工作，强化训练和学习java各1小时，这两天没做，然后第二天说是要重视起来，但是第二天还是这样o(╥﹏╥)o，今天是第三天，我觉得需要思考下，到底的什么制约了我的执行力，关于这个执行力，肯定是越辩越清楚的，用文字记录下来，一个是更容易清楚的整理思路，另外，一个也是锻炼写文章能力，万事起于微。</p>
+<h2 id="分析原因"><a href="#分析原因" class="headerlink" title="分析原因"></a>分析原因</h2></li>
+<li><p>回到正题，我总结了下几个因素：</p>
+<ul>
+<li>1.工作时间看股票的时间太多了 </li>
+<li>2.工作时间看新闻的时间太长而且往往是反复刷新闻，这个东西如果用到看知识上是多好呀 </li>
+<li>3.容易分心，无法专注，手机和外部环境影响</li>
+</ul>
+</li>
+</ul>
+<h2 id="采取措施"><a href="#采取措施" class="headerlink" title="采取措施"></a>采取措施</h2><blockquote>
+<p>关于坚持与做事的看法，需要客观看待坚持，人性都是一样的，惰性都是会有的，关键是及时可以纠正，不断强化训练自我意识，让肌体或者意识感到舒服，相信那个时候坚持做的事情，就会变得自然而然的。</p>
+</blockquote>
+<ul>
+<li>针对1与2，手机安装限制软件，以前也采取过措施，限制6小时使用时间。</li>
+<li>看基础知识最好需要写个demo，提高注意力</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jianhui1012.github.io/2022/05/10/%E5%85%B3%E4%BA%8E%E6%88%91%E5%AF%B9%E5%8F%A4%E6%AD%A6%E5%AD%A6%E7%9A%84%E7%90%86%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="golike">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="jianhui1012的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/05/10/%E5%85%B3%E4%BA%8E%E6%88%91%E5%AF%B9%E5%8F%A4%E6%AD%A6%E5%AD%A6%E7%9A%84%E7%90%86%E8%A7%A3/" class="post-title-link" itemprop="url">关于我对古武学的理解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-05-10 11:02:32" itemprop="dateCreated datePublished" datetime="2022-05-10T11:02:32+08:00">2022-05-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-25 16:24:59" itemprop="dateModified" datetime="2022-05-25T16:24:59+08:00">2022-05-25</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="古武学的历史"><a href="#古武学的历史" class="headerlink" title="古武学的历史"></a>古武学的历史</h2><h3 id="八段锦的历史"><a href="#八段锦的历史" class="headerlink" title="八段锦的历史"></a>八段锦的历史</h3><ul>
+<li>八段锦是一套独立而完整的*<strong>健身养生功**<em>，有</em></strong>舒筋活血*<strong>，**<em>调理气血</em></strong>，*<strong>促进人体新陈代谢**<em>等功能，久练可以</em></strong>强健体质*<strong>、抗疫祛病，益寿延年。那么八段锦究竟是何人、何时所创，目前尚无定论。但是我们从湖南长沙马王堆三号墓出土的**<em>《导引图》</em></strong>可以看到，至少有四幅图势与八段锦图势中的“调理脾胃须单举”、“双手攀足固肾腰”、“左右开弓似射雕”、“背后七颠百病消”这四个动作相似。当然这两者之间是否有关系，还有待专业人士考证。</li>
+<li>据了解八段锦之名，最早出现在北宋文学家洪迈（1123年—1202年）所著志怪笔记小说《夷坚志》中：“政和七年，李似矩为起居郎……尝以夜半时起坐，嘘吸按摩，行所谓八段锦者。”说明八段锦在北宋已流传于世，并有坐势和立势之分，而《夷坚志》中所描述的就是坐式八段锦。</li>
+<li>总体来说，八段锦源自古代智慧产物，有两千多年的历史，并且经过时间的锤炼，是非常有用的气功之一。</li>
+</ul>
+<h3 id="正确认识武侠和气功"><a href="#正确认识武侠和气功" class="headerlink" title="正确认识武侠和气功"></a>正确认识武侠和气功</h3><ul>
+<li>小时候，看那些武侠剧，比如:神雕侠侣，笑傲江湖，圆月弯刀等等，那时候认为我也可以通过练武来做到飞檐走壁，使用飘逸的轻功😄。</li>
+<li>我们会从电视新闻上看到现实生活中少林寺的和尚表演铁头功，劈砖等，这个是气功，通过循环强化训练，去掌握’气’的流动。</li>
+<li>武侠帮助我们提升想象力，凝聚力，培养侠的精神，而气动则帮助我们强化自己的体魄。尤其在现在这个物欲横流的生活，电子产品充斥的每一个时间段，而古代的气功是帮助我们调节现代生活的良药之一。</li>
+</ul>
+<h2 id="如何练习"><a href="#如何练习" class="headerlink" title="如何练习"></a>如何练习</h2><ul>
+<li>从我自己的体会来看，其实，气功和现在的体操或者减肥训练等等，都有相似的地方，就比如之前我练习的脊柱体操，它里面是配合呼吸去做的，然后我发现训练一段时间后，当静下来呼吸发力的时候，可以掌握自己的身体的一部分，好比是一起自己对腹部肉的感知会特别强烈，呼吸的时候也能感受气的流动。</li>
+<li>一旦自己做到这个程度，会产生强大的正向意识，因为肌体告诉你，这个有帮助，所以会不断的正向反馈循环往复。当然，这个时候还是需要每天做，不然，还是会脱离那种状态。</li>
+</ul>
+<h3 id="自悟能力"><a href="#自悟能力" class="headerlink" title="自悟能力"></a>自悟能力</h3><ul>
+<li>其实，上面已经有讲到了，就是静下来感受自己的肌肉发力，呼吸的流动，不断训练每个动作，循环往复，如果是自己训练需要拍摄视频，来反复观看和改进。</li>
+</ul>
+<h2 id="总结与思考"><a href="#总结与思考" class="headerlink" title="总结与思考"></a>总结与思考</h2><ul>
+<li>对于运动的自我意识，有时候需要契机开启，但是，锻炼身体，练习古武学，到了一定的强度，古武学或者体魄强大会不断的强化自我意识。</li>
+<li>这有点是哲学的意味，但是经验告诉我，确实两者相辅相成。试问，体魄不强，干活怎么会更有效，更有激情。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1808,7 +920,7 @@ E --> H(NullPointerException <br><br> IndexOutOfBoundsException <br><br> ClassCa
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
