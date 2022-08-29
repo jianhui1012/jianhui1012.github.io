@@ -27,11 +27,13 @@
 <meta property="og:site_name" content="jianhui1012的博客">
 <meta property="og:description" content="对于审查应用安全漏洞后需要整改，如何解决安全漏洞过程记录等。">
 <meta property="og:locale">
+<meta property="og:image" content="http://jianhui1012.github.io/2022/08/25/Android%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D/1.png">
 <meta property="article:published_time" content="2022-08-25T09:29:22.000Z">
-<meta property="article:modified_time" content="2022-08-25T09:54:15.382Z">
+<meta property="article:modified_time" content="2022-08-29T09:14:41.466Z">
 <meta property="article:author" content="golike">
 <meta property="article:tag" content="逆向安全,Android,反编译">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jianhui1012.github.io/2022/08/25/Android%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D/1.png">
 
 <link rel="canonical" href="http://jianhui1012.github.io/2022/08/25/Android%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D/">
 
@@ -174,10 +176,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-08-25 17:29:22 / Modified: 17:54:15" itemprop="dateCreated datePublished" datetime="2022-08-25T17:29:22+08:00">2022-08-25</time>
+              <time title="Created: 2022-08-25 17:29:22" itemprop="dateCreated datePublished" datetime="2022-08-25T17:29:22+08:00">2022-08-25</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-08-29 17:14:41" itemprop="dateModified" datetime="2022-08-29T17:14:41+08:00">2022-08-29</time>
+              </span>
 
           
 
@@ -193,10 +201,26 @@
         <p>对于审查应用安全漏洞后需要整改，如何解决安全漏洞过程记录等。</p>
 <a id="more"></a>
 
-<h2 id="Apk文件结构概览"><a href="#Apk文件结构概览" class="headerlink" title="Apk文件结构概览"></a>Apk文件结构概览</h2><ul>
-<li><h3 id="dex文件"><a href="#dex文件" class="headerlink" title="dex文件"></a>dex文件</h3></li>
+<h2 id="Apk文件结构概览"><a href="#Apk文件结构概览" class="headerlink" title="Apk文件结构概览"></a>Apk文件结构概览</h2><p><img src="/2022/08/25/Android%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D/1.png" alt="编译流程图"></p>
+<ul>
+<li>简单描述下：资源文件+源代码，其中资源文件通过aapt工具会产生R.java文件和编译后的资源文件，aidl文件通过aidl编译产生java接口文件，前面两种文件和源码Jvva文件,通过java编译器产生java文件，然后通过dex打包生成dex文件，最后在通过apkbuilder打包编译后的资源文件,其他资源文件asset,dex文件</li>
 </ul>
-<h3 id="res目录"><a href="#res目录" class="headerlink" title="res目录"></a>res目录</h3><h3 id="清单文件"><a href="#清单文件" class="headerlink" title="清单文件"></a>清单文件</h3><h3 id="so文件"><a href="#so文件" class="headerlink" title="so文件"></a>so文件</h3><h3 id="asset目录"><a href="#asset目录" class="headerlink" title="asset目录"></a>asset目录</h3><h2 id="反编译和重新打包"><a href="#反编译和重新打包" class="headerlink" title="反编译和重新打包"></a>反编译和重新打包</h2><h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><h3 id="apktool"><a href="#apktool" class="headerlink" title="apktool"></a>apktool</h3><p><a target="_blank" rel="noopener" href="https://ibotpeaches.github.io/Apktool/install/">apktool官网</a></p>
+<h3 id="dex文件"><a href="#dex文件" class="headerlink" title="dex文件"></a>dex文件</h3><ul>
+<li>多个class文件打包成dex文件。</li>
+</ul>
+<h3 id="res目录"><a href="#res目录" class="headerlink" title="res目录"></a>res目录</h3><ul>
+<li>资源目录，布局文件，颜色，字符串，动画文件等</li>
+</ul>
+<h4 id="清单文件"><a href="#清单文件" class="headerlink" title="清单文件"></a>清单文件</h4><ul>
+<li>应用中页面配置信息</li>
+</ul>
+<h3 id="jni下的so文件"><a href="#jni下的so文件" class="headerlink" title="jni下的so文件"></a>jni下的so文件</h3><ul>
+<li>第三方sdk中比较多，一般是比较核心的代码使用C或者C++写的</li>
+</ul>
+<h3 id="asset目录"><a href="#asset目录" class="headerlink" title="asset目录"></a>asset目录</h3><ul>
+<li>资源文件，比如说webview中使用到的js文件可以放这里，还有提示的音频文件等。</li>
+</ul>
+<h2 id="反编译和重新打包"><a href="#反编译和重新打包" class="headerlink" title="反编译和重新打包"></a>反编译和重新打包</h2><h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><h3 id="apktool"><a href="#apktool" class="headerlink" title="apktool"></a>apktool</h3><p><a target="_blank" rel="noopener" href="https://ibotpeaches.github.io/Apktool/install/">apktool官网</a></p>
 <ul>
 <li><p>简单来说是用来解码apk文件和打包解码的内容，环境的话，搞个jdk下载下，需要1.8以上，用法的话看官网就可以，简单来说，看下面的两组命令就行。apktool.jar的就是官方下的jar包后改了下名字</p>
 </li>
@@ -222,9 +246,20 @@
 <li>so文件可以通过ida等软件分析，我们加固的话一般分为有源加固和无源加固，源指的是源码，第三方sdk中的so文件加固属于无源加固。实现方式可以通过加壳实现，比如upx加壳</li>
 </ul>
 <h3 id="应用签名验证"><a href="#应用签名验证" class="headerlink" title="应用签名验证"></a>应用签名验证</h3><ul>
-<li><h3 id="asset目录中网页和js文件明文显示"><a href="#asset目录中网页和js文件明文显示" class="headerlink" title="asset目录中网页和js文件明文显示"></a>asset目录中网页和js文件明文显示</h3></li>
-<li><p>可以做混淆处理</p>
-</li>
+<li>被反编译后如果恶意修改重新打包上架应用市场换壳导致损失，验证打包时的签名信息，防止被恶意使用。</li>
+</ul>
+<h3 id="asset目录中网页和js文件明文显示"><a href="#asset目录中网页和js文件明文显示" class="headerlink" title="asset目录中网页和js文件明文显示"></a>asset目录中网页和js文件明文显示</h3><ul>
+<li>可以做混淆处理</li>
+</ul>
+<h3 id="StrandHogg漏洞"><a href="#StrandHogg漏洞" class="headerlink" title="StrandHogg漏洞"></a>StrandHogg漏洞</h3><ul>
+<li>android:allowBackup=”false”，关闭备份模式</li>
+<li>目前报告有个StrandHogg漏洞，需要把taskAffinity属性设置为空字符串</li>
+</ul>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/5c4a4b1e82e6">应用签名验证</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/admans/p/12014612.html">so加固实践</a></li>
+<li><a target="_blank" rel="noopener" href="https://bbs.pediy.com/thread-248779.htm">upx原理分析</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/omnispace/article/details/52738979">Android So简单加固</a></li>
 </ul>
 
     </div>
@@ -247,7 +282,10 @@
     <a href="/2022/07/15/mac%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" rel="prev" title="mac使用手册">
       <i class="fa fa-chevron-left"></i> mac使用手册
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/08/29/%E4%BC%98%E7%A7%80%E5%8D%9A%E5%AE%A2%E6%94%B6%E8%97%8F%E9%9B%86/" rel="next" title="优秀博客收藏集">
+      优秀博客收藏集 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -306,7 +344,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Apk%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E6%A6%82%E8%A7%88"><span class="nav-number">1.</span> <span class="nav-text">Apk文件结构概览</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dex%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">dex文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#res%E7%9B%AE%E5%BD%95"><span class="nav-number">1.2.</span> <span class="nav-text">res目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%85%E5%8D%95%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">清单文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#so%E6%96%87%E4%BB%B6"><span class="nav-number">1.4.</span> <span class="nav-text">so文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#asset%E7%9B%AE%E5%BD%95"><span class="nav-number">1.5.</span> <span class="nav-text">asset目录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E7%BC%96%E8%AF%91%E5%92%8C%E9%87%8D%E6%96%B0%E6%89%93%E5%8C%85"><span class="nav-number">2.</span> <span class="nav-text">反编译和重新打包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7"><span class="nav-number">2.1.</span> <span class="nav-text">工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#apktool"><span class="nav-number">2.2.</span> <span class="nav-text">apktool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jadx-gui"><span class="nav-number">2.3.</span> <span class="nav-text">jadx-gui</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E"><span class="nav-number">3.</span> <span class="nav-text">常见的安全漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dex%E4%B8%ADjava%E4%BB%A3%E7%A0%81%E7%A0%B4%E8%A7%A3%E9%A3%8E%E9%99%A9"><span class="nav-number">3.1.</span> <span class="nav-text">dex中java代码破解风险</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#so%E6%96%87%E4%BB%B6%E8%A2%AB%E7%A0%B4%E8%A7%A3%E9%A3%8E%E9%99%A9-%E7%AC%AC%E4%B8%89%E6%96%B9sdk%E4%B8%ADso%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.</span> <span class="nav-text">so文件被破解风险(第三方sdk中so文件)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E7%AD%BE%E5%90%8D%E9%AA%8C%E8%AF%81"><span class="nav-number">3.3.</span> <span class="nav-text">应用签名验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#asset%E7%9B%AE%E5%BD%95%E4%B8%AD%E7%BD%91%E9%A1%B5%E5%92%8Cjs%E6%96%87%E4%BB%B6%E6%98%8E%E6%96%87%E6%98%BE%E7%A4%BA"><span class="nav-number">3.4.</span> <span class="nav-text">asset目录中网页和js文件明文显示</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Apk%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E6%A6%82%E8%A7%88"><span class="nav-number">1.</span> <span class="nav-text">Apk文件结构概览</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dex%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">dex文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#res%E7%9B%AE%E5%BD%95"><span class="nav-number">1.2.</span> <span class="nav-text">res目录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B8%85%E5%8D%95%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.1.</span> <span class="nav-text">清单文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jni%E4%B8%8B%E7%9A%84so%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">jni下的so文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#asset%E7%9B%AE%E5%BD%95"><span class="nav-number">1.4.</span> <span class="nav-text">asset目录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E7%BC%96%E8%AF%91%E5%92%8C%E9%87%8D%E6%96%B0%E6%89%93%E5%8C%85"><span class="nav-number">2.</span> <span class="nav-text">反编译和重新打包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7"><span class="nav-number">2.1.</span> <span class="nav-text">工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#apktool"><span class="nav-number">2.2.</span> <span class="nav-text">apktool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jadx-gui"><span class="nav-number">2.3.</span> <span class="nav-text">jadx-gui</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E"><span class="nav-number">3.</span> <span class="nav-text">常见的安全漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dex%E4%B8%ADjava%E4%BB%A3%E7%A0%81%E7%A0%B4%E8%A7%A3%E9%A3%8E%E9%99%A9"><span class="nav-number">3.1.</span> <span class="nav-text">dex中java代码破解风险</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#so%E6%96%87%E4%BB%B6%E8%A2%AB%E7%A0%B4%E8%A7%A3%E9%A3%8E%E9%99%A9-%E7%AC%AC%E4%B8%89%E6%96%B9sdk%E4%B8%ADso%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.</span> <span class="nav-text">so文件被破解风险(第三方sdk中so文件)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E7%AD%BE%E5%90%8D%E9%AA%8C%E8%AF%81"><span class="nav-number">3.3.</span> <span class="nav-text">应用签名验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#asset%E7%9B%AE%E5%BD%95%E4%B8%AD%E7%BD%91%E9%A1%B5%E5%92%8Cjs%E6%96%87%E4%BB%B6%E6%98%8E%E6%96%87%E6%98%BE%E7%A4%BA"><span class="nav-number">3.4.</span> <span class="nav-text">asset目录中网页和js文件明文显示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#StrandHogg%E6%BC%8F%E6%B4%9E"><span class="nav-number">3.5.</span> <span class="nav-text">StrandHogg漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">3.6.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -320,12 +358,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">57</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
