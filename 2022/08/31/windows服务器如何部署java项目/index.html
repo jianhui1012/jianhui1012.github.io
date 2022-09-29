@@ -28,7 +28,7 @@
 <meta property="og:description" content="帮朋友搞个项目，服务器是windows的，数据库用的是mysql5.7+,第一次搞，正好记录下。">
 <meta property="og:locale">
 <meta property="article:published_time" content="2022-08-31T09:03:51.000Z">
-<meta property="article:modified_time" content="2022-08-31T09:40:23.242Z">
+<meta property="article:modified_time" content="2022-09-29T07:58:40.237Z">
 <meta property="article:author" content="golike">
 <meta property="article:tag" content="tomcat,服务器">
 <meta name="twitter:card" content="summary">
@@ -174,10 +174,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-08-31 17:03:51 / Modified: 17:40:23" itemprop="dateCreated datePublished" datetime="2022-08-31T17:03:51+08:00">2022-08-31</time>
+              <time title="Created: 2022-08-31 17:03:51" itemprop="dateCreated datePublished" datetime="2022-08-31T17:03:51+08:00">2022-08-31</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-09-29 15:58:40" itemprop="dateModified" datetime="2022-09-29T15:58:40+08:00">2022-09-29</time>
+              </span>
 
           
 
@@ -198,16 +204,32 @@
 </li>
 <li><p>导出创建数据库和相关表的sql文件</p>
 </li>
-<li><p>tomcat环境搭建</p>
+<li><p>jdk+tomcat环境搭建</p>
 </li>
 <li><p>启动tomcat和打包的服务</p>
+<ul>
+<li>打开tomcat服务器<ul>
+<li>sudo sh startup.sh</li>
+</ul>
+</li>
+<li>关闭tomcat服务器<ul>
+<li>sudo sh shutdown.sh</li>
+</ul>
+</li>
+<li>启动服务<ul>
+<li>java -jar jar包路径</li>
+</ul>
+</li>
+</ul>
 </li>
 <li><p>阿里云控制台增加入网的服务端口</p>
 </li>
+<li><p>前端项目部署到服务器</p>
+</li>
 </ul>
 <h3 id="ide项目打包发布到服务器"><a href="#ide项目打包发布到服务器" class="headerlink" title="ide项目打包发布到服务器"></a>ide项目打包发布到服务器</h3><ul>
-<li>windows配置ssh</li>
-<li>ide安装阿里的一个上传插件</li>
+<li>windows服务器安装配置ssh</li>
+<li>ide安装阿里的一个上传插件,Alibaba cloud toolkit,方便后面ide打包直接发布到服务器</li>
 </ul>
 
     </div>
