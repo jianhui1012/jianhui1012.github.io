@@ -20,22 +20,20 @@
     var CONFIG = {"hostname":"jianhui1012.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="前文简单讲了早期计算机网络发展史，本文主要概述OSI的7层协议结构，TCP&#x2F;IP的4层协议，5层协议的来由与具体内容。">
+  <meta name="description" content="记录一段时间做了些什么并记录进度，还有一些奇想。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="计算机网络体系结构">
-<meta property="og:url" content="http://jianhui1012.github.io/2017/08/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/index.html">
+<meta property="og:title" content="2022年9-11月份总结">
+<meta property="og:url" content="http://jianhui1012.github.io/2022/12/12/2022%E5%B9%B49-11%E6%9C%88%E4%BB%BD%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="jianhui1012的博客">
-<meta property="og:description" content="前文简单讲了早期计算机网络发展史，本文主要概述OSI的7层协议结构，TCP&#x2F;IP的4层协议，5层协议的来由与具体内容。">
+<meta property="og:description" content="记录一段时间做了些什么并记录进度，还有一些奇想。">
 <meta property="og:locale">
-<meta property="og:image" content="http://jianhui1012.github.io/2017/08/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.jpg">
-<meta property="article:published_time" content="2017-08-13T14:32:58.000Z">
-<meta property="article:modified_time" content="2020-08-29T14:40:35.074Z">
+<meta property="article:published_time" content="2022-12-12T09:01:05.000Z">
+<meta property="article:modified_time" content="2022-12-12T09:52:03.668Z">
 <meta property="article:author" content="golike">
-<meta property="article:tag" content="计算机网络">
+<meta property="article:tag" content="总结">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://jianhui1012.github.io/2017/08/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.jpg">
 
-<link rel="canonical" href="http://jianhui1012.github.io/2017/08/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">
+<link rel="canonical" href="http://jianhui1012.github.io/2022/12/12/2022%E5%B9%B49-11%E6%9C%88%E4%BB%BD%E6%80%BB%E7%BB%93/">
 
 
 <script id="page-configurations">
@@ -48,7 +46,7 @@
   };
 </script>
 
-  <title>计算机网络体系结构 | jianhui1012的博客</title>
+  <title>2022年9-11月份总结 | jianhui1012的博客</title>
   
 
 
@@ -154,7 +152,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jianhui1012.github.io/2017/08/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">
+    <link itemprop="mainEntityOfPage" href="http://jianhui1012.github.io/2022/12/12/2022%E5%B9%B49-11%E6%9C%88%E4%BB%BD%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -167,7 +165,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          计算机网络体系结构
+          2022年9-11月份总结
         </h1>
 
         <div class="post-meta">
@@ -176,16 +174,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2017-08-13 22:32:58" itemprop="dateCreated datePublished" datetime="2017-08-13T22:32:58+08:00">2017-08-13</time>
+              <time title="Created: 2022-12-12 17:01:05 / Modified: 17:52:03" itemprop="dateCreated datePublished" datetime="2022-12-12T17:01:05+08:00">2022-12-12</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-29 22:40:35" itemprop="dateModified" datetime="2020-08-29T22:40:35+08:00">2020-08-29</time>
-              </span>
 
           
 
@@ -198,59 +190,37 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>前文简单讲了早期计算机网络发展史，本文主要概述OSI的7层协议结构，TCP/IP的4层协议，5层协议的来由与具体内容。</p>
+        <p>记录一段时间做了些什么并记录进度，还有一些奇想。</p>
 <a id="more"></a>
 
-<h3 id="网络划分"><a href="#网络划分" class="headerlink" title="网络划分"></a>网络划分</h3><ul>
-<li>计算机网络是把许多计算机连接在一起;互联网是由许多计算机网络组成的;因特网是世界上最大的互联网;</li>
-<li>互联网所用的通信协议可以是任意的，而因特网所用的通信协议是TCP/IP协议族，且其前身是美国的ARPANET;</li>
-<li>因特网数据交换的方式通过存储转发的分组交换技术,以及3层ISP结构;</li>
-<li>因特网主要分为核心部分与边缘部分,计算机处于边缘部分;路由器处在核心部分,起作用是按存储转发进行分组交换</li>
-<li>按作用范围划分,计算机网络分为广域网,城域网,局域网,个人区域网</li>
-</ul>
-<h3 id="网络性能指标"><a href="#网络性能指标" class="headerlink" title="网络性能指标"></a>网络性能指标</h3><ul>
-<li>关键指标:速率,带宽,吞吐量,时延,时延带宽积,往返时间和信道利用率</li>
-</ul>
-<h3 id="计算机网络体系结构"><a href="#计算机网络体系结构" class="headerlink" title="计算机网络体系结构"></a>计算机网络体系结构</h3><h4 id="如何形成？"><a href="#如何形成？" class="headerlink" title="如何形成？"></a>如何形成？</h4><blockquote>
-<p>  1974年,美国的IBM公司宣布了系统网络体系结构SNA,这个著名的网络标准就是按照分层的方法制定的。</p>
+<h2 id="2022年度目标"><a href="#2022年度目标" class="headerlink" title="2022年度目标"></a>2022年度目标</h2><blockquote>
+<p>这是我copy过来的年度目标,第一项是12月份刚加的。</p>
 </blockquote>
-<blockquote>
-<p>  在1983年形成了开发系统互联基本参考模型的正式文件,即著名的ISO 7498国际标准，也就是所谓的七层协议的体系结构。</p>
-</blockquote>
-<ul>
-<li>协议主要由三部分组成:语法,语义,同步;其中,语法负责数据的结构;语义负责发送何种操作;同步负责事件实现顺序的详细说明;</li>
-<li>前面讲到因特网的前身ARPANET的研制经验告诉我们,对于复杂的计算机网络协议,需要分层设计。</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">## 排下下半年主要目标 </span><br><span class="line">0.找妹子</span><br><span class="line">2.考高级证书(软考)</span><br><span class="line">3.脊柱柔软和肌肉强化出来</span><br><span class="line">	- 4个月</span><br><span class="line">1.继续电商+重新出单</span><br><span class="line">	- 4个月</span><br><span class="line">	- 买货：虚拟产品+锁手机的</span><br><span class="line">4.读两本书：心流+大器晚成</span><br><span class="line">	- 4个月</span><br><span class="line"></span><br><span class="line">### 次要事情</span><br><span class="line"></span><br><span class="line">* ~~1.帮助老板搞机器学习预测~~</span><br><span class="line">	- jupyter notebook开发环境整好了</span><br><span class="line">	- 6.30学习人工智能，机器学习，深度学习</span><br><span class="line">* ~~1.搞钉钉推送~~</span><br><span class="line">* ~~2.汽车上牌和练车~~</span><br><span class="line">	- ~~上牌完成~~</span><br><span class="line">	- 7.18练车进步了</span><br><span class="line">* 3.重读大器晚成+阅读心流书籍</span><br><span class="line">先写这么多，在完成主要目标的情况增加新的目标</span><br><span class="line">* 读两本技术书</span><br></pre></td></tr></table></figure>
+
+<h3 id="进度"><a href="#进度" class="headerlink" title="进度"></a>进度</h3><h4 id="主要项目"><a href="#主要项目" class="headerlink" title="主要项目"></a>主要项目</h4><h4 id="2-考高级证书-软考"><a href="#2-考高级证书-软考" class="headerlink" title="2.考高级证书(软考)"></a>2.考高级证书(软考)</h4><ul>
+<li>考完了，但是论文和案例分析都没搞好，临时抱佛脚还是要不得了。</li>
 </ul>
-<h4 id="详解5层体系协议"><a href="#详解5层体系协议" class="headerlink" title="详解5层体系协议"></a>详解5层体系协议</h4><ul>
-<li>五层体系是由7层体系与TCP/IP的4层体系的中庸之道简化的产物,如下图所示:</li>
-<li>QAQ!小伙伴们知道是哪5层协议吗?承上启下网络层,上层应用层,上层之下传输层,下层数据链路层,下层之下物理层;</li>
+<h4 id="3-脊柱柔软和肌肉强化出来-4个月"><a href="#3-脊柱柔软和肌肉强化出来-4个月" class="headerlink" title="3.脊柱柔软和肌肉强化出来 -4个月"></a>3.脊柱柔软和肌肉强化出来 -4个月</h4><ul>
+<li>这个下半年基本是废了，上半年可以，总结一个字是懒，另外这个东西不是立马有反馈导致坚持时间不够长。</li>
 </ul>
-<p><img src="/2017/08/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.jpg" alt="计算机网络体系结构as"></p>
-<ul>
-<li>听完上面的,小伙伴们肯定对各层如何运作十分好奇吧？下面具体讲下各层的作用吧！</li>
+<h4 id="1-继续电商-重新出单-4个月-买货：虚拟产品-锁手机的"><a href="#1-继续电商-重新出单-4个月-买货：虚拟产品-锁手机的" class="headerlink" title="1.继续电商+重新出单 -4个月 -买货：虚拟产品+锁手机的"></a>1.继续电商+重新出单 -4个月 -买货：虚拟产品+锁手机的</h4><ul>
+<li>上半年是卖了一点，下半年就没搞了，首先没有去上品了，另外是软件到期了，外加被骗了200块，暂时不干了，个人干淘宝还是要坚持。</li>
 </ul>
-<h5 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h5><ul>
-<li>作为体系结构中的最上层,帮助应用进程之间进行交互是它的使命,他旗下的协议主要有:HTTP,STMP,FTP等;</li>
-<li>基本单位是报文;</li>
-</ul>
-<h5 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h5><ul>
-<li>传输层的名字与TCP英文翻译过来一样,容易记忆,它呢？有TCP与UDP两种协议,前一种是连接的,可靠的,后一种是无连接的,不可靠的;</li>
-<li>TCP的基本单位是报文段;UDP的基本单位是用户数据报;</li>
-</ul>
-<h5 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h5><ul>
-<li>网络层的名字也与其协议IP的名字符合,它的任务主要是分组交换网上的不同主机提供通信服务;在发送数据时,网络层把上层运输层的报文段或用户数据报封装成分组或包进行传送。网络层的另一个任务是寻找合适路由;</li>
-<li>数据基本单位是数据报;</li>
-</ul>
-<h5 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h5><ul>
-<li>它的作用主要是cha把网络层交下来的IP数据报组装成帧,在两个相邻节点间的链路上传送帧;帧的包括了控制信息(如同步信息,差错控制等);</li>
-</ul>
-<h5 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h5><ul>
-<li>物理层传递的是熟悉的二进制数据(0,1);</li>
-<li>很明显,它的基本单位是比特;</li>
+<h4 id="4-读两本书：心流-大器晚成-4个月"><a href="#4-读两本书：心流-大器晚成-4个月" class="headerlink" title="4.读两本书：心流+大器晚成 - 4个月"></a>4.读两本书：心流+大器晚成 - 4个月</h4><ul>
+<li>读都读完了，读完还是有收获的，但是还没有内化吸收掉，可以多读几遍。</li>
 </ul>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
-<li>上面讲的主要是计算机体系结构的相关内容,当然,还有很多细节与计算机性能指标的部分没有延伸开来讲;</li>
-<li>记住5层协议与其的基本任务;</li>
+<li>车子买了速腾，目前驾驶技术有待提高，周末多出来转转。</li>
+<li>聊了几个月觉得不够主动，太僵硬了。</li>
+<li>软考上半年没考，因为疫情，那时候感觉很好，想法：没复习好，正好多复习一段时间，当你一次没准备好的时候，没有去总结反思，下一次也必定会没准备好，下版本去考了，但是没成。</li>
+<li>锻炼没有坚持下去，尤其是下半年，做的很不好。娱乐时间太长了，导致多巴胺分泌，当你想起这件事的时候已经没有时间了，循环往复。</li>
+<li>炒股还是教学费，另外是占用大量的时间，考虑基金消费定投和股票选定一只低位股，持有一段时间然后暂时先不看了，把这部分时间空出来，去做其他提升自己能力的事情上。</li>
+<li>缺少社交活动，尤其是周末时候，可以和老朋友或者同学聚一聚。</li>
+<li>每个月12号写月总结</li>
+</ul>
+<h2 id="天外奇想"><a href="#天外奇想" class="headerlink" title="天外奇想"></a>天外奇想</h2><ul>
+<li>微观世界最小的是原子，现实中的人也是由这些东西构成的，如果可以把人拆分出来，并保存之间的关系，那么是不是可以进行传输和改造，这里有个时间因子，因为需要记录某个时间点所有的原子的状态然后去恢复它。</li>
 </ul>
 
     </div>
@@ -261,7 +231,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag"># 计算机网络</a>
+              <a href="/tags/%E6%80%BB%E7%BB%93/" rel="tag"># 总结</a>
           </div>
 
         
@@ -270,13 +240,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2017/05/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8F%91%E5%B1%95%E5%8F%B2/" rel="prev" title="计算机网络发展史">
-      <i class="fa fa-chevron-left"></i> 计算机网络发展史
+    <a href="/2022/12/11/%E5%88%86%E4%BA%AB%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BDB%E7%AB%99%E8%A7%86%E9%A2%91%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6/" rel="prev" title="分享批量下载B站视频开源软件">
+      <i class="fa fa-chevron-left"></i> 分享批量下载B站视频开源软件
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2017/09/11/%E9%98%85%E5%9B%BEAPI/" rel="next" title="阅图API">
-      阅图API <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -335,7 +302,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%88%92%E5%88%86"><span class="nav-number">1.</span> <span class="nav-text">网络划分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="nav-number">2.</span> <span class="nav-text">网络性能指标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">计算机网络体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%BD%A2%E6%88%90%EF%BC%9F"><span class="nav-number">3.1.</span> <span class="nav-text">如何形成？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%A6%E8%A7%A35%E5%B1%82%E4%BD%93%E7%B3%BB%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.2.</span> <span class="nav-text">详解5层体系协议</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82"><span class="nav-number">3.2.1.</span> <span class="nav-text">应用层</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="nav-number">3.2.2.</span> <span class="nav-text">传输层</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="nav-number">3.2.3.</span> <span class="nav-text">网络层</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="nav-number">3.2.4.</span> <span class="nav-text">数据链路层</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E5%B1%82"><span class="nav-number">3.2.5.</span> <span class="nav-text">物理层</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2022%E5%B9%B4%E5%BA%A6%E7%9B%AE%E6%A0%87"><span class="nav-number">1.</span> <span class="nav-text">2022年度目标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E5%BA%A6"><span class="nav-number">1.1.</span> <span class="nav-text">进度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.1.1.</span> <span class="nav-text">主要项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E8%80%83%E9%AB%98%E7%BA%A7%E8%AF%81%E4%B9%A6-%E8%BD%AF%E8%80%83"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.考高级证书(软考)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E8%84%8A%E6%9F%B1%E6%9F%94%E8%BD%AF%E5%92%8C%E8%82%8C%E8%82%89%E5%BC%BA%E5%8C%96%E5%87%BA%E6%9D%A5-4%E4%B8%AA%E6%9C%88"><span class="nav-number">1.1.3.</span> <span class="nav-text">3.脊柱柔软和肌肉强化出来 -4个月</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E7%BB%A7%E7%BB%AD%E7%94%B5%E5%95%86-%E9%87%8D%E6%96%B0%E5%87%BA%E5%8D%95-4%E4%B8%AA%E6%9C%88-%E4%B9%B0%E8%B4%A7%EF%BC%9A%E8%99%9A%E6%8B%9F%E4%BA%A7%E5%93%81-%E9%94%81%E6%89%8B%E6%9C%BA%E7%9A%84"><span class="nav-number">1.1.4.</span> <span class="nav-text">1.继续电商+重新出单 -4个月 -买货：虚拟产品+锁手机的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E8%AF%BB%E4%B8%A4%E6%9C%AC%E4%B9%A6%EF%BC%9A%E5%BF%83%E6%B5%81-%E5%A4%A7%E5%99%A8%E6%99%9A%E6%88%90-4%E4%B8%AA%E6%9C%88"><span class="nav-number">1.1.5.</span> <span class="nav-text">4.读两本书：心流+大器晚成 - 4个月</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.2.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A9%E5%A4%96%E5%A5%87%E6%83%B3"><span class="nav-number">2.</span> <span class="nav-text">天外奇想</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
