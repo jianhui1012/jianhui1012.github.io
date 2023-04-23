@@ -146,6 +146,106 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jianhui1012.github.io/2022/03/13/Mac%E4%B8%AD%E5%AF%B9jsk%E6%96%87%E4%BB%B6%E5%81%9A%E7%B3%BB%E7%BB%9F%E7%AD%BE%E5%90%8D-%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="golike">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="jianhui1012的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/13/Mac%E4%B8%AD%E5%AF%B9jsk%E6%96%87%E4%BB%B6%E5%81%9A%E7%B3%BB%E7%BB%9F%E7%AD%BE%E5%90%8D-%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">Mac中对jsk文件做系统签名(静默安装)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-03-13 22:52:47" itemprop="dateCreated datePublished" datetime="2022-03-13T22:52:47+08:00">2022-03-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-03-28 10:22:53" itemprop="dateModified" datetime="2022-03-28T10:22:53+08:00">2022-03-28</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="mac下注意设置全局环境变量"><a href="#mac下注意设置全局环境变量" class="headerlink" title="mac下注意设置全局环境变量"></a>mac下注意设置全局环境变量</h3><blockquote>
+<p>首先，检查你的默认shell是什么，echo $SHELL。</p>
+</blockquote>
+<blockquote>
+<p>以前每个新用户的默认shell是/bin/bash，而新版本的macOS Catalina开始，新用户的默认shell改为了zsh</p>
+</blockquote>
+<blockquote>
+<p>对于zsh，使用.zshrc</p>
+</blockquote>
+<ul>
+<li>这里特别说明：网上很多资料设置环境变量都是针对.bash_profile文件配置的，这里其实根据shell命令实际情况来的</li>
+</ul>
+<p>再检查终端中的便好配置，在通用中是否设置了特殊的shell</p>
+<h3 id="Android-Studio配置系统签名"><a href="#Android-Studio配置系统签名" class="headerlink" title="Android Studio配置系统签名"></a>Android Studio配置系统签名</h3><ul>
+<li><p>1.项目的AndroidManifest.xml配置文件增加 android:sharedUserId=”android.uid.system”</p>
+</li>
+<li><p>2.需要准备两个文件：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/getfatday/keytool-importkeypair">keytool-importkeypair</a><br>platform.x509.pem、platform.pk8（位于../build/target/product/security）可以向产商要平台签名</p>
+</blockquote>
+</li>
+<li><p>3.使用生成的签名文件jks来生成系统签名</p>
+<ul>
+<li><p>使用命令：./keytool-importkeypair -k [jks文件名] -p [jks的密码] -pk8 platform.pk8 -cert platform.x509.pem -alias [jks的别名]</p>
+</li>
+<li><p>这时候会生成一个新的签名文件，把新的jks文件替换掉</p>
+</li>
+</ul>
+</li>
+<li><p>4.应用的build.gradle文件增加配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: <span class="string">&#x27;com.android.application&#x27;</span></span><br><span class="line"></span><br><span class="line">android &#123;</span><br><span class="line">    compileSdkVersion <span class="number">23</span></span><br><span class="line">    buildToolsVersion <span class="string">&quot;23.0.2&quot;</span></span><br><span class="line"></span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        applicationId <span class="string">&quot;com.cxq.signdemo&quot;</span></span><br><span class="line">        minSdkVersion <span class="number">19</span></span><br><span class="line">        targetSdkVersion <span class="number">23</span></span><br><span class="line">        versionCode <span class="number">1</span></span><br><span class="line">        versionName <span class="string">&quot;1.0&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    signingConfigs &#123;</span><br><span class="line">        release &#123;</span><br><span class="line">            <span class="function">storeFile <span class="title">file</span><span class="params">(<span class="string">&quot;../signApk/SignDemo.jks&quot;</span>)</span></span></span><br><span class="line"><span class="function">            storePassword &#x27;123456&#x27;</span></span><br><span class="line"><span class="function">            keyAlias &#x27;SignDemo&#x27;</span></span><br><span class="line"><span class="function">            keyPassword &#x27;123456&#x27;</span></span><br><span class="line"><span class="function">        &#125;</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        debug </span>&#123;</span><br><span class="line">            <span class="function">storeFile <span class="title">file</span><span class="params">(<span class="string">&quot;../signApk/SignDemo.jks&quot;</span>)</span></span></span><br><span class="line"><span class="function">            storePassword &#x27;123456&#x27;</span></span><br><span class="line"><span class="function">            keyAlias &#x27;SignDemo&#x27;</span></span><br><span class="line"><span class="function">            keyPassword &#x27;123456&#x27;</span></span><br><span class="line"><span class="function">        &#125;</span></span><br><span class="line"><span class="function">    &#125;</span></span><br><span class="line"><span class="function">    buildTypes </span>&#123;</span><br><span class="line">        release &#123;</span><br><span class="line">            minifyEnabled <span class="keyword">false</span></span><br><span class="line">            <span class="function">proguardFiles <span class="title">getDefaultProguardFile</span><span class="params">(<span class="string">&#x27;proguard-android.txt&#x27;</span>)</span>, &#x27;proguard-rules.pro&#x27;</span></span><br><span class="line"><span class="function">        &#125;</span></span><br><span class="line"><span class="function">    &#125;</span></span><br><span class="line"><span class="function">&#125;</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">dependencies </span>&#123;</span><br><span class="line">    <span class="function">compile <span class="title">fileTree</span><span class="params">(dir: <span class="string">&#x27;libs&#x27;</span>, include: [<span class="string">&#x27;*.jar&#x27;</span>])</span></span></span><br><span class="line"><span class="function">    testCompile &#x27;junit:junit:4.12&#x27;</span></span><br><span class="line"><span class="function">    compile &#x27;com.android.support:appcompat-v7:23.3.0&#x27;</span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>5.直接运行AS的Run，安装的就是系统权限的应用。</p>
+</li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/cxq234843654/article/details/51557025">Android Studio自动生成带系统签名的apk</a><br><a target="_blank" rel="noopener" href="https://discussionschinese.apple.com/thread/251633370">mac设置全局环境变量</a><br><a target="_blank" rel="noopener" href="https://support.apple.com/zh-cn/HT208050">在 Mac 上将 zsh 用作默认 Shell</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/48131789">让Android Studio支持系统签名(证书)</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://jianhui1012.github.io/2022/03/01/Termux%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -764,72 +864,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jianhui1012.github.io/2021/02/04/2020%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="golike">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jianhui1012的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/04/2020%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">2020年终总结</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-02-04 19:53:59 / Modified: 20:54:11" itemprop="dateCreated datePublished" datetime="2021-02-04T19:53:59+08:00">2021-02-04</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>回顾过去一年事情并谈谈收获的果实</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/02/04/2020%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -899,12 +933,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-count">77</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">62</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
