@@ -1,1091 +1,850 @@
-<!DOCTYPE html>
-<html lang="zh-Hans">
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="jianhui1012的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.3.0">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://jianhui1012.github.io">
+    <!--SEO-->
 
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"jianhui1012.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta property="og:type" content="website">
-<meta property="og:title" content="jianhui1012的博客">
-<meta property="og:url" content="http://jianhui1012.github.io/index.html">
-<meta property="og:site_name" content="jianhui1012的博客">
-<meta property="og:locale">
-<meta property="article:author" content="golike">
-<meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="http://jianhui1012.github.io/">
+<meta name="keywords" content="" />
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : true,
-    isPost : false,
-    lang   : 'zh-Hans'
-  };
-</script>
-
-  <title>jianhui1012的博客</title>
-  
+<meta name="description" content="" />
 
 
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+<title>
+    
+    jianhui1012的博客
+</title>
+
+<link rel="alternate" href="/atom.xml" title="jianhui1012的博客" type="application/atom+xml">
 
 
+<link rel="icon" href="/favicon.ico">
+
+    
 
 
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
 
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">jianhui1012的博客</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">Knowledge is power!!!</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
 </div>
 
 
 
 
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
+    
 
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+<meta name="generator" content="Hexo 5.2.0"></head>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header"  style="background-image:url(
+    https://hexo-theme-snippet-1251680922.cos.ap-beijing.myqcloud.com/img/banner.jpg)"
+     >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='golike'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                勤求古训,博采众方
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://jianhui1012.github.io">
+                        jianhui1012的博客</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                首页</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa "></i>
+                                时间轴</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content ">
+                    
+<div class="carousel">
+    <a href="https://promotion.aliyun.com/ntms/act/qwbk.html?userCode=xs0pypd2" target="_blank">
+        <img src="/./img/1.jpg" alt="">
+    </a>
+</div>
 
-  </li>
-        <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
-  </li>
-  </ul>
+
+<article class="post">
+    
+    <div class="post-content">
+        <div class="post-head home-post-head">
+            <h1 class="post-title">
+                <a href="/2023/06/13/%E9%98%B4%E7%AC%A6%E7%BB%8F/">
+                    阴符经</a>
+            </h1>
+            <div class="post-meta"> &bull;
+                <time class="post-date" datetime="" title="">
+                    2023年06月13日
+                </time>
+            </div>
+        </div>
+        <p class="brief">
+            
+            阴符经渊源
+和道德经同为道家至高典籍，道教南宗祖师张伯端写有一诗：阴符宝字逾三百，道德灵文满五千，今古上仙无限数，尽从此处达真诠。《阴符经》与《道德经》并称，是一部高度精炼的道教经书。
+《阴符经》是我国古代思想文化的瑰宝，闪耀着智慧的...
+            
+        </p>
+    </div>
+    
+    <footer class="post-footer clearfix">
+        <div class="pull-left tag-list">
+            <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-none-link" href="/tags/%E9%81%93%E5%AE%B6/" rel="tag">道家</a>
+            
+        </span>
+    </span>
+    
+    
+</div>
+        </div>
+        <div class="post-permalink">
+            <a href="/2023/06/13/%E9%98%B4%E7%AC%A6%E7%BB%8F/" class="btn btn-default">
+                阅读全文</a>
+        </div>
+    </footer>
+    
+</article>
+
+
+<article class="post">
+    
+    <div class="post-content">
+        <div class="post-head home-post-head">
+            <h1 class="post-title">
+                <a href="/2023/05/09/%E6%80%9D%E8%80%83%E5%8A%9B/">
+                    思考力</a>
+            </h1>
+            <div class="post-meta"> &bull;
+                <time class="post-date" datetime="" title="">
+                    2023年05月09日
+                </time>
+            </div>
+        </div>
+        <p class="brief">
+            
+            思考力原理性思维
+事物背后隐藏的东西，本质内容
+
+结构化思维扩展性思维
+举一反三
+寻求更多的可能性
+
+抓重点思维
+从知识树中筛选重点，两则并不矛盾，核心思路是要抓住重点和脉络
+
+锻炼思考力的有效实践1.意识觉醒
+意识到去锻炼思考力这个...
+            
+        </p>
+    </div>
+    
+    <footer class="post-footer clearfix">
+        <div class="pull-left tag-list">
+            <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-none-link" href="/tags/%E6%80%9D%E8%80%83%E5%8A%9B/" rel="tag">思考力</a>
+            
+        </span>
+    </span>
+    
+    
+</div>
+        </div>
+        <div class="post-permalink">
+            <a href="/2023/05/09/%E6%80%9D%E8%80%83%E5%8A%9B/" class="btn btn-default">
+                阅读全文</a>
+        </div>
+    </footer>
+    
+</article>
+
+
+<article class="post">
+    
+    <div class="post-content">
+        <div class="post-head home-post-head">
+            <h1 class="post-title">
+                <a href="/2023/05/04/%E9%AB%98%E4%B8%8A%E7%8E%89%E7%9A%87%E5%BF%83%E5%8D%B0%E5%A6%99%E7%BB%8F/">
+                    高上玉皇心印妙经</a>
+            </h1>
+            <div class="post-meta"> &bull;
+                <time class="post-date" datetime="" title="">
+                    2023年05月04日
+                </time>
+            </div>
+        </div>
+        <p class="brief">
+            
+            《高上玉皇心印妙经》是道教典籍。吕祖曰“只修性，不修命，此是修行第一病；只修祖性不修丹，万劫阴灵难入圣”。本经便是命功修行之法。…
+            
+        </p>
+    </div>
+    
+    <footer class="post-footer clearfix">
+        <div class="pull-left tag-list">
+            <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-none-link" href="/tags/%E9%81%93%E6%95%99/" rel="tag">道教</a>
+            
+        </span>
+    </span>
+    
+    
+</div>
+        </div>
+        <div class="post-permalink">
+            <a href="/2023/05/04/%E9%AB%98%E4%B8%8A%E7%8E%89%E7%9A%87%E5%BF%83%E5%8D%B0%E5%A6%99%E7%BB%8F/" class="btn btn-default">
+                阅读全文</a>
+        </div>
+    </footer>
+    
+</article>
+
+
+<article class="post">
+    
+    <div class="post-content">
+        <div class="post-head home-post-head">
+            <h1 class="post-title">
+                <a href="/2023/05/04/%E9%95%BF%E6%98%A5%E4%B8%98%E7%9C%9F%E4%BA%BA%E5%AF%84%E8%A5%BF%E5%B7%9E%E5%90%8C%E9%81%93%E4%B9%A6/">
+                    长春丘真人寄西州同道书</a>
+            </h1>
+            <div class="post-meta"> &bull;
+                <time class="post-date" datetime="" title="">
+                    2023年05月04日
+                </time>
+            </div>
+        </div>
+        <p class="brief">
+            
+            长春丘真人寄西州道友书…
+            
+        </p>
+    </div>
+    
+    <footer class="post-footer clearfix">
+        <div class="pull-left tag-list">
+            <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-none-link" href="/tags/%E9%81%93%E6%95%99/" rel="tag">道教</a>
+            
+        </span>
+    </span>
+    
+    
+</div>
+        </div>
+        <div class="post-permalink">
+            <a href="/2023/05/04/%E9%95%BF%E6%98%A5%E4%B8%98%E7%9C%9F%E4%BA%BA%E5%AF%84%E8%A5%BF%E5%B7%9E%E5%90%8C%E9%81%93%E4%B9%A6/" class="btn btn-default">
+                阅读全文</a>
+        </div>
+    </footer>
+    
+</article>
+
+
+<article class="post">
+    
+    <div class="post-content">
+        <div class="post-head home-post-head">
+            <h1 class="post-title">
+                <a href="/2023/04/25/2022%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/">
+                    2022年终总结</a>
+            </h1>
+            <div class="post-meta"> &bull;
+                <time class="post-date" datetime="" title="">
+                    2023年04月25日
+                </time>
+            </div>
+        </div>
+        <p class="brief">
+            
+            这是第三年写总结了，回顾过去一年事情，看去年的目标有没有完成，明年的目标是啥…
+            
+        </p>
+    </div>
+    
+    <footer class="post-footer clearfix">
+        <div class="pull-left tag-list">
+            <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-none-link" href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93-%E6%80%9D%E8%80%83/" rel="tag">年终总结,思考</a>
+            
+        </span>
+    </span>
+    
+    
+</div>
+        </div>
+        <div class="post-permalink">
+            <a href="/2023/04/25/2022%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" class="btn btn-default">
+                阅读全文</a>
+        </div>
+    </footer>
+    
+</article>
+
+
+<article class="post">
+    
+    <div class="post-content">
+        <div class="post-head home-post-head">
+            <h1 class="post-title">
+                <a href="/2023/04/23/%E8%AE%B0%E5%BD%95%E6%96%BD%E7%BD%97%E6%96%AF%E7%96%97%E6%B3%95/">
+                    记录施罗斯疗法</a>
+            </h1>
+            <div class="post-meta"> &bull;
+                <time class="post-date" datetime="" title="">
+                    2023年04月23日
+                </time>
+            </div>
+        </div>
+        <p class="brief">
+            
+            2019年从网上了解到这个施罗斯疗法，花了3600元，3天课程，一天1200，以此作记录。…
+            
+        </p>
+    </div>
+    
+    <footer class="post-footer clearfix">
+        <div class="pull-left tag-list">
+            <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-none-link" href="/tags/%E6%96%BD%E7%BD%97%E6%96%AF%E7%96%97%E6%B3%95/" rel="tag">施罗斯疗法</a>
+            
+        </span>
+    </span>
+    
+    
+</div>
+        </div>
+        <div class="post-permalink">
+            <a href="/2023/04/23/%E8%AE%B0%E5%BD%95%E6%96%BD%E7%BD%97%E6%96%AF%E7%96%97%E6%B3%95/" class="btn btn-default">
+                阅读全文</a>
+        </div>
+    </footer>
+    
+</article>
+
+
+<article class="post">
+    
+    <div class="post-content">
+        <div class="post-head home-post-head">
+            <h1 class="post-title">
+                <a href="/2023/03/16/%E7%81%B5%E6%BA%90%E5%A4%A7%E9%81%93%E6%AD%8C/">
+                    灵源大道歌</a>
+            </h1>
+            <div class="post-meta"> &bull;
+                <time class="post-date" datetime="" title="">
+                    2023年03月16日
+                </time>
+            </div>
+        </div>
+        <p class="brief">
+            
+            曹文逸，宋朝宣和年间(1009–1126)女道士，能诗能文，有女才子之名。 宋徽宗闻名召入汴京，敕封为“文逸真人”，世称曹文逸真人，靖康之乱离去，身世无考。 曹文逸工于女丹，着《灵源大道歌》。 其丹功开示灵源，清净自然，元和内运，不急于斩赤龙，无铅汞等隐语，男女皆可以修习…
+            
+        </p>
+    </div>
+    
+    <footer class="post-footer clearfix">
+        <div class="pull-left tag-list">
+            <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-none-link" href="/tags/%E9%81%93%E6%95%99-%E9%81%93%E6%95%99%E7%BB%8F%E5%85%B8/" rel="tag">道教,道教经典</a>
+            
+        </span>
+    </span>
+    
+    
+</div>
+        </div>
+        <div class="post-permalink">
+            <a href="/2023/03/16/%E7%81%B5%E6%BA%90%E5%A4%A7%E9%81%93%E6%AD%8C/" class="btn btn-default">
+                阅读全文</a>
+        </div>
+    </footer>
+    
+</article>
+
+
+<article class="post">
+    
+    <div class="post-content">
+        <div class="post-head home-post-head">
+            <h1 class="post-title">
+                <a href="/2023/03/10/%E5%90%95%E7%A5%96%E7%99%BD%E5%AD%97%E7%A2%91/">
+                    吕祖白字碑</a>
+            </h1>
+            <div class="post-meta"> &bull;
+                <time class="post-date" datetime="" title="">
+                    2023年03月10日
+                </time>
+            </div>
+        </div>
+        <p class="brief">
+            
+            《吕祖百字碑》，唐朝吕洞宾撰，又称《百字碑》，为五言20句诗歌，只有100个字。内容简明深刻，讲述了内丹修炼的整个过程、内景、效验等。…
+            
+        </p>
+    </div>
+    
+    <footer class="post-footer clearfix">
+        <div class="pull-left tag-list">
+            <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-none-link" href="/tags/%E9%81%93%E6%95%99-%E5%90%95%E6%B4%9E%E5%AE%BE/" rel="tag">道教,吕洞宾</a>
+            
+        </span>
+    </span>
+    
+    
+</div>
+        </div>
+        <div class="post-permalink">
+            <a href="/2023/03/10/%E5%90%95%E7%A5%96%E7%99%BD%E5%AD%97%E7%A2%91/" class="btn btn-default">
+                阅读全文</a>
+        </div>
+    </footer>
+    
+</article>
+
+
+<article class="post">
+    
+    <div class="post-content">
+        <div class="post-head home-post-head">
+            <h1 class="post-title">
+                <a href="/2023/03/06/wait%E4%B8%8Enotify%E7%9A%84%E8%A7%A3%E6%9E%90/">
+                    wait与notify的解析</a>
+            </h1>
+            <div class="post-meta"> &bull;
+                <time class="post-date" datetime="" title="">
+                    2023年03月06日
+                </time>
+            </div>
+        </div>
+        <p class="brief">
+            
+            wait和notify都是object的方法,加上重载总共5个方法，而object总共才12个方法，可见这两个方法的重要性…
+            
+        </p>
+    </div>
+    
+    <footer class="post-footer clearfix">
+        <div class="pull-left tag-list">
+            <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-none-link" href="/tags/java/" rel="tag">java</a>
+            
+        </span>
+    </span>
+    
+    
+</div>
+        </div>
+        <div class="post-permalink">
+            <a href="/2023/03/06/wait%E4%B8%8Enotify%E7%9A%84%E8%A7%A3%E6%9E%90/" class="btn btn-default">
+                阅读全文</a>
+        </div>
+    </footer>
+    
+</article>
+
+
+<article class="post">
+    
+    <div class="post-content">
+        <div class="post-head home-post-head">
+            <h1 class="post-title">
+                <a href="/2023/03/03/%E6%B8%85%E5%87%80%E7%BB%8F/">
+                    清净经</a>
+            </h1>
+            <div class="post-meta"> &bull;
+                <time class="post-date" datetime="" title="">
+                    2023年03月03日
+                </time>
+            </div>
+        </div>
+        <p class="brief">
+            
+            大地山河一卷经拈来题目甚分明山花野草皆谈说蠢动含灵侧耳听-白玉蟾祖师-
+老君曰：大道无形，生育天地；大道无情，运行日月；大道无名，长养万物；吾不知其名，强名曰道。夫道者：有清有浊，有动有静；天清地浊，天动地静；男清女浊，男动女静；降本...
+            
+        </p>
+    </div>
+    
+    <footer class="post-footer clearfix">
+        <div class="pull-left tag-list">
+            <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-none-link" href="/tags/%E6%B8%85%E9%9D%99%E7%BB%8F-%E9%81%93%E6%95%99/" rel="tag">清静经,道教</a>
+            
+        </span>
+    </span>
+    
+    
+</div>
+        </div>
+        <div class="post-permalink">
+            <a href="/2023/03/03/%E6%B8%85%E5%87%80%E7%BB%8F/" class="btn btn-default">
+                阅读全文</a>
+        </div>
+    </footer>
+    
+</article>
+
+
+
+<nav class="pagination" role="navigation">
+    <div id="page-nav">
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/"><i class='fa fa-angle-right'></i></a>
+    </div>
 </nav>
 
-
-
-
-</div>
-    </header>
-
+                </main>
+                
+                    
+<aside class="col-md-4 sidebar">
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content index posts-expand">
+    
+<div class="widget">
+    <h3 class="title">
+        搜索
+    </h3>
+    <div id="search-form">
+        <div id="result-mask" class="hide"></div>
+        <div class="search-area">
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jianhui1012.github.io/2023/06/13/%E9%98%B4%E7%AC%A6%E7%BB%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="golike">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jianhui1012的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/13/%E9%98%B4%E7%AC%A6%E7%BB%8F/" class="post-title-link" itemprop="url">阴符经</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-06-13 09:13:44 / Modified: 14:15:52" itemprop="dateCreated datePublished" datetime="2023-06-13T09:13:44+08:00">2023-06-13</time>
-            </span>
-
-          
-
+            <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢？">
+            <button type="button" class="search-form-submit" id="search-local">
+                站内搜索</button>
+            
+            
         </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="阴符经渊源"><a href="#阴符经渊源" class="headerlink" title="阴符经渊源"></a>阴符经渊源</h3><ul>
-<li>和道德经同为道家至高典籍，道教南宗祖师张伯端写有一诗：阴符宝字逾三百，道德灵文满五千，今古上仙无限数，尽从此处达真诠。《阴符经》与《道德经》并称，是一部高度精炼的道教经书。</li>
-<li>《阴符经》是我国古代思想文化的瑰宝，闪耀着智慧的光芒。被历代的政治家，军事家和智谋之士所重视。</li>
-<li>《黄帝阴符经》作者说是轩辕黄帝，历史上有太公、范蠡、鬼谷子、张良、诸葛亮、李淳风、李筌、李治、李鉴、李锐、杨晟等都作过注解，《四库全书》中有所收录。《阴符经》应该是一部思想著作，集道家的治国方略，养生之道，兵法战术等。</li>
-</ul>
-<h2 id="全文"><a href="#全文" class="headerlink" title="全文"></a>全文</h2><p><img src="/2023/06/13/%E9%98%B4%E7%AC%A6%E7%BB%8F/1.png"></p>
-<p>　　观天之道，执天之行，尽矣。天有五贼，见之者昌。五贼在心，施行于天。宇宙在乎心，万化生乎身。天性，人也；人心，机也。立天之道，以定人也。天发杀机，移星易宿；地发杀机，龙蛇起陆；人发杀机，天地反覆。天人合发，万化定基。性有巧拙，可以伏藏。九窍之邪，在乎三要，可以动静。火生于木，祸发必克；奸生于国，时动必溃。知之修炼，谓之圣人。<br>　　天生天杀，道之理也。天地，万物之盗；万物，人之盗；人，万物之盗。三盗既宜，三材既安。故曰：食其时，百骸理；动其机，万化安。人知其神之神，不知其不神之所以神也。日月有数，大小有定；圣人生焉，神明出焉。其盗机也，天下莫能见，莫能知。君子得之固躬，小人得之轻命。<br>　　瞽者善听，聋者善视。绝利一源，用师十倍；三反昼夜，用师万倍。心生于物，死于物，机在目。生死之心在于物，成败之机见于目。天之无恩，而大恩生。迅雷烈风，莫不蠢然。至乐性馀，至静性廉。天之至私，用之至公，禽之制在气。生者死之根，死者生之根。恩生于害，害生于恩。愚人以天地文理圣，我以时物文理哲；人以愚虞圣，我以不愚虞圣；人以奇期圣，我以不奇期圣。故曰：沉水入火，自取灭亡。自然之道静，故天地万物生；天地之道浸，故阴阳胜。阴阳相推，而变化顺矣。是故圣人知自然之道不可违，因而制之。至静之道，律历所不能契。爰有奇器，是生万象。八卦甲子，神机鬼藏。阴阳相胜之术，昭昭乎进乎象矣。</p>
-
-      
+        <div id="result-wrap" class="hide">
+            <div id="search-result"></div>
+        </div>
+        <div class="hide">
+            <template id="search-tpl">
+                <div class="item">
+                    <a href="/{path}" title="{title}">
+                        <div class="title">{title}</div>
+                        <div class="content">{content}</div>
+                    </a>
+                </div>
+            </template>
+        </div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jianhui1012.github.io/2023/05/09/%E6%80%9D%E8%80%83%E5%8A%9B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="golike">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jianhui1012的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/09/%E6%80%9D%E8%80%83%E5%8A%9B/" class="post-title-link" itemprop="url">思考力</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-05-09 16:36:08 / Modified: 17:34:22" itemprop="dateCreated datePublished" datetime="2023-05-09T16:36:08+08:00">2023-05-09</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="思考力"><a href="#思考力" class="headerlink" title="思考力"></a>思考力</h1><h2 id="原理性思维"><a href="#原理性思维" class="headerlink" title="原理性思维"></a>原理性思维</h2><ul>
-<li>事物背后隐藏的东西，本质内容</li>
-</ul>
-<h2 id="结构化思维"><a href="#结构化思维" class="headerlink" title="结构化思维"></a>结构化思维</h2><h2 id="扩展性思维"><a href="#扩展性思维" class="headerlink" title="扩展性思维"></a>扩展性思维</h2><ul>
-<li>举一反三</li>
-<li>寻求更多的可能性</li>
-</ul>
-<h2 id="抓重点思维"><a href="#抓重点思维" class="headerlink" title="抓重点思维"></a>抓重点思维</h2><ul>
-<li>从知识树中筛选重点，两则并不矛盾，核心思路是要抓住重点和脉络</li>
-</ul>
-<h2 id="锻炼思考力的有效实践"><a href="#锻炼思考力的有效实践" class="headerlink" title="锻炼思考力的有效实践"></a>锻炼思考力的有效实践</h2><h3 id="1-意识觉醒"><a href="#1-意识觉醒" class="headerlink" title="1.意识觉醒"></a>1.意识觉醒</h3><ul>
-<li>意识到去锻炼思考力这个东西</li>
-</ul>
-<h3 id="2-保持信心"><a href="#2-保持信心" class="headerlink" title="2.保持信心"></a>2.保持信心</h3><ul>
-<li>人人平等</li>
-</ul>
-<h3 id="3-空杯心态"><a href="#3-空杯心态" class="headerlink" title="3.空杯心态"></a>3.空杯心态</h3><ul>
-<li>人无完人，天外有天</li>
-</ul>
-<h3 id="4-思考训练时间从哪里来"><a href="#4-思考训练时间从哪里来" class="headerlink" title="4.思考训练时间从哪里来"></a>4.思考训练时间从哪里来</h3><ul>
-<li><p>1.利用碎片时间，比如上下班路上的时间，吃饭的时候，可以把刚才或者今天的事情想一想，想通了，然后定期汇总一下就可以。</p>
-</li>
-<li><p>2.抓住工作的过程，注意，每次出技术方案，优化代码，排查问题，处理故障，准备晋升，年终总结。。。都是一次训练的机会，在做事情的过程中就可以思考并快速实践。</p>
-</li>
-</ul>
-<h3 id="5-评估思考力提升的标准"><a href="#5-评估思考力提升的标准" class="headerlink" title="5.评估思考力提升的标准"></a>5.评估思考力提升的标准</h3><ul>
-<li>思考力3个度，广度，深度，速度</li>
-</ul>
-<h3 id="6-好的工具推荐"><a href="#6-好的工具推荐" class="headerlink" title="6.好的工具推荐"></a>6.好的工具推荐</h3><ul>
-<li>xmind</li>
-</ul>
-<h3 id="7-一定要互相分享"><a href="#7-一定要互相分享" class="headerlink" title="7.一定要互相分享"></a>7.一定要互相分享</h3><ul>
-<li>思考力虽然靠自己，但是一定要相互分享。因为思考是智力活动，相互分享完全能够取得1+1&gt;2的效果。</li>
-</ul>
-<h2 id="习惯vs习以为常"><a href="#习惯vs习以为常" class="headerlink" title="习惯vs习以为常"></a>习惯vs习以为常</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">相信这句话，精英之所以精英，是不间断的正向习惯的驱使。</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>所谓改变习惯就是在触发条件发生后进入下一个行为前，让自己作对选择题。</li>
-<li>了解习惯产生的机制后，改变习惯就变得相对简单，每次在触发条件发生时，做一道选择题，选择做无效的事，还是对自己有益的事情(包括休息，学习，运动等)。</li>
-</ul>
-<h2 id="时间的三八理论"><a href="#时间的三八理论" class="headerlink" title="时间的三八理论"></a>时间的三八理论</h2><ul>
-<li><p>8个小时工作，8小时自由，8小时睡觉</p>
-</li>
-<li><p>如果想从工作中省点时间，想从周末挤点时间用于学习，这叫做成长的断崖，我相信不能持续，学习必须是每日的必修课，必须是日拱一卒，持之以恒，有不断输入，持续地沉淀，正所谓，学而不思则罔，思而不学则殆，所以能在关键时刻输出解决问题能力，从而获得能力认可。</p>
-</li>
-<li><p>所谓时间管理就是找到不被打扰的时间用于投资自己的成长。</p>
-</li>
-<li><p>实际上真正的安全感，成就感，归属感来自自我成长，自我沉淀。</p>
-</li>
-<li><p>练习只字不差的阅读，因为只字不差的阅读会让自己更专注的理解内容的逻辑关系，从而达到提升注意力的目的。</p>
-</li>
-</ul>
-<h2 id="执行力"><a href="#执行力" class="headerlink" title="执行力"></a>执行力</h2><ul>
-<li>执行力就是想明白，然后一步一步做下去。</li>
-</ul>
-<h2 id="贵人"><a href="#贵人" class="headerlink" title="贵人"></a>贵人</h2><ul>
-<li>借事修人，事情结果反而并不是很重要，人成了目的达到，人的能力提升了</li>
-<li>因为相信一切问题源于自己，让自己变好是解决一切问题的根源</li>
-</ul>
-<h2 id="会议"><a href="#会议" class="headerlink" title="会议"></a>会议</h2><ul>
-<li>参与会议讨论就像在模拟机器学习，通过正反馈来优化自己的逻辑和观点。</li>
-</ul>
-<h2 id="职业规划"><a href="#职业规划" class="headerlink" title="职业规划"></a>职业规划</h2><ul>
-<li>所谓职业规划，就是工作能力提升</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jianhui1012.github.io/2023/05/04/%E9%AB%98%E4%B8%8A%E7%8E%89%E7%9A%87%E5%BF%83%E5%8D%B0%E5%A6%99%E7%BB%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="golike">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jianhui1012的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/04/%E9%AB%98%E4%B8%8A%E7%8E%89%E7%9A%87%E5%BF%83%E5%8D%B0%E5%A6%99%E7%BB%8F/" class="post-title-link" itemprop="url">高上玉皇心印妙经</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-05-04 08:55:27 / Modified: 08:56:45" itemprop="dateCreated datePublished" datetime="2023-05-04T08:55:27+08:00">2023-05-04</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>《高上玉皇心印妙经》是道教典籍。吕祖曰“只修性，不修命，此是修行第一病；只修祖性不修丹，万劫阴灵难入圣”。本经便是命功修行之法。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/04/%E9%AB%98%E4%B8%8A%E7%8E%89%E7%9A%87%E5%BF%83%E5%8D%B0%E5%A6%99%E7%BB%8F/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jianhui1012.github.io/2023/05/04/%E9%95%BF%E6%98%A5%E4%B8%98%E7%9C%9F%E4%BA%BA%E5%AF%84%E8%A5%BF%E5%B7%9E%E5%90%8C%E9%81%93%E4%B9%A6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="golike">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jianhui1012的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/04/%E9%95%BF%E6%98%A5%E4%B8%98%E7%9C%9F%E4%BA%BA%E5%AF%84%E8%A5%BF%E5%B7%9E%E5%90%8C%E9%81%93%E4%B9%A6/" class="post-title-link" itemprop="url">长春丘真人寄西州同道书</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-05-04 08:42:58 / Modified: 15:04:57" itemprop="dateCreated datePublished" datetime="2023-05-04T08:42:58+08:00">2023-05-04</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>长春丘真人寄西州道友书</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/04/%E9%95%BF%E6%98%A5%E4%B8%98%E7%9C%9F%E4%BA%BA%E5%AF%84%E8%A5%BF%E5%B7%9E%E5%90%8C%E9%81%93%E4%B9%A6/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jianhui1012.github.io/2023/04/25/2022%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="golike">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jianhui1012的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/04/25/2022%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">2022年终总结</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-04-25 15:19:57" itemprop="dateCreated datePublished" datetime="2023-04-25T15:19:57+08:00">2023-04-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-09 16:24:10" itemprop="dateModified" datetime="2023-05-09T16:24:10+08:00">2023-05-09</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>这是第三年写总结了，回顾过去一年事情，看去年的目标有没有完成，明年的目标是啥</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/04/25/2022%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jianhui1012.github.io/2023/04/23/%E8%AE%B0%E5%BD%95%E6%96%BD%E7%BD%97%E6%96%AF%E7%96%97%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="golike">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jianhui1012的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/04/23/%E8%AE%B0%E5%BD%95%E6%96%BD%E7%BD%97%E6%96%AF%E7%96%97%E6%B3%95/" class="post-title-link" itemprop="url">记录施罗斯疗法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-04-23 10:27:16" itemprop="dateCreated datePublished" datetime="2023-04-23T10:27:16+08:00">2023-04-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-26 17:21:55" itemprop="dateModified" datetime="2023-04-26T17:21:55+08:00">2023-04-26</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年从网上了解到这个施罗斯疗法，花了3600元，3天课程，一天1200，以此作记录。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/04/23/%E8%AE%B0%E5%BD%95%E6%96%BD%E7%BD%97%E6%96%AF%E7%96%97%E6%B3%95/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jianhui1012.github.io/2023/03/16/%E7%81%B5%E6%BA%90%E5%A4%A7%E9%81%93%E6%AD%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="golike">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jianhui1012的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/16/%E7%81%B5%E6%BA%90%E5%A4%A7%E9%81%93%E6%AD%8C/" class="post-title-link" itemprop="url">灵源大道歌</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-03-16 17:37:39 / Modified: 17:39:34" itemprop="dateCreated datePublished" datetime="2023-03-16T17:37:39+08:00">2023-03-16</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>曹文逸，宋朝宣和年间(1009–1126)女道士，能诗能文，有女才子之名。 宋徽宗闻名召入汴京，敕封为“文逸真人”，世称曹文逸真人，靖康之乱离去，身世无考。 曹文逸工于女丹，着《灵源大道歌》。 其丹功开示灵源，清净自然，元和内运，不急于斩赤龙，无铅汞等隐语，男女皆可以修习</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/03/16/%E7%81%B5%E6%BA%90%E5%A4%A7%E9%81%93%E6%AD%8C/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jianhui1012.github.io/2023/03/10/%E5%90%95%E7%A5%96%E7%99%BD%E5%AD%97%E7%A2%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="golike">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jianhui1012的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/10/%E5%90%95%E7%A5%96%E7%99%BD%E5%AD%97%E7%A2%91/" class="post-title-link" itemprop="url">吕祖白字碑</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-03-10 10:59:05 / Modified: 11:00:44" itemprop="dateCreated datePublished" datetime="2023-03-10T10:59:05+08:00">2023-03-10</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>《吕祖百字碑》，唐朝吕洞宾撰，又称《百字碑》，为五言20句诗歌，只有100个字。内容简明深刻，讲述了内丹修炼的整个过程、内景、效验等。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/03/10/%E5%90%95%E7%A5%96%E7%99%BD%E5%AD%97%E7%A2%91/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jianhui1012.github.io/2023/03/06/wait%E4%B8%8Enotify%E7%9A%84%E8%A7%A3%E6%9E%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="golike">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jianhui1012的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/06/wait%E4%B8%8Enotify%E7%9A%84%E8%A7%A3%E6%9E%90/" class="post-title-link" itemprop="url">wait与notify的解析</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-03-06 17:21:57" itemprop="dateCreated datePublished" datetime="2023-03-06T17:21:57+08:00">2023-03-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-03-07 08:55:33" itemprop="dateModified" datetime="2023-03-07T08:55:33+08:00">2023-03-07</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>wait和notify都是object的方法,加上重载总共5个方法，而object总共才12个方法，可见这两个方法的重要性</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/03/06/wait%E4%B8%8Enotify%E7%9A%84%E8%A7%A3%E6%9E%90/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jianhui1012.github.io/2023/03/03/%E6%B8%85%E5%87%80%E7%BB%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="golike">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jianhui1012的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/03/%E6%B8%85%E5%87%80%E7%BB%8F/" class="post-title-link" itemprop="url">清净经</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-03-03 12:46:40" itemprop="dateCreated datePublished" datetime="2023-03-03T12:46:40+08:00">2023-03-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-03-22 12:57:01" itemprop="dateModified" datetime="2023-03-22T12:57:01+08:00">2023-03-22</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>大地山河一卷经<br>拈来题目甚分明<br>山花野草皆谈说<br>蠢动含灵侧耳听<br>-白玉蟾祖师-</p>
-<p>老君曰：大道无形，生育天地；大道无情，运行日月；大道无名，长养万物；吾不知其名，强名曰道。夫道者：有清有浊，有动有静；天清地浊，天动地静；男清女浊，男动女静；降本流末，而生万物。清者，浊之源，动者，静之基；人能常清静，天地悉皆归。</p>
-<p>夫人神好清，而心扰之；人心好静，而欲牵之。常能遣其欲，而心自静；澄其心，而神自清；自然六欲不生，三毒消灭。</p>
-<p>所以不能者，为心未澄，欲未遣也；能遣之者：内观其心，心无其心；外观其形，形无其形；远观其物，物无其物；三者既悟，唯见於空。观空亦空，空无所空；所空既无，无无亦无；无无既无，湛然常寂。寂无所寂，欲岂能生；欲既不生，即是真静。</p>
-<p>真常应物，真常得性；常应常静，常清静矣。如此清静，渐入真道；既入真道，名为得道；虽名得道，实无所得；为化众生，名为得道；能悟之者，可传圣道。</p>
-<p>老君曰：上士无争，下士好争；上德不德，下德执德；执著之者，不名道德。众生所以不得真道者，为有妄心；既有妄心，即惊其神；既惊其神，即著万物；既著万物，即生贪求；既生贪求，即是烦恼；烦恼妄想，忧苦身心；便遭浊辱，流浪生死；常沉苦海，永失真道。真常之道，悟者自得；得悟道者，常清静矣！</p>
-<p>仙人葛翁曰：吾得真道，曾诵此经万遍。此经是天人所习，不传下士。吾昔受之于东华帝君，东华帝君受之于金阙帝君，金阙帝君受之于西王母，以上皆口口相传，不记文字。吾今于世，书而录之。上士悟之，升为天官；中士修之，南宫列仙；下士得之，在世长年。游行三界，升入金门。</p>
-<p>左玄真人曰：学道之士，持诵此经者，即得十天善神，拥护其神。然後玉符保神，金液炼形。形神俱妙，与道合真。</p>
-<p>正一真人曰：人家有此经，悟解之者，灾障不干，众圣护门。神升上界，朝拜高尊。功满德就，相感帝君。诵持不退，身腾紫云。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
-  </nav>
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">golike</p>
-  <div class="site-description" itemprop="description"></div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
+
+    
+    
+<div class="widget">
+    <h3 class="title">
+        网站公告
+    </h3>
+    <div class="notification">
+        <p>
+    主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet" title="fork me" target="_blank">Snippet主题</a> <br/>
+    主题使用：<a href="https://github.com/shenliyang/hexo-theme-snippet/blob/master/README.md#常见问题" title="" target="_blank">常见使用问题</a> <br/>
+    支持主题：<a target="_blank" rel="noopener" href="https://github.com/shenliyang/hexo-theme-snippet/stargazers">Star一下</a>
+</p>
+    </div>
+</div>
+
+    
+    
+<div class="widget">
+    <h3 class="title">
+        社交
+    </h3>
+    <div class="content social">
         
-          <span class="site-state-item-count">82</span>
-          <span class="site-state-item-name">posts</span>
+        <a href="//github.com/jianhui1012" rel="external nofollow" title="Github" target="_blank">
+            <i class="git fa fa-git"></i>
         </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">66</span>
-        <span class="site-state-item-name">tags</span>
-      </div>
-  </nav>
-</div>
-
-
-
-      </div>
-
+        
+        <a href="/" rel="external nofollow" title="邮箱" target="_blank">
+            <i class="envelope-o fa fa-envelope-o"></i>
+        </a>
+        
+        <a href="/" rel="external nofollow" title="联系QQ" target="_blank">
+            <i class="qq fa fa-qq"></i>
+        </a>
+        
+        <a href="/" rel="external nofollow" title="微信" target="_blank">
+            <i class="weixin fa fa-weixin"></i>
+        </a>
+        
+        <a href="/" rel="external nofollow" title="QQ群" target="_blank">
+            <i class="users fa fa-users"></i>
+        </a>
+        
+        <a href="/atom.xml" rel="external nofollow" title="RSS" target="_blank">
+            <i class="feed fa fa-feed"></i>
+        </a>
+        
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">golike</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
-  </div>
 
+    
+    
+    
+    
+<div class="widget">
+    <h3 class="title">
+        归档
+    </h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/"><i class="fa" aria-hidden="true">2023年06月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/"><i class="fa" aria-hidden="true">2023年05月</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/"><i class="fa" aria-hidden="true">2023年04月</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/"><i class="fa" aria-hidden="true">2023年03月</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/"><i class="fa" aria-hidden="true">2023年02月</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/"><i class="fa" aria-hidden="true">2023年01月</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/"><i class="fa" aria-hidden="true">2022年12月</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/"><i class="fa" aria-hidden="true">2022年10月</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/"><i class="fa" aria-hidden="true">2022年08月</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/"><i class="fa" aria-hidden="true">2022年07月</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/"><i class="fa" aria-hidden="true">2022年06月</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/"><i class="fa" aria-hidden="true">2022年05月</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/"><i class="fa" aria-hidden="true">2022年04月</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/"><i class="fa" aria-hidden="true">2022年03月</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/"><i class="fa" aria-hidden="true">2022年01月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/"><i class="fa" aria-hidden="true">2021年11月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/"><i class="fa" aria-hidden="true">2021年10月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/"><i class="fa" aria-hidden="true">2021年08月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/"><i class="fa" aria-hidden="true">2021年06月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/"><i class="fa" aria-hidden="true">2021年04月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/"><i class="fa" aria-hidden="true">2021年03月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/"><i class="fa" aria-hidden="true">2021年02月</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/"><i class="fa" aria-hidden="true">2021年01月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/"><i class="fa" aria-hidden="true">2020年12月</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/"><i class="fa" aria-hidden="true">2020年10月</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/"><i class="fa" aria-hidden="true">2020年09月</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">2018年07月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">2018年04月</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/"><i class="fa" aria-hidden="true">2018年02月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">2017年12月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">2017年09月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">2017年08月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">2017年05月</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">2017年04月</i></a><span class="archive-list-count">3</span></li></ul>
+</div>
 
-
-  <script src='https://unpkg.com/mermaid@8.8.4/dist/mermaid.min.js'></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({theme: theme.mermaid.theme});
-    }
-  </script>
-
-
+    
+    
+<div class="widget">
+    <h3 class="title">
+        标签云
+    </h3>
+    <div class="content tag-cloud">
         
+        <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-AndroidStudio/" style="font-size: 16.67px;">Android,AndroidStudio</a> <a href="/tags/Android-Mac-AndroidStudio/" style="font-size: 10px;">Android,Mac,AndroidStudio</a> <a href="/tags/Android-sqlite-greendao/" style="font-size: 10px;">Android,sqlite,greendao</a> <a href="/tags/Android-%E4%B8%83%E7%89%9B%E4%BA%91/" style="font-size: 10px;">Android,七牛云</a> <a href="/tags/Android-%E5%88%86%E5%B1%8F/" style="font-size: 10px;">Android,分屏</a> <a href="/tags/Android-%E7%B3%BB%E7%BB%9F%E7%BA%A7/" style="font-size: 10px;">Android,系统级</a> <a href="/tags/Android-%E8%93%9D%E7%89%99-%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/" style="font-size: 10px;">Android,蓝牙,蓝牙开发</a> <a href="/tags/Android%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">Android基础</a> <a href="/tags/B%E7%AB%99-%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6/" style="font-size: 10px;">B站,开源软件</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/ReactNative/" style="font-size: 10px;">ReactNative</a> <a href="/tags/ide-java/" style="font-size: 10px;">ide,java</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/music/" style="font-size: 10px;">music</a> <a href="/tags/tomcat-%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">tomcat,服务器</a> <a href="/tags/%E4%B8%8A%E7%89%8C/" style="font-size: 10px;">上牌</a> <a href="/tags/%E4%B8%AD%E5%8C%BB-%E5%80%AA%E6%B5%B7%E5%8E%A6/" style="font-size: 10px;">中医,倪海厦</a> <a href="/tags/%E4%B8%AD%E5%8C%BB-%E6%96%B0%E5%86%A0/" style="font-size: 10px;">中医,新冠</a> <a href="/tags/%E4%B9%B0%E8%BD%A6-%E9%80%9F%E8%85%BE-%E5%AD%A6%E8%BD%A6/" style="font-size: 10px;">买车,速腾,学车</a> <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">人工智能,机器学习,深度学习</a> <a href="/tags/%E5%85%BB%E7%94%9F-%E5%81%A5%E8%BA%AB/" style="font-size: 10px;">养生,健身</a> <a href="/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-Android/" style="font-size: 10px;">单元测试,Android</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%94%B6%E8%97%8F/" style="font-size: 10px;">博客收藏</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%8A%80%E5%B7%A7/" style="font-size: 10px;">学习技巧</a> <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/" style="font-size: 10px;">工作总结</a> <a href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" style="font-size: 13.33px;">年终总结</a> <a href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93-%E6%80%9D%E8%80%83/" style="font-size: 10px;">年终总结,思考</a> <a href="/tags/%E5%BF%83%E5%BE%97-%E5%8F%A4%E6%AD%A6%E5%AD%A6-%E9%94%BB%E7%82%BC-%E5%85%AB%E6%AE%B5%E9%94%A6/" style="font-size: 10px;">心得,古武学,锻炼,八段锦</a> <a href="/tags/%E5%BF%83%E5%BE%97-%E6%80%BB%E7%BB%93/" style="font-size: 10px;">心得,总结</a> <a href="/tags/%E5%BF%83%E6%B5%81-%E6%80%BB%E7%BB%93/" style="font-size: 10px;">心流,总结</a> <a href="/tags/%E6%80%9D%E8%80%83%E5%8A%9B/" style="font-size: 10px;">思考力</a> <a href="/tags/%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%BB%E7%BB%93/" style="font-size: 10px;">思考，总结</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 10px;">总结</a> <a href="/tags/%E6%80%BB%E7%BB%93-%E6%80%9D%E8%80%83/" style="font-size: 10px;">总结,思考</a> <a href="/tags/%E6%96%BD%E7%BD%97%E6%96%AF%E7%96%97%E6%B3%95/" style="font-size: 10px;">施罗斯疗法</a> <a href="/tags/%E6%97%85%E6%B8%B8/" style="font-size: 10px;">旅游</a> <a href="/tags/%E6%97%A0%E6%A0%B9%E6%A0%91-%E5%BC%A0%E4%B8%89%E4%B8%B0/" style="font-size: 10px;">无根树,张三丰</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 10px;">日记</a> <a href="/tags/%E6%B5%81%E6%84%9F/" style="font-size: 10px;">流感</a> <a href="/tags/%E6%B8%85%E9%9D%99%E7%BB%8F-%E9%81%93%E6%95%99/" style="font-size: 10px;">清静经,道教</a> <a href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" style="font-size: 13.33px;">源码分析</a> <a href="/tags/%E7%90%86%E8%B4%A2/" style="font-size: 10px;">理财</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">生活</a> <a href="/tags/%E7%94%9F%E6%B4%BB-%E5%81%A5%E5%BA%B7/" style="font-size: 10px;">生活,健康</a> <a href="/tags/%E7%94%B5%E5%95%86/" style="font-size: 10px;">电商</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" style="font-size: 10px;">网络安全</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86/" style="font-size: 10px;">网络知识</a> <a href="/tags/%E7%BF%BB%E8%AF%91/" style="font-size: 10px;">翻译</a> <a href="/tags/%E8%87%AA%E5%AD%A6/" style="font-size: 10px;">自学</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 13.33px;">计算机网络</a> <a href="/tags/%E8%AF%BB%E5%90%8E%E6%84%9F-%E6%80%9D%E8%80%83/" style="font-size: 10px;">读后感,思考</a> <a href="/tags/%E8%B0%B7%E9%AC%BC%E5%AD%90/" style="font-size: 10px;">谷鬼子</a> <a href="/tags/%E8%BF%BD%E4%B9%A6%E7%A5%9E%E5%99%A8/" style="font-size: 10px;">追书神器</a> <a href="/tags/%E9%80%86%E5%90%91%E5%AE%89%E5%85%A8-Android-%E5%8F%8D%E7%BC%96%E8%AF%91/" style="font-size: 10px;">逆向安全,Android,反编译</a> <a href="/tags/%E9%81%93%E5%AE%B6/" style="font-size: 13.33px;">道家</a> <a href="/tags/%E9%81%93%E5%AE%B6-%E9%81%93%E7%BB%8F/" style="font-size: 10px;">道家,道经</a> <a href="/tags/%E9%81%93%E6%95%99/" style="font-size: 13.33px;">道教</a> <a href="/tags/%E9%81%93%E6%95%99-%E5%90%95%E6%B4%9E%E5%AE%BE/" style="font-size: 10px;">道教,吕洞宾</a> <a href="/tags/%E9%81%93%E6%95%99-%E9%81%93%E6%95%99%E7%BB%8F%E5%85%B8/" style="font-size: 10px;">道教,道教经典</a> <a href="/tags/%E9%9A%90%E7%A7%81%E5%90%88%E8%A7%84/" style="font-size: 10px;">隐私合规</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 13.33px;">面试</a>
+        
+    </div>
+</div>
+
+    
+    
+<div class="widget">
+    <h3 class="title">
+        友链
+    </h3>
+    <div class="content friends-link">
+        
+        <a href="https://hexo.io/zh-cn/" class="fa" target="_blank">
+            Hexo官网</a>
+        
+    </div>
+</div>
+
+    
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2017
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/search.js?rev=@@hash.js"></script>
 
 
 
 
 
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-<script>
-document.querySelectorAll('.pdfobject-container').forEach(element => {
-  let url = element.dataset.target;
-  let pdfOpenParams = {
-    navpanes : 0,
-    toolbar  : 0,
-    statusbar: 0,
-    pagemode : 'thumbs',
-    view     : 'FitH'
-  };
-  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
-  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
-
-  if (NexT.utils.supportsPDFs()) {
-    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
-  } else {
-    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
-  }
-});
-</script>
-
-
-<script>
-if (document.querySelectorAll('pre.mermaid').length) {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
-    mermaid.initialize({
-      theme    : 'forest',
-      logLevel : 3,
-      flowchart: { curve     : 'linear' },
-      gantt    : { axisFormat: '%m/%d/%Y' },
-      sequence : { actorMargin: 50 }
-    });
-  }, window.mermaid);
-}
-</script>
-
-
-  
-
-  
+<script src="/js/app.js?rev=@@hash.js"></script>
 
 </body>
 </html>
