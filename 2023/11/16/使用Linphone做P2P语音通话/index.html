@@ -1,0 +1,328 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="jianhui1012的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.3.0">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://jianhui1012.github.io">
+    <!--SEO-->
+
+<meta name="keywords" content="" />
+
+
+<meta name="description" content="SIP客户端介绍
+关于VoIP中有很多的SIP客户端，其中Linphone、PJSIP、Telephone、BareSIP等。
+LinPhone是跨平台的，包含了Windows、Linux、Ma..." />
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+<title>
+    
+    使用Linphone做P2P语音通话 |
+    
+    jianhui1012的博客
+</title>
+
+<link rel="alternate" href="/atom.xml" title="jianhui1012的博客" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header"  style="background-image:url(
+    https://hexo-theme-snippet-1251680922.cos.ap-beijing.myqcloud.com/img/banner.jpg)"
+     >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='golike'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                勤求古训,博采众方
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://jianhui1012.github.io">
+                        jianhui1012的博客</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                首页</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa "></i>
+                                时间轴</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="使用Linphone做P2P语音通话">
+            
+            使用Linphone做P2P语音通话
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2023/11/16</span>
+    </span>
+    
+    
+</div>
+        
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="SIP客户端介绍"><a href="#SIP客户端介绍" class="headerlink" title="SIP客户端介绍"></a>SIP客户端介绍</h2><ul>
+<li>关于VoIP中有很多的SIP客户端，其中Linphone、PJSIP、Telephone、BareSIP等。</li>
+<li>LinPhone是跨平台的，包含了Windows、Linux、Mac、Android、iOS，支持视频，它是开源的。</li>
+<li>PJSIP是个协议栈，也有个客户端，它是开源的，支持语音和视频。支持STUN、ICE、WebRTC AEC等，很多客户端都是用它作协议栈。它的实现是为了能在嵌入式设备上高效实现SIP/VoIP。</li>
+<li>Telephone是一款开源免费的电话，界面非常简洁，仅支持Mac，在Apple Store里可以直接下载，底层用PJSIP。不支持视频。</li>
+<li>Baresip是一个协议栈，不过，它带了一个完整的命令行SIP客户端，也很好用，它是开源的，跨平台的，支持语音和视频。</li>
+</ul>
+<h3 id="Linphone客户端配置"><a href="#Linphone客户端配置" class="headerlink" title="Linphone客户端配置"></a>Linphone客户端配置</h3><h4 id="配置默认端口5060"><a href="#配置默认端口5060" class="headerlink" title="配置默认端口5060"></a>配置默认端口5060</h4><ul>
+<li><p>设置网络-端口关闭随机-默认5060</p>
+</li>
+<li><p>保证呼叫的设备在同一个局域网同网段内，然后通过Linphone的呼叫键盘输入内容，一方通过sip:xxx@ip的形式呼叫一方设备，其中xxx的话自定义，比如：1002，ip的话是被呼叫设备的对应地址，比如：192.168.30.122。</p>
+</li>
+<li><p>如果是自己的应用代码设置如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">val transports &#x3D; core.transports</span><br><span class="line">transports.udpPort &#x3D; 5060</span><br><span class="line">transports.tcpPort &#x3D; 5060</span><br><span class="line">transports.tlsPort &#x3D; -1</span><br><span class="line">core.transports &#x3D; transports</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<p><img src="/2023/11/16/%E4%BD%BF%E7%94%A8Linphone%E5%81%9AP2P%E8%AF%AD%E9%9F%B3%E9%80%9A%E8%AF%9D/1.png" alt="image-20231123101811616"></p>
+<h3 id="Linphone常见问题"><a href="#Linphone常见问题" class="headerlink" title="Linphone常见问题"></a>Linphone常见问题</h3><h4 id="电话呼叫停止铃声"><a href="#电话呼叫停止铃声" class="headerlink" title="电话呼叫停止铃声"></a>电话呼叫停止铃声</h4><ul>
+<li>配置core.ringDuringIncomingEarlyMedia = false</li>
+<li>然后呼入状态里调用core.stopRinging()</li>
+</ul>
+<h4 id="背景音降噪"><a href="#背景音降噪" class="headerlink" title="背景音降噪"></a>背景音降噪</h4><ul>
+<li>在assets的linphonerc_factory配置文件中增加，linphonerc_factory中的配置linphone每次启动都会应用，如果是linphonerc_default配置文件只会应用一次，下次启动不会重新应用<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[sound]</span><br><span class="line">noisegate&#x3D;1 #这个表示开启降噪音，不开会又背景音</span><br><span class="line">ng_thres&#x3D;0.12 #这个表示声音这个阈值以上都可以通过，用于判断哪些是噪音</span><br><span class="line">ng_floorgain&#x3D;0.12 #这个表示低于阈值的声音进行增益，用于补偿声音太小被吃掉</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="硬件回声消除器不工作，强制使用软件回声消除器"><a href="#硬件回声消除器不工作，强制使用软件回声消除器" class="headerlink" title="硬件回声消除器不工作，强制使用软件回声消除器"></a>硬件回声消除器不工作，强制使用软件回声消除器</h4><ul>
+<li>官方文档说明 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">The hardware echo canceller on Android often only works if the AudioManager&#39;s mode is set to IN_COMMUNICATIONS.</span><br><span class="line">Any linphone-sdk newer than 5.0 will do that automatically, but make sure you don&#39;t modify it&#39;s value in your app.</span><br><span class="line"></span><br><span class="line">If the device declares having a hardware echo canceller but it doesn&#39;t work, you can use the following Kotlin code to tell our SDK to use the software one instead:</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">core.mediastreamerFactory.setDeviceInfo(android.os.Build.MANUFACTURER, android.os.Build.MODEL, android.os.Build.DEVICE, org.linphone.mediastream.Factory.DEVICE_HAS_BUILTIN_AEC_CRAPPY, &lt;calibrated value&gt;, 0)</span><br><span class="line">core.reloadSoundDevices()</span><br><span class="line"></span><br><span class="line">To get the correct &lt;calibrated value&gt;, use the echo canceller calibration option in linphone-android&#39;s audio settings.</span><br><span class="line">Do it a few times and keep the lowest value.</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="回声消除优化"><a href="#回声消除优化" class="headerlink" title="回声消除优化"></a>回声消除优化</h4><ul>
+<li>linphone会识别当前设备是否支持硬件回声消除器，如果不支持的话才会走软件回声消除器，软件回声消除器有三种算法可以选择，MSSpeexAEC,MSWebrtcAECM,MSWebrtcAEC,官方推荐使用第三种算法，音质更好，但会占用更多CPU另外算法的延迟值很重要是，是麦克风和扬声器的距离等因素有关，linphone提供了对应的api可以测试，另外算法的区间是有限的，默认是80的区间中搜索，比如延迟值为200ms,那么算法的工作区间是200ms-280ms之间。</li>
+</ul>
+<h4 id="通话无声音"><a href="#通话无声音" class="headerlink" title="通话无声音"></a>通话无声音</h4><ul>
+<li>之前老的版本不需要，5.0 SDk开始需要增加依赖配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">  implementation &#39;androidx.media:media:1.2.0&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="单独拉流播放并通话，通话会暂停"><a href="#单独拉流播放并通话，通话会暂停" class="headerlink" title="单独拉流播放并通话，通话会暂停"></a>单独拉流播放并通话，通话会暂停</h3><ul>
+<li>在assets的linphonerc_factory配置文件中增加，linphonerc_factory中的配置linphone每次启动都会应用，如果是linphonerc_default配置文件只会应用一次，下次启动不会重新应用<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[audio]</span><br><span class="line">android_pause_calls_when_audio_focus_lost&#x3D;0</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a target="_blank" rel="noopener" href="https://github.com/BelledonneCommunications/linphone-android/issues/1917">Linphone的p2p设置官方说明</a><br><a target="_blank" rel="noopener" href="https://wiki.linphone.org/xwiki/wiki/public/view/Lib/Getting%20started/Android/">Linphone Android</a><br><a target="_blank" rel="noopener" href="https://wiki.linphone.org/xwiki/wiki/public/view/Lib/Features/Audio%20devices/">Audio devices</a><br><a target="_blank" rel="noopener" href="https://wiki.linphone.org/xwiki/wiki/public/view/Lib/Features/Audio%20tuning/">Audio tuning</a><br><a target="_blank" rel="noopener" href="http://rts.cn/blog/sip/">我用过的那些SIP客户端</a></p>
+
+    </div>
+    
+    <div class="post-footer">
+        <div>
+            
+            转载声明：
+            商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    <a href="/2023/11/27/%E6%B7%B1%E7%A7%8B%E7%9A%84%E5%B0%BE%E5%B7%B4/" class="pre-post btn btn-default" title='深秋的尾巴'>
+        <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+        <span class="hidden-xs">
+            深秋的尾巴</span>
+    </a>
+    
+    
+    <a href="/2023/09/13/%E6%82%9F%E7%9C%9F%E7%AF%87/" class="next-post btn btn-default" title='悟真篇'>
+        <span class="hidden-lg">下一篇</span>
+        <span class="hidden-xs">
+            悟真篇</span><i class="fa fa-angle-right fa-fw"></i>
+    </a>
+    
+</div>
+
+<div id="comments">
+    
+    
+<div class="utteranc">
+  
+  <script
+    src='https://utteranc.es/client.js'
+    repo='shenliyang/snippet-comment'
+    issue-term='pathname'
+    issue-number=''
+    theme='github-light'
+    label=''
+    crossorigin='anonymous'
+    async
+  ></script>
+</div>
+
+
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            文章目录
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SIP%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BB%8B%E7%BB%8D"><span class="toc-text">SIP客户端介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linphone%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE"><span class="toc-text">Linphone客户端配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E9%BB%98%E8%AE%A4%E7%AB%AF%E5%8F%A35060"><span class="toc-text">配置默认端口5060</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linphone%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-text">Linphone常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%B5%E8%AF%9D%E5%91%BC%E5%8F%AB%E5%81%9C%E6%AD%A2%E9%93%83%E5%A3%B0"><span class="toc-text">电话呼叫停止铃声</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%83%8C%E6%99%AF%E9%9F%B3%E9%99%8D%E5%99%AA"><span class="toc-text">背景音降噪</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E5%9B%9E%E5%A3%B0%E6%B6%88%E9%99%A4%E5%99%A8%E4%B8%8D%E5%B7%A5%E4%BD%9C%EF%BC%8C%E5%BC%BA%E5%88%B6%E4%BD%BF%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%9B%9E%E5%A3%B0%E6%B6%88%E9%99%A4%E5%99%A8"><span class="toc-text">硬件回声消除器不工作，强制使用软件回声消除器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9E%E5%A3%B0%E6%B6%88%E9%99%A4%E4%BC%98%E5%8C%96"><span class="toc-text">回声消除优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%9A%E8%AF%9D%E6%97%A0%E5%A3%B0%E9%9F%B3"><span class="toc-text">通话无声音</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E7%8B%AC%E6%8B%89%E6%B5%81%E6%92%AD%E6%94%BE%E5%B9%B6%E9%80%9A%E8%AF%9D%EF%BC%8C%E9%80%9A%E8%AF%9D%E4%BC%9A%E6%9A%82%E5%81%9C"><span class="toc-text">单独拉流播放并通话，通话会暂停</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li></ol></li></ol>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2017
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+</body>
+</html>

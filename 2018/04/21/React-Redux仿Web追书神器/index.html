@@ -1,0 +1,429 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="jianhui1012的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.3.0">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://jianhui1012.github.io">
+    <!--SEO-->
+
+<meta name="keywords" content="源码分析,React" />
+
+
+<meta name="description" content="由于 10 月份做的 React Native 项目没有使用到 Redux 等库，写了一段时间想深入学习 React，有个想法想做个 demo 练手下，那时候其实还没想好要做哪一个类型的，也看了..." />
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+<title>
+    
+    React+Redux仿Web追书神器 |
+    
+    jianhui1012的博客
+</title>
+
+<link rel="alternate" href="/atom.xml" title="jianhui1012的博客" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header"  style="background-image:url(
+    https://hexo-theme-snippet-1251680922.cos.ap-beijing.myqcloud.com/img/banner.jpg)"
+     >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='golike'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                勤求古训,博采众方
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://jianhui1012.github.io">
+                        jianhui1012的博客</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                首页</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa "></i>
+                                时间轴</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="React+Redux仿Web追书神器">
+            
+            React+Redux仿Web追书神器
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-none-link" href="/tags/React/" rel="tag">React</a> <a class="tag-none-link" href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">源码分析</a>
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2018/04/21</span>
+    </span>
+    
+    
+</div>
+        
+        
+        <p class="fa fa-exclamation-triangle warning">
+            本文于<strong>
+                2060</strong>
+            天之前发表，文中内容可能已经过时。
+        </p>
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <p>由于 10 月份做的 React Native 项目没有使用到 Redux 等库，写了一段时间想深入学习 React，有个想法想做个 demo 练手下，那时候其实还没想好要做哪一个类型的，也看了些动漫的，小说阅读，聚合资源的开源项目。由于正好在学习开源的 Android 小说阅读器 – <a target="_blank" rel="noopener" href="https://github.com/JustWayward/BookReader">任阅</a>，开始边学边做，已完成的功能列在下面。<a target="_blank" rel="noopener" href="https://github.com/jianhui1012/bookreader">项目地址</a> 在这里，如果有好的意见欢迎提 issue或pr。</p>
+<a id="more"></a>
+
+<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><blockquote>
+<p>   由于 10 月份做的 React Native 项目没有使用到 Redux 等库，写了一段时间想深入学习 React，有个想法想做个 demo 练手下，那时候其实还没想好要做哪一个类型的，也看了些动漫的，小说阅读，聚合资源的开源项目。由于正好在学习开源的 Android 小说阅读器 – <a target="_blank" rel="noopener" href="https://github.com/JustWayward/BookReader">任阅</a>，开始边学边做，已完成的功能列在下面。<a target="_blank" rel="noopener" href="https://github.com/jianhui1012/bookreader">项目地址</a> 在这里，如果有好的意见欢迎提 issue或pr。</p>
+</blockquote>
+<h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><p><img src="https://user-gold-cdn.xitu.io/2017/12/15/160592c0a575964a?w=1893&h=871&f=gif&s=9585858"></p>
+<h3 id="目标功能"><a href="#目标功能" class="headerlink" title="目标功能"></a>目标功能</h3><ul>
+<li><input checked disabled type="checkbox"> 排行榜 – 完成</li>
+<li><input checked disabled type="checkbox"> 书籍详情 – 完成</li>
+<li><input checked disabled type="checkbox"> 阅读书籍 – 完成</li>
+<li><input checked disabled type="checkbox"> 书单推荐 – 完成</li>
+<li><input checked disabled type="checkbox"> 搜索书籍 – 完成</li>
+<li><input checked disabled type="checkbox"> 精选书籍 – 完成</li>
+<li><input checked disabled type="checkbox"> 分类书籍 – 完成</li>
+<li><input checked disabled type="checkbox"> 主题书单 – 完成</li>
+<li><input checked disabled type="checkbox"> 书单详情 – 完成</li>
+<li><input checked disabled type="checkbox"> 主    页 – 完成</li>
+</ul>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├─actions                              #redux的action,业务逻辑</span><br><span class="line">├─components                           #页面容器</span><br><span class="line">│  └─common                            #公共目录</span><br><span class="line">│      ├─component-module              #封装的组件</span><br><span class="line">│      ├─images                        #项目图片</span><br><span class="line">│      │  └─icon</span><br><span class="line">│      └─style                          #组件样式</span><br><span class="line">├─modules                               #公用模块</span><br><span class="line">│  ├─api                                #管理api请求类</span><br><span class="line">│  └─constants                          #公共字段类</span><br><span class="line">├─reducers                              #redux中的reducers，处理action发送的数据流</span><br><span class="line">├─router                                #路由管理模块</span><br><span class="line">├─store                                 #redux中的store,联结reducers</span><br><span class="line">└─template                              #存放html模版</span><br><span class="line">.</span><br></pre></td></tr></table></figure>
+
+<p>项目的初始结构和说明已罗列如上。</p>
+<p>下面对目录结构作以下说明</p>
+<ul>
+<li><p>项目最初始是参考 <a target="_blank" rel="noopener" href="https://github.com/bailicangdu/react-pxq">react-pxq</a> 初始化的。</p>
+</li>
+<li><p>中间件引人日志中间件 —— redux-logger，异步 API 调用 —— redux-thunk 等;</p>
+</li>
+<li><p>component-module 和 components 存放的都是 react 组件，区别是：容器组件就放在components中，和模块组件(比如左侧菜单组件、书籍列表组件等)就放到 component-module中;</p>
+</li>
+<li><p>页面状态等公共部分最好是独立起来，统一管理;</p>
+</li>
+<li><p>跨域配置使用 pathRewrite 字段，需要注意 webpack-dev-server 的版本</p>
+</li>
+</ul>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ul>
+<li><ol>
+<li>整理 API</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>学习 Redux(搭建脚手架)</li>
+</ol>
+</li>
+</ul>
+<h4 id="API-数据"><a href="#API-数据" class="headerlink" title="API 数据"></a>API 数据</h4><ul>
+<li>数据来源主要是两个地方：一个是开源的Android项目与RN版本的数据，另一个是追书神器h5移动端</li>
+<li>数据跨域：网上查了不少方法，考虑到便捷，使用反向代理的方式处理</li>
+</ul>
+<h4 id="学习-Redux"><a href="#学习-Redux" class="headerlink" title="学习 Redux"></a>学习 Redux</h4><ul>
+<li>刚开始我差不多用一个星期多学习了 Github 上的 <a target="_blank" rel="noopener" href="https://github.com/kdchang/reactjs101">从零开始学 ReactJS（ReactJS 101）</a>，基本上每一天看个 1-2 章，玩的也很开心，浅显易懂，适合初学者阅读。<blockquote>
+<p>   前面 8 章：主要是熟悉接下来会用到的基础概念，当然每一章讲完理论，后面都会有例子自己可以动手实践，加深对于前面概念的理解。</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>   后面 9、10 两章开始运用上面学到的内容，做一个简单的项目。</p>
+</blockquote>
+<ul>
+<li>接着是用了 5-6 天学习网上开源项目的脚手架 —— <a target="_blank" rel="noopener" href="https://github.com/bailicangdu/react-pxq">一个 react + redux 的完整项目 和 个人总结</a>，基本上是看    </li>
+</ul>
+<blockquote>
+<p>   参考所使用的库、编译打包的脚本以及 redux 代码。</p>
+</blockquote>
+<ul>
+<li>最后，大概花了 3 天看了阮一峰老师写的 <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/09/redux_tutorial_part_one_basic_usages.html">Redux 入门教程</a></li>
+</ul>
+<blockquote>
+<p>   这部分内容是后面在搭建项目整体结构的时候看的，对于 reducers、action、store 的内容比较深入，加深理解。</p>
+</blockquote>
+<h3 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h3><ul>
+<li>虽然列了众多核心库，但是自己也谈不上熟练运用，所以列了一些遇到的问题和后期改进的东西。</li>
+</ul>
+<h4 id="Webpack-3-10-0"><a href="#Webpack-3-10-0" class="headerlink" title="Webpack(3.10.0)"></a>Webpack(3.10.0)</h4><ul>
+<li><p>本项目主要用了第三方的脚手架，学习了反向代理部分，当然自己也搭建过 webpack，后续会升级 webpack。</p>
+</li>
+<li><p>这里提下反向代理部分，关于使用 webpack-dev-server 进行配置反向代理的时候，如果使用 pathRewrite 到属性需要注意 webpack-dev-server 版本，这个属性是在 1.15.0 中，不然是不起作用的。特此说明，网上查到相同问题没有这个解释，以免浪费时间。</p>
+</li>
+<li><p>升级Webpack到3.10版本并更新其他老的包，比如file-loader,css-loader等，出现的问题在下发表格中。</p>
+</li>
+</ul>
+<h5 id="Webpack1-x升级到Webpack3-10"><a href="#Webpack1-x升级到Webpack3-10" class="headerlink" title="Webpack1.x升级到Webpack3.10"></a>Webpack1.x升级到Webpack3.10</h5><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>1.x</th>
+<th>3.10</th>
+<th>备注</th>
+<th>参考</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>webpack 2 cannot resolve empty extensions</code></td>
+<td>extensions数组中不能出现空字符或者字符串</td>
+<td><code>resolve: &#123;extensions: [&#39;&#39;,&#39;.css&#39;]&#125;</code></td>
+<td><code>resolve: &#123;extensions: [&#39;.css&#39;]&#125;</code></td>
+<td><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/42068939/webpack-2-cannot-resolve-empty-extensions">参考1</a></td>
+</tr>
+<tr>
+<td><code>Error: Chunk.entry was removed. Use hasRuntime()</code></td>
+<td><code>&quot;extract-text-webpack-plugin&quot;: &quot;^1.10.0&quot;,</code></td>
+<td><code>&quot;extract-text-webpack-plugin&quot;: &quot;^2.1.2&quot;,</code></td>
+<td>版本问题</td>
+<td><a target="_blank" rel="noopener" href="https://www.cnblogs.com/rhxuza1993/p/6991145.html">参考1</a></td>
+</tr>
+<tr>
+<td><code>Error: Breaking change: extract now only takes a single argument. Either an options object *or* the loader(s).</code></td>
+<td><code>loader: ExtractTextPlugin.extract(&#39;style&#39;, [&#39;css&#39;, &#39;autoprefixer&#39;]),</code></td>
+<td><code>ExtractTextPlugin.extract(&#123; fallback: &#39;style-loader&#39;, use: &#39;css-loader&#39; &#125;)</code></td>
+<td>新的版本只支持一个参数</td>
+<td>npm run dev 命令运行结果错误提示</td>
+</tr>
+<tr>
+<td>找不到API Schema</td>
+<td><code>modulesDirectories</code></td>
+<td><code>modules</code></td>
+<td>属性名称变更</td>
+<td>npm run dist 命令运行结果错误提示</td>
+</tr>
+<tr>
+<td>找不到OccurenceOrderPlugin</td>
+<td><code>new webpack.optimize.OccurenceOrderPlugin(),newwebpack.HotModuleReplacementPlugin(),new webpack.NoErrorsPlugin(),new webpack.optimize.UglifyJsPlugin()</code></td>
+<td><code>new webpack.HotModuleReplacementPlugin(),new webpack.optimize.UglifyJsPlugin()</code></td>
+<td>移除了OccurenceOrderPlugin 和 NoErrorsPlugin</td>
+<td><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000008671104">参考1</a></td>
+</tr>
+</tbody></table>
+<h4 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h4><ul>
+<li>简单的讲他是一个管理单向数据流的框架，根据业务复杂度可以把控其中颗粒度。一开始学习的时候感觉反而把项目复杂化，看原理也是半懂不懂，后面不断实践理解前面看的内容，总归理论要与实践结合起来。<br>模型如下：简单的数据流向可以看作 View -&gt; Action -&gt; (Middleware) -&gt; Reducer<br><img src="https://user-gold-cdn.xitu.io/2017/12/15/160592c0a21a5f2a?w=1501&h=1197&f=png&s=102313"></li>
+</ul>
+<h4 id="React-router-2-x"><a href="#React-router-2-x" class="headerlink" title="React-router(2.x)"></a>React-router(2.x)</h4><p>react-router(2.x)与react-router(4.x)的还是不同的，当然主要是写法上，所以没更新到4.0</p>
+<p>另外， 发布打包时使用nginx等应用服务器托管的时候需要配置下，所用路由走index.html文件，不然路由会被拦截。</p>
+<h4 id="Antd-2-13"><a href="#Antd-2-13" class="headerlink" title="Antd(2.13)"></a>Antd(2.13)</h4><ul>
+<li><p>antd是（蚂蚁金服体验技术部）经过大量的项目实践和总结，沉淀出的一个中台设计语言 Ant Design，使用者包括蚂蚁金服、阿里巴巴、口碑、美团、滴滴等一系列知名公司，其中包括了移动端，Web端，Pro(最近刚出)</p>
+</li>
+<li><p>遇到错误可以翻看 <a target="_blank" rel="noopener" href="https://github.com/ant-design/ant-design/issues">Antd的issues</a>，基本能解决。</p>
+</li>
+<li><p>提 Issues 的话要符合一定规范，一开始感觉麻烦，后来看了 <a target="_blank" rel="noopener" href="https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way">提问的智慧</a>，恍然大悟这部分的必要性。</p>
+</li>
+</ul>
+<h3 id="扩展内容"><a href="#扩展内容" class="headerlink" title="扩展内容"></a>扩展内容</h3><h4 id="功能扩展"><a href="#功能扩展" class="headerlink" title="功能扩展"></a>功能扩展</h4><ul>
+<li>讨论区数据统计分析，主要想知道一段时间的热点内容。</li>
+</ul>
+<h4 id="测试及优化"><a href="#测试及优化" class="headerlink" title="测试及优化"></a>测试及优化</h4><ul>
+<li>现在项目代码是没有进行单元测试，后续学习集成JEST测试</li>
+<li>优化部分页面的组件以及一些 bugs</li>
+</ul>
+
+    </div>
+    
+    <div class="post-footer">
+        <div>
+            
+            转载声明：
+            商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    <a href="/2018/04/21/420%E5%B0%8F%E6%97%B6%E5%AD%A6%E4%B9%A0%E4%BB%A3%E7%A0%81%E4%B9%8B%E5%90%8E-%E5%A6%82%E4%BD%95%E6%95%99%E4%BD%A0%E5%85%8D%E8%B4%B9%E8%87%AA%E5%AD%A6Python/" class="pre-post btn btn-default" title='420小时学习代码之后:如何教你免费自学Python'>
+        <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+        <span class="hidden-xs">
+            420小时学习代码之后:如何教你免费自学Python</span>
+    </a>
+    
+    
+    <a href="/2018/04/21/%E5%85%B3%E4%BA%8E%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF%E7%9A%84%E6%95%85%E4%BA%8B/" class="next-post btn btn-default" title='关于贝塞尔曲线的故事'>
+        <span class="hidden-lg">下一篇</span>
+        <span class="hidden-xs">
+            关于贝塞尔曲线的故事</span><i class="fa fa-angle-right fa-fw"></i>
+    </a>
+    
+</div>
+
+<div id="comments">
+    
+    
+<div class="utteranc">
+  
+  <script
+    src='https://utteranc.es/client.js'
+    repo='shenliyang/snippet-comment'
+    issue-term='pathname'
+    issue-number=''
+    theme='github-light'
+    label=''
+    crossorigin='anonymous'
+    async
+  ></script>
+</div>
+
+
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            文章目录
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-text">引言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%88%E6%9E%9C%E5%9B%BE"><span class="toc-text">效果图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87%E5%8A%9F%E8%83%BD"><span class="toc-text">目标功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-text">目录结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#API-%E6%95%B0%E6%8D%AE"><span class="toc-text">API 数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0-Redux"><span class="toc-text">学习 Redux</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E6%A0%88"><span class="toc-text">技术栈</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Webpack-3-10-0"><span class="toc-text">Webpack(3.10.0)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Webpack1-x%E5%8D%87%E7%BA%A7%E5%88%B0Webpack3-10"><span class="toc-text">Webpack1.x升级到Webpack3.10</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Redux"><span class="toc-text">Redux</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#React-router-2-x"><span class="toc-text">React-router(2.x)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Antd-2-13"><span class="toc-text">Antd(2.13)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E5%86%85%E5%AE%B9"><span class="toc-text">扩展内容</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E6%89%A9%E5%B1%95"><span class="toc-text">功能扩展</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E5%8F%8A%E4%BC%98%E5%8C%96"><span class="toc-text">测试及优化</span></a></li></ol></li></ol>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2017
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+</body>
+</html>

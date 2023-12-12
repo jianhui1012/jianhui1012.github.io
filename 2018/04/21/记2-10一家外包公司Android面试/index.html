@@ -1,0 +1,363 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="jianhui1012的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.3.0">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://jianhui1012.github.io">
+    <!--SEO-->
+
+<meta name="keywords" content="Android,面试" />
+
+
+<meta name="description" content="面的内容包括Android基础,项目,框架原理等知识点
+
+
+面试问题Android基础
+activity之间数据传输，类型如果是类实例，需要实现序列化，以及序列化的原理
+
+基本数据类型和复合类型..." />
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+<title>
+    
+    记2.10一家外包公司Android面试 |
+    
+    jianhui1012的博客
+</title>
+
+<link rel="alternate" href="/atom.xml" title="jianhui1012的博客" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header"  style="background-image:url(
+    https://hexo-theme-snippet-1251680922.cos.ap-beijing.myqcloud.com/img/banner.jpg)"
+     >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='golike'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                勤求古训,博采众方
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://jianhui1012.github.io">
+                        jianhui1012的博客</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                首页</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa "></i>
+                                时间轴</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="记2.10一家外包公司Android面试">
+            
+            记2.10一家外包公司Android面试
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-none-link" href="/tags/Android/" rel="tag">Android</a> <a class="tag-none-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a>
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2018/04/21</span>
+    </span>
+    
+    
+</div>
+        
+        
+        <p class="fa fa-exclamation-triangle warning">
+            本文于<strong>
+                2060</strong>
+            天之前发表，文中内容可能已经过时。
+        </p>
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <p>面的内容包括Android基础,项目,框架原理等知识点</p>
+<a id="more"></a>
+
+<h3 id="面试问题"><a href="#面试问题" class="headerlink" title="面试问题"></a>面试问题</h3><h4 id="Android基础"><a href="#Android基础" class="headerlink" title="Android基础"></a>Android基础</h4><ul>
+<li><p>activity之间数据传输，类型如果是类实例，需要实现序列化，以及序列化的原理</p>
+<blockquote>
+<p>基本数据类型和复合类型，复合类型中的类实例–对象需要序列化传输，后面引出了序列化的原理(对象转化成可存储的或者客传输的过程，对象=&gt;字节流)，两种方式：java自带实现Serializable以及Android的Parcelable(应用内传递高效内存)</p>
+</blockquote>
+</li>
+<li><p>有哪几种图片缓存框架？</p>
+<blockquote>
+<p> Fresco，Glide，Volley，简单使用过没看过源码，很虚</p>
+</blockquote>
+</li>
+<li><p>使用过okhttp没？okhttp的优势？</p>
+<blockquote>
+<p> 我答：用过，看过知识点了，想不起来，答了个定时重传，说Xutils网络模块没有吗(简历上写了)，回答是有的，尴尬哈。</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p> 去看知识点后：<br>1.支持SPDY，共享同一个Socket来处理同一个请求<br>2.如果SPDY不可用，则使用连接池提高效率并减少请求延时<br>3.默认支持GZIP，提高传输效率<br>4.网络请求缓存响应的数据来减少重复的网络请求</p>
+</blockquote>
+<ul>
+<li><p>一般软件开发的流程？</p>
+<blockquote>
+<p> 不说了</p>
+</blockquote>
+</li>
+<li><p>一组动画循环播放的代码？</p>
+<blockquote>
+<p>我答：原生动画基本没有使用，说一直在进行RN开发</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>后面查了下：<br>1.使用属性动画 代码如下</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Animator&gt; animators = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">animators.add(<span class="keyword">new</span> ObjectAnimator...);</span><br><span class="line">...</span><br><span class="line">AnimatorSet btnSexAnimatorSet = <span class="keyword">new</span> AnimatorSet();</span><br><span class="line">btnSexAnimatorSet.playTogether(animators);</span><br><span class="line">btnSexAnimatorSet.setStartDelay(delay);</span><br><span class="line">btnSexAnimatorSet.start();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>线程与进程的区别</p>
+<blockquote>
+<p>记得好像是线程是任务最小调度单位，看我愣了会，就问了下哪个大，然后顺便说了下进程是有一个或者多个线程的构成的</p>
+</blockquote>
+</li>
+<li><p>五种基本布局？有没有接触过约束布局，说一下它的主要作用？</p>
+<blockquote>
+<p>五种布局就不说了，约束布局可以拖拽式布局，作用的话减少嵌套视图，提高页面加载效率</p>
+</blockquote>
+</li>
+<li><p>有哪些动画类型？</p>
+<blockquote>
+<p> 属性动画，View动画，帧动画</p>
+</blockquote>
+</li>
+<li><p>handler中的取消消息发送的？</p>
+<blockquote>
+<p>removeMessage和sendEmptyMessageDelayed</p>
+</blockquote>
+</li>
+<li><p>举例一款app的项目结构和遇到的疑难问题以及如何解决的？</p>
+</li>
+</ul>
+<h4 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h4><ul>
+<li>单例模式有哪几种以及单例模式的作用？</li>
+<li>熟悉哪几种设计模式？</li>
+<li>MVP与MVC开发模式的优势？<h4 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h4></li>
+<li>讲了下2015年的两个Android项目做了什么东西？</li>
+<li>简历上写了布局优化？<blockquote>
+<p> 使用merge减少层次和使用ViewStub提高资源利用，讲了下ListView优化</p>
+</blockquote>
+</li>
+<li>没问到算法</li>
+</ul>
+
+    </div>
+    
+    <div class="post-footer">
+        <div>
+            
+            转载声明：
+            商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    <a href="/2018/07/24/%E4%B8%80%E4%BA%9B%E5%BF%83%E5%BE%97/" class="pre-post btn btn-default" title='一些心得'>
+        <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+        <span class="hidden-xs">
+            一些心得</span>
+    </a>
+    
+    
+    <a href="/2018/04/21/%E8%AE%B0%E5%A4%A7%E6%90%9C%E8%BD%A6%E9%9D%A2%E8%AF%95%E4%B8%80%E9%9D%A2/" class="next-post btn btn-default" title='记大搜车面试一面'>
+        <span class="hidden-lg">下一篇</span>
+        <span class="hidden-xs">
+            记大搜车面试一面</span><i class="fa fa-angle-right fa-fw"></i>
+    </a>
+    
+</div>
+
+<div id="comments">
+    
+    
+<div class="utteranc">
+  
+  <script
+    src='https://utteranc.es/client.js'
+    repo='shenliyang/snippet-comment'
+    issue-term='pathname'
+    issue-number=''
+    theme='github-light'
+    label=''
+    crossorigin='anonymous'
+    async
+  ></script>
+</div>
+
+
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            文章目录
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98"><span class="toc-text">面试问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Android%E5%9F%BA%E7%A1%80"><span class="toc-text">Android基础</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-text">设计模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE"><span class="toc-text">项目</span></a></li></ol></li></ol>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2017
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+</body>
+</html>

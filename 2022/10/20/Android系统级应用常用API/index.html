@@ -1,0 +1,312 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="jianhui1012的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.3.0">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://jianhui1012.github.io">
+    <!--SEO-->
+
+<meta name="keywords" content="Android,系统级" />
+
+
+<meta name="description" content="Android系统级应用开发中常用的方法，工具类汇总
+
+
+常见API同步系统时间
+1.我们的应用需要拥有系统签名才能修改系统时间，我们找设备供应商给自己的应用加上了系统签名。
+
+2.需要在Man..." />
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+<title>
+    
+    Android系统级应用常用API |
+    
+    jianhui1012的博客
+</title>
+
+<link rel="alternate" href="/atom.xml" title="jianhui1012的博客" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header"  style="background-image:url(
+    https://hexo-theme-snippet-1251680922.cos.ap-beijing.myqcloud.com/img/banner.jpg)"
+     >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='golike'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                勤求古训,博采众方
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://jianhui1012.github.io">
+                        jianhui1012的博客</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                首页</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa "></i>
+                                时间轴</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Android系统级应用常用API">
+            
+            Android系统级应用常用API
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-none-link" href="/tags/Android-%E7%B3%BB%E7%BB%9F%E7%BA%A7/" rel="tag">Android,系统级</a>
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2022/10/20</span>
+    </span>
+    
+    
+</div>
+        
+        
+        <p class="fa fa-exclamation-triangle warning">
+            本文于<strong>
+                417</strong>
+            天之前发表，文中内容可能已经过时。
+        </p>
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <p>Android系统级应用开发中常用的方法，工具类汇总</p>
+<a id="more"></a>
+
+<h2 id="常见API"><a href="#常见API" class="headerlink" title="常见API"></a>常见API</h2><h3 id="同步系统时间"><a href="#同步系统时间" class="headerlink" title="同步系统时间"></a>同步系统时间</h3><ul>
+<li><p>1.我们的应用需要拥有系统签名才能修改系统时间，我们找设备供应商给自己的应用加上了系统签名。</p>
+</li>
+<li><p>2.需要在Manifest添加如下两个权限</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;uses-permission</span><br><span class="line">       android:name&#x3D;&quot;android.permission.SET_TIME_ZONE&quot; &#x2F;&gt;  </span><br><span class="line">&lt;uses-permission</span><br><span class="line">       android:name&#x3D;&quot;android.permission.SET_TIME&quot;&#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>3.我们获取通过接口获取服务器的时间戳，根据服务器的时间戳来修改安卓设备的时间，上代码:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public static void doSetLocalTime(Context mContext, long time) &#123;</span><br><span class="line">        boolean is24Hour &#x3D; DateFormat.is24HourFormat(mContext);</span><br><span class="line">        if (!is24Hour) &#123;</span><br><span class="line">            android.provider.Settings.System.putString(mContext.getContentResolver(),</span><br><span class="line">                    android.provider.Settings.System.TIME_12_24, &quot;24&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        try &#123;</span><br><span class="line">            boolean isAUTO_TIME_ZONE &#x3D; android.provider.Settings.Global.getInt(mContext.getContentResolver(),</span><br><span class="line">                    android.provider.Settings.Global.AUTO_TIME_ZONE) &gt; 0;</span><br><span class="line">            if (isAUTO_TIME_ZONE) &#123;</span><br><span class="line">                android.provider.Settings.Global.putInt(mContext.getContentResolver(),</span><br><span class="line">                        android.provider.Settings.Global.AUTO_TIME_ZONE, 0);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (Settings.SettingNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        try &#123;</span><br><span class="line">            boolean AUTO_TIME &#x3D; android.provider.Settings.Global.getInt(mContext.getContentResolver(),</span><br><span class="line">                    android.provider.Settings.Global.AUTO_TIME) &gt; 0;</span><br><span class="line">            if (AUTO_TIME) &#123;</span><br><span class="line">                android.provider.Settings.Global.putInt(mContext.getContentResolver(),</span><br><span class="line">                        android.provider.Settings.Global.AUTO_TIME, 0);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (Settings.SettingNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        if (time &#x2F; 1000 &lt; Integer.MAX_VALUE) &#123;</span><br><span class="line">            ((AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE)).setTimeZone(&quot;GMT+08:00&quot;);</span><br><span class="line">            ((AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE)).setTime(time);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="系统重启"><a href="#系统重启" class="headerlink" title="系统重启"></a>系统重启</h3><ul>
+<li>由于 App 有系统签名，所以实现系统重启功能比较简单。其中的一种方式是使用 PowerManager 实现。代码如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 重新启动到 fastboot模式</span><br><span class="line">PowerManager pManager &#x3D; (PowerManager)getSystemService(Context.POWER_SERVICE);</span><br><span class="line">pManager.reboot(&quot;&quot;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="禁止下拉设置按钮"><a href="#禁止下拉设置按钮" class="headerlink" title="禁止下拉设置按钮"></a>禁止下拉设置按钮</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 用反射实现控制StatusBar状态，需要是system应用</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class StatusBarUtil &#123;</span><br><span class="line">    public static final int STATUS_BAR_DISABLE_HOME &#x3D; 0x00200000;</span><br><span class="line">    public static final int STATUS_BAR_DISABLE_RECENT &#x3D; 0x01000000;</span><br><span class="line">    public static final int STATUS_BAR_DISABLE_BACK &#x3D; 0x00400000;</span><br><span class="line">    public static final int STATUS_BAR_DISABLE_EXPAND &#x3D; 0x00010000;</span><br><span class="line">    public static final int STATUS_BAR_DISABLE_NONE &#x3D; 0x00000000;</span><br><span class="line"></span><br><span class="line">    public static void setStatusBarState(Context context, int disableFlag) &#123;</span><br><span class="line">        @SuppressLint(&quot;WrongConstant&quot;) Object service &#x3D; context.getSystemService(&quot;statusbar&quot;);</span><br><span class="line">        try &#123;</span><br><span class="line">            Class&lt;?&gt; statusbarManager &#x3D; Class.forName(&quot;android.app.StatusBarManager&quot;);</span><br><span class="line">            Method disable &#x3D; statusbarManager.getMethod(&quot;disable&quot;, int.class);</span><br><span class="line">            disable.invoke(service, disableFlag);</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 禁用顶部状态栏的下拉及底部虚拟的回退等按键</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static void disableStatusBar(Context context) &#123;</span><br><span class="line">        &#x2F;&#x2F; Disable *all* possible navigation via the system bar.</span><br><span class="line">        int state &#x3D; STATUS_BAR_DISABLE_EXPAND ;</span><br><span class="line">        setStatusBarState(context, state);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void enableStatusBar(Context context) &#123;</span><br><span class="line">        setStatusBarState(context, STATUS_BAR_DISABLE_NONE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/jdfkldjlkjdl/article/details/121020649">Android App 设置系统时间，语言和时区、系统重启</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhf6751134/article/details/117509820">Android 静默安装并自动重启</a></p>
+
+    </div>
+    
+    <div class="post-footer">
+        <div>
+            
+            转载声明：
+            商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    <a href="/2022/10/31/%E5%BC%80%E6%B7%98%E5%AE%9D%E5%BA%97%E6%80%9D%E8%80%83/" class="pre-post btn btn-default" title='开淘宝店思考'>
+        <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+        <span class="hidden-xs">
+            开淘宝店思考</span>
+    </a>
+    
+    
+    <a href="/2022/08/31/windows%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2java%E9%A1%B9%E7%9B%AE/" class="next-post btn btn-default" title='windows服务器如何部署java项目'>
+        <span class="hidden-lg">下一篇</span>
+        <span class="hidden-xs">
+            windows服务器如何部署java项目</span><i class="fa fa-angle-right fa-fw"></i>
+    </a>
+    
+</div>
+
+<div id="comments">
+    
+    
+<div class="utteranc">
+  
+  <script
+    src='https://utteranc.es/client.js'
+    repo='shenliyang/snippet-comment'
+    issue-term='pathname'
+    issue-number=''
+    theme='github-light'
+    label=''
+    crossorigin='anonymous'
+    async
+  ></script>
+</div>
+
+
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            文章目录
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81API"><span class="toc-text">常见API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4"><span class="toc-text">同步系统时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E9%87%8D%E5%90%AF"><span class="toc-text">系统重启</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%81%E6%AD%A2%E4%B8%8B%E6%8B%89%E8%AE%BE%E7%BD%AE%E6%8C%89%E9%92%AE"><span class="toc-text">禁止下拉设置按钮</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2017
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+</body>
+</html>

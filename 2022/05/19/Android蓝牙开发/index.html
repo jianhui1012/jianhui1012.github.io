@@ -1,0 +1,334 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="jianhui1012的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.3.0">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://jianhui1012.github.io">
+    <!--SEO-->
+
+<meta name="keywords" content="Android,蓝牙,蓝牙开发" />
+
+
+<meta name="description" content="蓝牙的介绍，建立连接过程，错误码说明
+
+Android蓝牙介绍系统版本
+Android4.4系统以下使用的是传统蓝牙(经典蓝牙)，4.4以上的话使用低功耗蓝牙(也就是经常俗称的ble),蓝牙连接..." />
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+<title>
+    
+    Android蓝牙开发 |
+    
+    jianhui1012的博客
+</title>
+
+<link rel="alternate" href="/atom.xml" title="jianhui1012的博客" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header"  style="background-image:url(
+    https://hexo-theme-snippet-1251680922.cos.ap-beijing.myqcloud.com/img/banner.jpg)"
+     >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='golike'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                勤求古训,博采众方
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://jianhui1012.github.io">
+                        jianhui1012的博客</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                首页</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa "></i>
+                                时间轴</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Android蓝牙开发">
+            
+            Android蓝牙开发
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-none-link" href="/tags/Android-%E8%93%9D%E7%89%99-%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/" rel="tag">Android,蓝牙,蓝牙开发</a>
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2022/05/19</span>
+    </span>
+    
+    
+</div>
+        
+        
+        <p class="fa fa-exclamation-triangle warning">
+            本文于<strong>
+                571</strong>
+            天之前发表，文中内容可能已经过时。
+        </p>
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <p>蓝牙的介绍，建立连接过程，错误码说明</p>
+<a id="more"></a>
+<h1 id="Android蓝牙介绍"><a href="#Android蓝牙介绍" class="headerlink" title="Android蓝牙介绍"></a>Android蓝牙介绍</h1><h2 id="系统版本"><a href="#系统版本" class="headerlink" title="系统版本"></a>系统版本</h2><ul>
+<li>Android4.4系统以下使用的是传统蓝牙(经典蓝牙)，4.4以上的话使用低功耗蓝牙(也就是经常俗称的ble),蓝牙连接有距离限制，大概几十米左右(根据当前环境的障碍物多少)。</li>
+</ul>
+<h1 id="Android建立连接过程"><a href="#Android建立连接过程" class="headerlink" title="Android建立连接过程"></a>Android建立连接过程</h1><h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><pre class="mermaid">graph TD
+A(gatt.connectGatt-其中的参数:BluetoothGattCallback回调) 
+--> B[BGCB的onConnectionStateChange回调]
+B --> C{判断status值}
+C --> |不等于GATT_SUCCESS| D[断开连接+关闭服务]
+C --> |等于GATT_SUCCESS| E{判断newState的值}
+E --> |等于STATE_DISCONNECTED| G[close关闭服务]
+E --> |等于STATE_CONNECTED| F{判断需要requestMtu}
+F --> |请求则协商数据交互包大小| J[BGCB的onMtuChanged回调-获取协商结果]
+J --> H[gatt.discoverServices]
+F --> |不请求则默认23字节| H
+H --> I[BGCB的onServicesDiscovered回调]
+I --> K[发现服务成功则获取对应的特征-mGattService.getCharacteristic] --> L[订阅特征值-gatt.setCharacteristicNotification]
+L --> N[连接建立-可通信]
+G --> M[一次连接结束]
+D --> M
+12[BluetoothGattCallback简称BGCB]</pre>
+
+<h2 id="介绍低功耗蓝牙"><a href="#介绍低功耗蓝牙" class="headerlink" title="介绍低功耗蓝牙"></a>介绍低功耗蓝牙</h2><ul>
+<li> 低功耗蓝牙体系结构主要分为三个部分：控制器、主机和应用程序。在控制器内既有物理层和链路层，又有直接测试模式和主机控制接口(HCI)层的下半部分。在主机内包含三个协议：逻辑链路控制和适配协议(L2CAP)、属性协议(Attribute Protocol)和安全管理器协议(Security Manager Protocol)，此外还包括通用属性规范(GATT)、通用访问规范(GAP)和模式(Mode)。<br><img src="/2022/05/19/Android%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/1.png" alt="image-20220526172058056"></li>
+</ul>
+<h3 id="控制器"><a href="#控制器" class="headerlink" title="控制器"></a>控制器</h3><pre><code>物理设备，收发无线电信号。控制器与外界通过天线相连，与主机通过主机控制接口(HCI)相连。</code></pre>
+<h3 id="主机"><a href="#主机" class="headerlink" title="主机"></a>主机</h3><pre><code>软件栈，管理多台设备之间的通信以及提供服务。主机构建位于主机控制器的上层部分，其上为逻辑链路控制和适配协议(L2CAP)。在它上面是系统的两个基本构建块：安全管理器(用于处理所有认证和安全连接等事务)以及属性协议(用于公开设备上的状态数据)。属性协议之上为通用属性规范(GATT),定义属性协议如何实现可重用的服务，而这些服务公开了设备的标准特性。最后，通用访问规范(GAP)定义了设备如何以一种可交互方式找到对方，并与之进行连接。
+主机并未对其上层接口做明确规定，每个操作系统或者环境都会用不同的方式公开主机上层接口API。</code></pre>
+<h3 id="应用程序"><a href="#应用程序" class="headerlink" title="应用程序"></a>应用程序</h3><pre><code>使用软件栈和控制器实现用户实例。</code></pre>
+<h3 id="3-应用层"><a href="#3-应用层" class="headerlink" title="3.应用层"></a>3.应用层</h3><p>  控制器和主机之上是应用层。应用层规范定义了三种类型：特性(characteristic)、服务(service)和规范(profile)。</p>
+<h4 id="3-1特性-characterisitic"><a href="#3-1特性-characterisitic" class="headerlink" title="3.1特性(characterisitic)"></a>3.1特性(characterisitic)</h4><p>  特性是采用已知格式，以通用唯一识别码(UUID)作为标记的一小块数据。由于特性要求能够重复使用，因而设计时没有设计行为。</p>
+<h4 id="3-2服务-service"><a href="#3-2服务-service" class="headerlink" title="3.2服务(service)"></a>3.2服务(service)</h4><p>  服务只定义了位于服务器上的相关特性行为，而不定义客户端的行为。服务有两种类型：首要服务和次要服务。首要服务表征一个给定的设备主要做些什么。次要服务是协助主要服务或者其他次要服务的服务。</p>
+<h4 id="3-3规范-profile"><a href="#3-3规范-profile" class="headerlink" title="3.3规范(profile)"></a>3.3规范(profile)</h4><p>  规范是描述两个或者多个设备的说明，每个设备提供一个或者多个服务。规范描述了如何发现并连接设备，从而为每台设备确定所需的拓扑结构。规范还描述了客户端特性，用于发现服务和服务特性。规范和服务是一对多对多的功能。</p>
+<h3 id="建立连接"><a href="#建立连接" class="headerlink" title="建立连接"></a>建立连接</h3><ul>
+<li>connect方法</li>
+<li>发现服务</li>
+<li>寻找指定特征(写入和读取)</li>
+<li>订阅特征通知</li>
+</ul>
+<h1 id="Android蓝牙通信"><a href="#Android蓝牙通信" class="headerlink" title="Android蓝牙通信"></a>Android蓝牙通信</h1><ul>
+<li>获取连接过程中的特征(有写入权限的)</li>
+<li>构建数据写入特征到设备，然后通过订阅通知获取到设备响应数据，来进行交互。</li>
+<li>实际开发过程中，去连接设备的时候，在上面的流程图的过程中，比如说connectGatt，discoverServices,requestMtu这些方法中都可能出现onConnectionStateChange回调报状态码错误-133(最多),19,22，为了更好的用户体验需要进行重连，重连之前需要close下。</li>
+<li>另外，一般开始连接的时候，需要停止扫描，等连接结束了之后，再重新开始扫描。</li>
+</ul>
+<h1 id="常见错误与解决方法"><a href="#常见错误与解决方法" class="headerlink" title="常见错误与解决方法"></a>常见错误与解决方法</h1><h2 id="错误码"><a href="#错误码" class="headerlink" title="错误码"></a>错误码</h2><p>staus    说明<br>0    连接成功或者失败<br>8    设备端已经断开（可能是复位或者断点等原因），手机端没有收到回应，等到一定时间会自动断开<br>19    设备端主动发起的断开。比如关机等<br>22    获取不到服务<br>40    应该是环境不好，或者射频新能不好，或者距离太远，导致这些命令包slave没有收到，然后Master一直重传到connection event counter超过instant值导致。<br>133    设备不在附近，或者手机端之前的连接没有断开（有时候closegatt没有效果） 或者是连接数量超过了最大值</p>
+<h2 id="BLE版本不同MTU不同"><a href="#BLE版本不同MTU不同" class="headerlink" title="BLE版本不同MTU不同"></a>BLE版本不同MTU不同</h2><p>不同的蓝牙版本最大MTU不同，例如：蓝牙4.2的最大MTU=247Byte（不一定正确，也有说是257Byte、也有说是241Byte），蓝牙5.0的最大MTU=512Byte，有效的最大MTU还需要减去协议Byte、Opcode和Handler。<br>蓝牙4.2：1Byte(Opcode)+2Byte(Handler)+244Byte(BATT)=247Byte（不一定正确）<br>蓝牙5.0：512Byte不一定正确）</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36749906/article/details/107336329?spm=1001.2101.3001.6650.3&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-3-107336329-blog-86551379.pc_relevant_antiscanv3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-3-107336329-blog-86551379.pc_relevant_antiscanv3&utm_relevant_index=6">蓝牙学习笔记</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2dba7f067372">android蓝牙BLE</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/743dd0b4266c">Android BLE设置MTU大小</a></p>
+
+    </div>
+    
+    <div class="post-footer">
+        <div>
+            
+            转载声明：
+            商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    <a href="/2022/05/29/5%E6%9C%88%E8%B4%AD%E8%BD%A6%E8%AE%B0%E5%BD%95/" class="pre-post btn btn-default" title='5月购车记录'>
+        <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+        <span class="hidden-xs">
+            5月购车记录</span>
+    </a>
+    
+    
+    <a href="/2022/05/19/%E6%8B%96%E5%BB%B6%E7%97%87%E7%9A%84%E6%80%BB%E7%BB%93/" class="next-post btn btn-default" title='拖延症的总结'>
+        <span class="hidden-lg">下一篇</span>
+        <span class="hidden-xs">
+            拖延症的总结</span><i class="fa fa-angle-right fa-fw"></i>
+    </a>
+    
+</div>
+
+<div id="comments">
+    
+    
+<div class="utteranc">
+  
+  <script
+    src='https://utteranc.es/client.js'
+    repo='shenliyang/snippet-comment'
+    issue-term='pathname'
+    issue-number=''
+    theme='github-light'
+    label=''
+    crossorigin='anonymous'
+    async
+  ></script>
+</div>
+
+
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            文章目录
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Android%E8%93%9D%E7%89%99%E4%BB%8B%E7%BB%8D"><span class="toc-text">Android蓝牙介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%89%88%E6%9C%AC"><span class="toc-text">系统版本</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Android%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5%E8%BF%87%E7%A8%8B"><span class="toc-text">Android建立连接过程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B"><span class="toc-text">流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D%E4%BD%8E%E5%8A%9F%E8%80%97%E8%93%9D%E7%89%99"><span class="toc-text">介绍低功耗蓝牙</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="toc-text">控制器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E6%9C%BA"><span class="toc-text">主机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F"><span class="toc-text">应用程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%BA%94%E7%94%A8%E5%B1%82"><span class="toc-text">3.应用层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1%E7%89%B9%E6%80%A7-characterisitic"><span class="toc-text">3.1特性(characterisitic)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2%E6%9C%8D%E5%8A%A1-service"><span class="toc-text">3.2服务(service)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3%E8%A7%84%E8%8C%83-profile"><span class="toc-text">3.3规范(profile)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5"><span class="toc-text">建立连接</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Android%E8%93%9D%E7%89%99%E9%80%9A%E4%BF%A1"><span class="toc-text">Android蓝牙通信</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-text">常见错误与解决方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%99%E8%AF%AF%E7%A0%81"><span class="toc-text">错误码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BLE%E7%89%88%E6%9C%AC%E4%B8%8D%E5%90%8CMTU%E4%B8%8D%E5%90%8C"><span class="toc-text">BLE版本不同MTU不同</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2017
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+</body>
+</html>

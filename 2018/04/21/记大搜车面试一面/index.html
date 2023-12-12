@@ -1,0 +1,327 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="jianhui1012的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.3.0">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://jianhui1012.github.io">
+    <!--SEO-->
+
+<meta name="keywords" content="Android,面试,ReactNative" />
+
+
+<meta name="description" content="加了郭老大 开源的Android系统源码分析 团体项目微信群，看到大搜车招人内推，抱着试下的心态，投了下简历，效率是真的高，大概一个小时之后业务部门 leader 大概一小时后打电话过来让我去面..." />
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+<title>
+    
+    记大搜车面试一面 |
+    
+    jianhui1012的博客
+</title>
+
+<link rel="alternate" href="/atom.xml" title="jianhui1012的博客" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header"  style="background-image:url(
+    https://hexo-theme-snippet-1251680922.cos.ap-beijing.myqcloud.com/img/banner.jpg)"
+     >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='golike'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                勤求古训,博采众方
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://jianhui1012.github.io">
+                        jianhui1012的博客</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                首页</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa "></i>
+                                时间轴</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="记大搜车面试一面">
+            
+            记大搜车面试一面
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-none-link" href="/tags/Android/" rel="tag">Android</a> <a class="tag-none-link" href="/tags/ReactNative/" rel="tag">ReactNative</a> <a class="tag-none-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a>
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2018/04/21</span>
+    </span>
+    
+    
+</div>
+        
+        
+        <p class="fa fa-exclamation-triangle warning">
+            本文于<strong>
+                2060</strong>
+            天之前发表，文中内容可能已经过时。
+        </p>
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <p>加了郭老大 <a target="_blank" rel="noopener" href="https://github.com/guoxiaoxing/android-open-source-project-analysis">开源的Android系统源码分析</a> 团体项目微信群，看到大搜车招人内推，抱着试下的心态，投了下简历，效率是真的高，大概一个小时之后业务部门 leader 大概一小时后打电话过来让我去面试。</p>
+<a id="more"></a>
+
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>加了郭老大 <a target="_blank" rel="noopener" href="https://github.com/guoxiaoxing/android-open-source-project-analysis">开源的Android系统源码分析</a> 团体项目微信群，看到大搜车招人内推，抱着试下的心态，投了下简历，效率是真的高，大概一个小时之后业务部门 leader 大概一小时后打电话过来让我去面试。</p>
+<h3 id="一面"><a href="#一面" class="headerlink" title="一面"></a>一面</h3><p>大搜车总部在余杭区的五常大道这边，先到前台一个漂亮的小姐姐登记好以后，让我等会儿，然后让我去二楼中间露天的地方等下，走了一圈，发现好多人三三两两坐在不同的圆桌讨论，it’s amazing。进来帅气的小伙子，一开始就说面试是聊聊天的，气氛很好，基本是围绕着简历来的。</p>
+<h4 id="面试内容"><a href="#面试内容" class="headerlink" title="面试内容"></a>面试内容</h4><p>主要是原生与RN的两块。</p>
+<ul>
+<li><p>git的常见命令操作，以及切换新分支的操作 git checkout -b xxx</p>
+</li>
+<li><p>http中的三次握手和四次挥手？ </p>
+</li>
+<li><p>线程之间通信方式有哪些？进程之间通信方式有哪些？</p>
+</li>
+<li><p>okhttp与其他网络框架的优势？</p>
+</li>
+</ul>
+<blockquote>
+<p>这个其实看过，但是答的不好，讲了支持SPDY，但是共享Scoket说的是排队接受请求，其实要点是复用连接池</p>
+</blockquote>
+<ul>
+<li><p>事件传递机制？用到了哪个经典的设计模式？</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/card361401376/article/details/51552568">职责链模式</a></p>
+</blockquote>
+</li>
+<li><p>RxJava的优势是什么？RxJava的函数式编程和面向对象编程的区别？RxJava对于java编程来说的优势是什么？</p>
+</li>
+<li><p>RN解析的过程？</p>
+</li>
+</ul>
+<blockquote>
+<p>讲了点流于表面的东西，virtual dom树，diff算法这些，这部分的内容确实没看过</p>
+</blockquote>
+<ul>
+<li><p>平时看什么书？</p>
+</li>
+<li><p>给了些建议？多看看书，扎实基础</p>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li><p>这次面试收获挺多，一个是简历上的写的技术栈 – 重要的基础原理要搞清楚(其中也聊到，有时候你往往看过但是容易忘，需要反复学习)；另一个是，回答问题要到点子上去，不要流于表面，学的时候，如果欠缺思考，对于原理性的不太会有好奇，基础扎实很重要。</p>
+</li>
+<li><p>简历上的亮点，如果被问倒，那就是最大的破绽。</p>
+</li>
+</ul>
+
+    </div>
+    
+    <div class="post-footer">
+        <div>
+            
+            转载声明：
+            商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    <a href="/2018/04/21/%E8%AE%B02-10%E4%B8%80%E5%AE%B6%E5%A4%96%E5%8C%85%E5%85%AC%E5%8F%B8Android%E9%9D%A2%E8%AF%95/" class="pre-post btn btn-default" title='记2.10一家外包公司Android面试'>
+        <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+        <span class="hidden-xs">
+            记2.10一家外包公司Android面试</span>
+    </a>
+    
+    
+    <a href="/2018/04/21/420%E5%B0%8F%E6%97%B6%E5%AD%A6%E4%B9%A0%E4%BB%A3%E7%A0%81%E4%B9%8B%E5%90%8E-%E5%A6%82%E4%BD%95%E6%95%99%E4%BD%A0%E5%85%8D%E8%B4%B9%E8%87%AA%E5%AD%A6Python/" class="next-post btn btn-default" title='420小时学习代码之后:如何教你免费自学Python'>
+        <span class="hidden-lg">下一篇</span>
+        <span class="hidden-xs">
+            420小时学习代码之后:如何教你免费自学Python</span><i class="fa fa-angle-right fa-fw"></i>
+    </a>
+    
+</div>
+
+<div id="comments">
+    
+    
+<div class="utteranc">
+  
+  <script
+    src='https://utteranc.es/client.js'
+    repo='shenliyang/snippet-comment'
+    issue-term='pathname'
+    issue-number=''
+    theme='github-light'
+    label=''
+    crossorigin='anonymous'
+    async
+  ></script>
+</div>
+
+
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            文章目录
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E9%9D%A2"><span class="toc-text">一面</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9"><span class="toc-text">面试内容</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2017
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+</body>
+</html>

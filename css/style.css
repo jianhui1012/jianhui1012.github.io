@@ -50,22 +50,22 @@ h6 {
   color: #303030;
 }
 h1 {
-  font-size: 4em;
+  font-size: 2em;
 }
 h2 {
   font-size: 1.5em;
 }
 h3 {
-  font-size: 2.4em;
+  font-size: 1.2em;
 }
 h4 {
-  font-size: 2em;
+  font-size: 1em;
 }
 h5 {
-  font-size: 1.5em;
+  font-size: 0.75em;
 }
 h6 {
-  font-size: 1em;
+  font-size: 0.5em;
 }
 a {
   color: #e67e22;
@@ -482,8 +482,8 @@ pre {
   overflow: hidden;
 }
 .post .post-body p {
-  font-size: 2em;
-  line-height: 2;
+  font-size: 1em;
+  line-height: 1.5;
   word-break: break-all;
 }
 .post .post-body p img {
