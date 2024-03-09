@@ -1,0 +1,348 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="jianhui1012的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.3.0">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://jianhui1012.github.io">
+    <!--SEO-->
+
+<meta name="keywords" content="音视频,会议," />
+
+
+<meta name="description" content="为了更清晰的记录现在的工作情况，有什么，要什么，放弃什么。
+
+
+
+工作回顾工作线记录
+23.11.15 
+
+通话质量问题以及缺少会议sdk总结
+linphone无法走硬解会卡死,走软解可以
+
+
+..." />
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+<title>
+    
+    音视频会议2个月复盘 |
+    
+    jianhui1012的博客
+</title>
+
+<link rel="alternate" href="/atom.xml" title="jianhui1012的博客" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header"  style="background-image:url(
+    https://hexo-theme-snippet-1251680922.cos.ap-beijing.myqcloud.com/img/banner.jpg)"
+     >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='golike'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                勤求古训,博采众方
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://jianhui1012.github.io">
+                        jianhui1012的博客</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                首页</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa "></i>
+                                时间轴</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="音视频会议2个月复盘">
+            
+            音视频会议2个月复盘
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-none-link" href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91-%E4%BC%9A%E8%AE%AE/" rel="tag">音视频,会议,</a>
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2024/01/17</span>
+    </span>
+    
+    
+</div>
+        
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <p>为了更清晰的记录现在的工作情况，有什么，要什么，放弃什么。</p>
+<a id="more"></a>
+
+
+<h2 id="工作回顾"><a href="#工作回顾" class="headerlink" title="工作回顾"></a>工作回顾</h2><h3 id="工作线记录"><a href="#工作线记录" class="headerlink" title="工作线记录"></a>工作线记录</h3><ul>
+<li><p>23.11.15 </p>
+<ul>
+<li>通话质量问题以及缺少会议sdk总结</li>
+<li>linphone无法走硬解会卡死,走软解可以</li>
+</ul>
+</li>
+<li><p>23.11.29-12.8 </p>
+<ul>
+<li>研究Linphone的会议服务器flexsip</li>
+<li>验证系统自带播放器和网上找的播放器播放h264可以走硬解</li>
+</ul>
+</li>
+<li><p>23.12.12-12.21 </p>
+<ul>
+<li>根据日志研究linphone源码 和c++同事定位硬解无法进行的原因，怀疑是系统问题</li>
+<li>把日志文件给厂商，厂商定位</li>
+</ul>
+</li>
+<li><p>23.12.21   </p>
+<ul>
+<li>研究webrtc的p2p音视频通话的效果，也是走软解</li>
+</ul>
+</li>
+<li><p>23.12.22-1.17</p>
+<ul>
+<li>研究pjsip可行性，编译打包，双向视频效果测试，pjsip h264可以走硬解</li>
+<li>pjsip搭配freeswitch做会议</li>
+</ul>
+</li>
+</ul>
+<h3 id="成果和问题"><a href="#成果和问题" class="headerlink" title="成果和问题"></a>成果和问题</h3><h4 id="成果"><a href="#成果" class="headerlink" title="成果"></a>成果</h4><ul>
+<li>英文技术文档阅读能力提升，排查问题提高</li>
+<li>pjsip编译和demo验证,验证切换听筒/扬声器,静音/关闭视频功能</li>
+</ul>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><ul>
+<li>犹犹豫豫,不够果决,远远超出能力范围的,需要拒绝</li>
+<li>能力不足需要向上申请资源</li>
+</ul>
+<h2 id="学会看自己"><a href="#学会看自己" class="headerlink" title="学会看自己"></a>学会看自己</h2><h3 id="有什么"><a href="#有什么" class="headerlink" title="有什么"></a>有什么</h3><h4 id="工作方面"><a href="#工作方面" class="headerlink" title="工作方面"></a>工作方面</h4><ul>
+<li>17-23 6年开发经验</li>
+<li>Android,Java后端,sql</li>
+<li>使用多个排查问题工具,Android内嵌网页问题chrome inspect调试,抓包工具：wirshark,Charles,tcpdump 抓包</li>
+<li>分析问题,定位问题,解决问题</li>
+<li>串口通信,usb设备通信,蓝牙通信开发经验</li>
+<li>人脸识别sdk对接</li>
+<li>应用商店上架审核整改经验</li>
+<li>较强抗压能力,良好的沟通能力</li>
+</ul>
+<h3 id="要什么"><a href="#要什么" class="headerlink" title="要什么"></a>要什么</h3><ul>
+<li>一技之长，搞懂弄透，甚至形成本能</li>
+<li>有个喜欢的事情，可以坚持很久</li>
+<li>综合能力提升,包括不限于表达，书写，总结，沟通，身体素质，沉下心来</li>
+</ul>
+<h3 id="放弃什么"><a href="#放弃什么" class="headerlink" title="放弃什么"></a>放弃什么</h3><ul>
+<li>无用的社交</li>
+</ul>
+
+    </div>
+    
+    <div class="post-footer">
+        <div>
+            
+            转载声明：
+            商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    <a href="/2024/02/27/2023%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" class="pre-post btn btn-default" title='2023年终总结'>
+        <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+        <span class="hidden-xs">
+            2023年终总结</span>
+    </a>
+    
+    
+    <a href="/2024/01/08/Mac%E5%B9%B3%E5%8F%B0%E4%B8%8B%E7%BC%96%E8%AF%91PjSip-Android%E7%AB%AF%E5%AE%9E%E7%8E%B0P2P%E7%94%B5%E8%AF%9D/" class="next-post btn btn-default" title='Mac平台下编译PjSip Android端实现P2P电话'>
+        <span class="hidden-lg">下一篇</span>
+        <span class="hidden-xs">
+            Mac平台下编译PjSip Android端实现P2P电话</span><i class="fa fa-angle-right fa-fw"></i>
+    </a>
+    
+</div>
+
+<div id="comments">
+    
+    
+<div class="utteranc">
+  
+  <script
+    src='https://utteranc.es/client.js'
+    repo='shenliyang/snippet-comment'
+    issue-term='pathname'
+    issue-number=''
+    theme='github-light'
+    label=''
+    crossorigin='anonymous'
+    async
+  ></script>
+</div>
+
+
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            文章目录
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%9B%9E%E9%A1%BE"><span class="toc-text">工作回顾</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E7%BA%BF%E8%AE%B0%E5%BD%95"><span class="toc-text">工作线记录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%90%E6%9E%9C%E5%92%8C%E9%97%AE%E9%A2%98"><span class="toc-text">成果和问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E6%9E%9C"><span class="toc-text">成果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-text">问题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%BC%9A%E7%9C%8B%E8%87%AA%E5%B7%B1"><span class="toc-text">学会看自己</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E4%BB%80%E4%B9%88"><span class="toc-text">有什么</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E6%96%B9%E9%9D%A2"><span class="toc-text">工作方面</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A6%81%E4%BB%80%E4%B9%88"><span class="toc-text">要什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BE%E5%BC%83%E4%BB%80%E4%B9%88"><span class="toc-text">放弃什么</span></a></li></ol></li></ol>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2017
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+</body>
+</html>
