@@ -1,0 +1,313 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="jianhui1012的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.3.0">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://jianhui1012.github.io">
+    <!--SEO-->
+
+<meta name="keywords" content="Android,主屏幕应用" />
+
+
+<meta name="description" content="记录定制的Android13系统中设置主屏幕应用后开机启动崩溃导致需要重新设置主屏幕应用，本文主要从问题产生，问题定位，问题解决如何思路展开描述。
+
+
+
+背景
+最近在开发的一款产品升级了芯片和系..." />
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+<title>
+    
+    Android系统在开机时主屏幕应用Activity启动两次定位处理 |
+    
+    jianhui1012的博客
+</title>
+
+<link rel="alternate" href="/atom.xml" title="jianhui1012的博客" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header"  style="background-image:url(
+    https://hexo-theme-snippet-1251680922.cos.ap-beijing.myqcloud.com/img/banner.jpg)"
+     >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='golike'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                勤求古训,博采众方
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://jianhui1012.github.io">
+                        jianhui1012的博客</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                首页</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa "></i>
+                                时间轴</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Android系统在开机时主屏幕应用Activity启动两次定位处理">
+            
+            Android系统在开机时主屏幕应用Activity启动两次定位处理
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-none-link" href="/tags/Android-%E4%B8%BB%E5%B1%8F%E5%B9%95%E5%BA%94%E7%94%A8/" rel="tag">Android,主屏幕应用</a>
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2024/05/24</span>
+    </span>
+    
+    
+</div>
+        
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <p>记录定制的Android13系统中设置主屏幕应用后开机启动崩溃导致需要重新设置主屏幕应用，本文主要从问题产生，问题定位，问题解决如何思路展开描述。</p>
+<a id="more"></a>
+
+
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><ul>
+<li>最近在开发的一款产品升级了芯片和系统，然后有用户反馈之前的A应用设置为主屏幕应用之后，断电开机自启动会出现需要重新设置主屏幕应用，一开始以为是系统问题，后面发现其他应用是正常的。所以需要定位是什么原因导致了这个问题。</li>
+</ul>
+<h2 id="问题产生"><a href="#问题产生" class="headerlink" title="问题产生"></a>问题产生</h2><ul>
+<li>A应用设置为主屏幕应用，断电重启或者使用adb reboot命令重启，A应用闪了下，然后从底部弹出了选择主屏幕应用弹窗。</li>
+</ul>
+<h2 id="问题定位"><a href="#问题定位" class="headerlink" title="问题定位"></a>问题定位</h2><ul>
+<li>通过复现问题，观察发现A应用先是闪了下，那说明这个时候应用已经启动了，可能这个时候什么东西导致应用崩溃了，然后弹出了上面的选择主屏幕应用弹窗。</li>
+</ul>
+<h3 id="如何确定猜想"><a href="#如何确定猜想" class="headerlink" title="如何确定猜想"></a>如何确定猜想</h3><ul>
+<li>因为我们需要的日志是开机启动的，如果这个时候在应用中记录本地日志的话不能很好的定位，所以通过adb命令抓取当前一段时间的日志到本地，我们日志抓取的时候实际上是会把之前的时间日志也抓进来，命令：<code>adb logcat -v time -&gt; log.txt</code>,通过日志搜索fatal:发现确实是应用崩溃了，报的是启动线程状态异常，什么意思，启动一次的线程再次启动会抛出下面的异常。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">--------- beginning of crash</span><br><span class="line">05-22 18:29:40.277 E&#x2F;AndroidRuntime( 1371): FATAL EXCEPTION: main</span><br><span class="line">05-22 18:29:40.277 E&#x2F;AndroidRuntime( 1371): Process: com.simplemobile.medicalintercomhostapp, PID: 1371</span><br><span class="line">05-22 18:29:40.277 E&#x2F;AndroidRuntime( 1371): java.lang.IllegalThreadStateException</span><br><span class="line">05-22 18:29:40.277 E&#x2F;AndroidRuntime( 1371): 	at java.lang.Thread.start(Thread.java:960)</span><br><span class="line">05-22 18:29:40.277 E&#x2F;AndroidRuntime( 1371): 	at com.simplemobile.medicalintercomhostapp.common.multicast.BroadCastServer.start(BroadCastServer.java:71)</span><br><span class="line">05-22 18:29:40.277 E&#x2F;AndroidRuntime( 1371): 	at com.simplemobile.medicalintercomhostapp.ui.home.HomeActivity.initView$lambda$2(HomeActivity.kt:198)</span><br><span class="line">05-22 18:29:40.277 E&#x2F;AndroidRuntime( 1371): 	at com.simplemobile.medicalintercomhostapp.ui.home.HomeActivity.$r8$lambda$5BUTYHCFS-IzS8Ut4SnqwZB32E4(Unknown Source:0)</span><br><span class="line">05-22 18:29:40.277 E&#x2F;AndroidRuntime( 1371): 	at com.simplemobile.medicalintercomhostapp.ui.home.HomeActivity$$ExternalSyntheticLambda5.run(Unknown Source:2)</span><br><span class="line">05-22 18:29:40.277 E&#x2F;AndroidRuntime( 1371): 	at android.os.Handler.handleCallback(Handler.java:942)</span><br><span class="line">05-22 18:29:40.277 E&#x2F;AndroidRuntime( 1371): 	at android.os.Handler.dispatchMessage(Handler.java:99)</span><br><span class="line">05-22 18:29:40.277 E&#x2F;AndroidRuntime( 1371): 	at android.os.Looper.loopOnce(Looper.java:201)</span><br><span class="line">05-22 18:29:40.277 E&#x2F;AndroidRuntime( 1371): 	at android.os.Looper.loop(Looper.java:288)</span><br><span class="line">05-22 18:29:40.277 E&#x2F;AndroidRuntime( 1371): 	at android.app.ActivityThread.main(ActivityThread.java:7921)</span><br><span class="line">05-22 18:29:40.277 E&#x2F;AndroidRuntime( 1371): 	at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">05-22 18:29:40.277 E&#x2F;AndroidRuntime( 1371): 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:548)</span><br><span class="line">05-22 18:29:40.277 E&#x2F;AndroidRuntime( 1371): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1149)</span><br></pre></td></tr></table></figure>
+
+<h3 id="确定猜想"><a href="#确定猜想" class="headerlink" title="确定猜想"></a>确定猜想</h3><ul>
+<li><p>然后去看代码发现这个是放在Activity的onCreate去做启动，正常来说开机启动的话onCreate只会走一次，难道走了两次？加入日志观察，发现确实启动两次，那问题产生的原因是找到了。</p>
+</li>
+<li><p>那怎么解决这个问题，请继续阅读下一节内容。</p>
+</li>
+</ul>
+<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><ul>
+<li>一开始以为是屏幕旋转导致的，开启启动发现每次自动旋转屏幕会默认打开，然后清单文件启动Activity增加了<code>android:configChanges=&quot;orientation|screenSize&quot;</code>,测试发现没有作用。</li>
+<li>没办法只能通过google,百度,bing搜索大法了，还真有类似问题，找到一个说是<code>MCC MNC等Configuration改变引起的 MCC(移动国家码)和 MNC(移动网络码)</code>问题的，也是增加配置<code>android:configChanges=&quot;mcc|mnc&quot;</code>,实际测试后发现也不是这个属性引起的，继续搜索，皇天不负有心人，找到一个说是启动Activity日志中带有<code>Config changes=8</code>这个信息的，是需要加<code>android:configChanges=&quot;touchscreen&quot;</code>,测试后发现Activity启动一次，那就确定是这个属性变动导致的。</li>
+<li>后面了解了下其实导致activity重新创建的属性还有很多，比如uiMode,locale等，如下配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">android:configChanges&#x3D;[&quot;mcc&quot;, &quot;mnc&quot;, &quot;locale&quot;,</span><br><span class="line">                                 &quot;touchscreen&quot;, &quot;keyboard&quot;, &quot;keyboardHidden&quot;,</span><br><span class="line">                                 &quot;navigation&quot;, &quot;screenLayout&quot;, &quot;fontScale&quot;, &quot;uiMode&quot;,</span><br><span class="line">                                 &quot;orientation&quot;, &quot;screenSize&quot;, &quot;smallestScreenSize&quot;]</span><br><span class="line"></span><br><span class="line">官方的解释是这样的：</span><br><span class="line">Lists configuration changes that the activity will handle itself. When a configuration change occurs at runtime, the activity is shut down and restarted by default, but declaring a configuration with this attribute will prevent the activity from being restarted. Instead, the activity remains running and itsonConfigurationChanged() method is called.</span><br><span class="line">大致意思也就是说：</span><br><span class="line">    那些被列举的属性configuration改变时activity是否保存自己的状态。当应用发生了configuration改变，默认情况下activity将关闭并重启自身，但是如果定义了这个属性，activity将不必重启，它将保持运行状态同时调用onConfigurationChanged()方法。也就是说当不配置android:configChanges&#x3D;&quot;mcc|mnc&quot;时，当mcc或mnc的值发生改变的时候，会重启activity，并且onConfigurationChanged()不会被调用</span><br><span class="line">                        </span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="复盘"><a href="#复盘" class="headerlink" title="复盘"></a>复盘</h2><ul>
+<li>遇到系统相关日志需要看所有日志包括系统和应用的</li>
+<li>搜索类似问题需要多找多试</li>
+<li>解决问题固然是好的，但是我们需要知道它从哪里来，才能更好理解它，然后避免下次发生这个问题。</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tangnengwu/article/details/38537533">Launcher Activity在开机时重启两次解决办法</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/5d989bee709c">Android关于Launcher的Activity启动两次的问题调查</a></p>
+
+    </div>
+    
+    <div class="post-footer">
+        <div>
+            
+            转载声明：
+            商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+    <a href="/2024/03/21/adb%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="next-post btn btn-default" title='adb使用指南'>
+        <span class="hidden-lg">下一篇</span>
+        <span class="hidden-xs">
+            adb使用指南</span><i class="fa fa-angle-right fa-fw"></i>
+    </a>
+    
+</div>
+
+<div id="comments">
+    
+    
+<div class="utteranc">
+  
+  <script
+    src='https://utteranc.es/client.js'
+    repo='shenliyang/snippet-comment'
+    issue-term='pathname'
+    issue-number=''
+    theme='github-light'
+    label=''
+    crossorigin='anonymous'
+    async
+  ></script>
+</div>
+
+
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            文章目录
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%BA%A7%E7%94%9F"><span class="toc-text">问题产生</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D"><span class="toc-text">问题定位</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E7%8C%9C%E6%83%B3"><span class="toc-text">如何确定猜想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AE%E5%AE%9A%E7%8C%9C%E6%83%B3"><span class="toc-text">确定猜想</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="toc-text">问题解决</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E7%9B%98"><span class="toc-text">复盘</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2017
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+</body>
+</html>
