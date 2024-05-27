@@ -197,8 +197,7 @@
 <li>一开始以为是屏幕旋转导致的，开启启动发现每次自动旋转屏幕会默认打开，然后清单文件启动Activity增加了<code>android:configChanges=&quot;orientation|screenSize&quot;</code>,测试发现没有作用。</li>
 <li>没办法只能通过google,百度,bing搜索大法了，还真有类似问题，找到一个说是<code>MCC MNC等Configuration改变引起的 MCC(移动国家码)和 MNC(移动网络码)</code>问题的，也是增加配置<code>android:configChanges=&quot;mcc|mnc&quot;</code>,实际测试后发现也不是这个属性引起的，继续搜索，皇天不负有心人，找到一个说是启动Activity日志中带有<code>Config changes=8</code>这个信息的，是需要加<code>android:configChanges=&quot;touchscreen&quot;</code>,测试后发现Activity启动一次，那就确定是这个属性变动导致的。</li>
 <li>后面了解了下其实导致activity重新创建的属性还有很多，比如uiMode,locale等，如下配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">android:configChanges&#x3D;[&quot;mcc&quot;, &quot;mnc&quot;, &quot;locale&quot;,</span><br><span class="line">                                 &quot;touchscreen&quot;, &quot;keyboard&quot;, &quot;keyboardHidden&quot;,</span><br><span class="line">                                 &quot;navigation&quot;, &quot;screenLayout&quot;, &quot;fontScale&quot;, &quot;uiMode&quot;,</span><br><span class="line">                                 &quot;orientation&quot;, &quot;screenSize&quot;, &quot;smallestScreenSize&quot;]</span><br><span class="line"></span><br><span class="line">官方的解释是这样的：</span><br><span class="line">Lists configuration changes that the activity will handle itself. When a configuration change occurs at runtime, the activity is shut down and restarted by default, but declaring a configuration with this attribute will prevent the activity from being restarted. Instead, the activity remains running and itsonConfigurationChanged() method is called.</span><br><span class="line">大致意思也就是说：</span><br><span class="line">    那些被列举的属性configuration改变时activity是否保存自己的状态。当应用发生了configuration改变，默认情况下activity将关闭并重启自身，但是如果定义了这个属性，activity将不必重启，它将保持运行状态同时调用onConfigurationChanged()方法。也就是说当不配置android:configChanges&#x3D;&quot;mcc|mnc&quot;时，当mcc或mnc的值发生改变的时候，会重启activity，并且onConfigurationChanged()不会被调用</span><br><span class="line">                        </span><br></pre></td></tr></table></figure>
-
-</li>
+<img src="/2024/05/24/Android%E7%B3%BB%E7%BB%9F%E5%9C%A8%E5%BC%80%E6%9C%BA%E6%97%B6%E4%B8%BB%E5%B1%8F%E5%B9%95%E5%BA%94%E7%94%A8Activity%E5%90%AF%E5%8A%A8%E4%B8%A4%E6%AC%A1%E5%AE%9A%E4%BD%8D%E5%A4%84%E7%90%86/1.png"></li>
 </ul>
 <h2 id="复盘"><a href="#复盘" class="headerlink" title="复盘"></a>复盘</h2><ul>
 <li>遇到系统相关日志需要看所有日志包括系统和应用的</li>
@@ -207,6 +206,7 @@
 </ul>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tangnengwu/article/details/38537533">Launcher Activity在开机时重启两次解决办法</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/5d989bee709c">Android关于Launcher的Activity启动两次的问题调查</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.android.google.cn/guide/topics/manifest/activity-element?hl=zh-cn#config">官方属性android:configChanges说明</a></p>
 
     </div>
     
