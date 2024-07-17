@@ -1,0 +1,305 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="jianhui1012的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.3.0">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://jianhui1012.github.io">
+    <!--SEO-->
+
+<meta name="keywords" content="Android,Webview,前端" />
+
+
+<meta name="description" content="前端页面使用本地摄像头拍照，在Android的Webview发现，默认展示播放按钮图标，另外点击没有反应，摄像头权限都是赋予了。
+
+
+概述
+简单说下需求，做的应用是内嵌了h5页面，功能是h5使用..." />
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+<title>
+    
+    Android使用WebView使用摄像头后处理默认播放按钮 |
+    
+    jianhui1012的博客
+</title>
+
+<link rel="alternate" href="/atom.xml" title="jianhui1012的博客" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header"  style="background-image:url(
+    https://hexo-theme-snippet-1251680922.cos.ap-beijing.myqcloud.com/img/banner.jpg)"
+     >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='golike'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                勤求古训,博采众方
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://jianhui1012.github.io">
+                        jianhui1012的博客</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                首页</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa "></i>
+                                时间轴</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Android使用WebView使用摄像头后处理默认播放按钮">
+            
+            Android使用WebView使用摄像头后处理默认播放按钮
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-none-link" href="/tags/Android-Webview-%E5%89%8D%E7%AB%AF/" rel="tag">Android,Webview,前端</a>
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2024/07/17</span>
+    </span>
+    
+    
+</div>
+        
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <p>前端页面使用本地摄像头拍照，在Android的Webview发现，默认展示播放按钮图标，另外点击没有反应，摄像头权限都是赋予了。</p>
+<a id="more"></a>
+
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
+<li>简单说下需求，做的应用是内嵌了h5页面，功能是h5使用Video标签，使用本地摄像头，拍照上传，现在测试发现两个问题，第一个是点击之后没有响应，第二个是默认Video标签位置，是一张播放按钮图片，主要是解决两个问题。</li>
+</ul>
+<h2 id="The-First-Question"><a href="#The-First-Question" class="headerlink" title="The First Question"></a>The First Question</h2><ul>
+<li>一开始猜测也是权限问题，网上一顿搜索，找到相关解决方案，Webview中申请使用摄像头等权限，需要额外申请相关权限，重写Webview授权方法，我这边处理是直接授权了。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mWebView.setWebChromeClient(new WebChromeClient() &#123;</span><br><span class="line">...</span><br><span class="line"> @Override</span><br><span class="line"> public void onPermissionRequest(PermissionRequest request) &#123;</span><br><span class="line">   if (Build.VERSION.SDK_INT &gt;&#x3D; Build.VERSION_CODES.LOLLIPOP) &#123;</span><br><span class="line">       request.grant(request.getResources());</span><br><span class="line">     &#125;</span><br><span class="line">  &#125;    </span><br><span class="line">...</span><br><span class="line">&#125;        </span><br></pre></td></tr></table></figure></li>
+<li>重新测试点击h5拍照页面，发现可以拍照了，然后了解了下除了视频录制权限，还有其他三个权限。<blockquote>
+<p><img src="/2024/07/17/Android%E4%BD%BF%E7%94%A8WebView%E4%BD%BF%E7%94%A8%E6%91%84%E5%83%8F%E5%A4%B4%E5%90%8E%E5%A4%84%E7%90%86%E9%BB%98%E8%AE%A4%E6%92%AD%E6%94%BE%E6%8C%89%E9%92%AE/image.png" alt="alt text"></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="The-Second-Question"><a href="#The-Second-Question" class="headerlink" title="The Second Question"></a>The Second Question</h2><ul>
+<li><p>这个问题找了半天，最开始猜测是WebviewSetting设置的改下就好了，实际试了很多方法并且搜了很多资料，都不行，后面搜到stackoverflow中类似问题，可以重写WebChromeClient的getDefaultVideoPoster方法，并且在掘金搜到海报属性解读，这个问题，可以从前端或者原生去解决。</p>
+</li>
+<li><p>原生解决的话重写getDefaultVideoPoster方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> @Override</span><br><span class="line"> public Bitmap getDefaultVideoPoster() &#123;</span><br><span class="line">    return Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888);</span><br><span class="line"> &#125;</span><br><span class="line">&#96;&#96;&#96;  </span><br><span class="line">* 前端页面上解决的话,vido属性增加poster属性的值</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>poster=”<a target="_blank" rel="noopener" href="https://via.placeholder.com/1x1&quot;">https://via.placeholder.com/1x1&quot;</a> or poster=”noposter”</p>
+<p>注意，空值将会被忽略 poster=””，所以赋值为空字符串是没有用的。</p>
+<p>```</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#attr-poster">根据 MDN 的解释，它的值为一张图片的 URL，在以下情况中会被展示，外在表现是看起来替换了视频的第一帧，好比一张“海报”。</a><blockquote>
+<p>视频加载中<br>视频加载完但未触发播放<br>视频播放完毕</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6979472595468943373">移除 Android WebView 中 video 默认播放按钮</a><br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/18271991/html5-video-remove-overlay-play-icon">stackoverflow - HTML5 video remove overlay play icon</a><br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/video">video - MDN</a></p>
+
+    </div>
+    
+    <div class="post-footer">
+        <div>
+            
+            转载声明：
+            商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+    <a href="/2024/07/17/Android%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%B8%E6%9C%BA%E5%BC%80%E5%8F%91/" class="next-post btn btn-default" title='Android自定义相机开发'>
+        <span class="hidden-lg">下一篇</span>
+        <span class="hidden-xs">
+            Android自定义相机开发</span><i class="fa fa-angle-right fa-fw"></i>
+    </a>
+    
+</div>
+
+<div id="comments">
+    
+    
+<div class="utteranc">
+  
+  <script
+    src='https://utteranc.es/client.js'
+    repo='shenliyang/snippet-comment'
+    issue-term='pathname'
+    issue-number=''
+    theme='github-light'
+    label=''
+    crossorigin='anonymous'
+    async
+  ></script>
+</div>
+
+
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            文章目录
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-First-Question"><span class="toc-text">The First Question</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Second-Question"><span class="toc-text">The Second Question</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2017
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+</body>
+</html>
