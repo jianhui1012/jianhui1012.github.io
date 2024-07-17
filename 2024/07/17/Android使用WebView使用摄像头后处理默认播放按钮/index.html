@@ -185,10 +185,9 @@
 <li><p>这个问题找了半天，最开始猜测是WebviewSetting设置的改下就好了，实际试了很多方法并且搜了很多资料，都不行，后面搜到stackoverflow中类似问题，可以重写WebChromeClient的getDefaultVideoPoster方法，并且在掘金搜到海报属性解读，这个问题，可以从前端或者原生去解决。</p>
 </li>
 <li><p>原生解决的话重写getDefaultVideoPoster方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> @Override</span><br><span class="line"> public Bitmap getDefaultVideoPoster() &#123;</span><br><span class="line">    return Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888);</span><br><span class="line"> &#125;</span><br><span class="line">&#96;&#96;&#96;  </span><br><span class="line">* 前端页面上解决的话,vido属性增加poster属性的值</span><br></pre></td></tr></table></figure>
-
 </li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> @Override</span><br><span class="line"> public Bitmap getDefaultVideoPoster() &#123;</span><br><span class="line">    return Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888);</span><br><span class="line"> &#125;</span><br><span class="line">&#96;&#96;&#96;  </span><br><span class="line"></span><br><span class="line">* 前端页面上解决的话,vido属性增加poster属性的值</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>poster=”<a target="_blank" rel="noopener" href="https://via.placeholder.com/1x1&quot;">https://via.placeholder.com/1x1&quot;</a> or poster=”noposter”</p>
 <p>注意，空值将会被忽略 poster=””，所以赋值为空字符串是没有用的。</p>
 <p>```</p>
