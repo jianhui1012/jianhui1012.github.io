@@ -187,10 +187,13 @@
 <li><p>原生解决的话重写getDefaultVideoPoster方法</p>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> @Override</span><br><span class="line"> public Bitmap getDefaultVideoPoster() &#123;</span><br><span class="line">    return Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888);</span><br><span class="line"> &#125;</span><br><span class="line">&#96;&#96;&#96;  </span><br><span class="line"></span><br><span class="line">* 前端页面上解决的话,vido属性增加poster属性的值</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>poster=”<a target="_blank" rel="noopener" href="https://via.placeholder.com/1x1&quot;">https://via.placeholder.com/1x1&quot;</a> or poster=”noposter”</p>
-<p>注意，空值将会被忽略 poster=””，所以赋值为空字符串是没有用的。</p>
-<p>```</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public Bitmap getDefaultVideoPoster() &#123;</span><br><span class="line">   return Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>前端页面上解决的话,vido属性增加poster属性的值</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">poster&#x3D;&quot;https:&#x2F;&#x2F;via.placeholder.com&#x2F;1x1&quot; or poster&#x3D;&quot;noposter&quot;</span><br><span class="line"></span><br><span class="line">注意，空值将会被忽略 poster&#x3D;&quot;&quot;，所以赋值为空字符串是没有用的。</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#attr-poster">根据 MDN 的解释，它的值为一张图片的 URL，在以下情况中会被展示，外在表现是看起来替换了视频的第一帧，好比一张“海报”。</a><blockquote>
 <p>视频加载中<br>视频加载完但未触发播放<br>视频播放完毕</p>
