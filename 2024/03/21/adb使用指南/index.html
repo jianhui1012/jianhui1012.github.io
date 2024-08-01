@@ -26,13 +26,7 @@
 
 
 
-adb介绍adb常用命令获取应用包名
-获取所有应用
-adb shell pm list package 
-
-
-获取第三方包名
-adb shell pm list p..." />
+adb介绍ADB（Android Debug Bridge）是一个命令行工具，它允许你与Android设备进行通信。它主要用于Android开发过程中，可以执行各种..." />
 
 
 <meta name="robots" content="all" />
@@ -178,7 +172,30 @@ adb shell pm list p..." />
 <a id="more"></a>
 
 
-<h2 id="adb介绍"><a href="#adb介绍" class="headerlink" title="adb介绍"></a>adb介绍</h2><h2 id="adb常用命令"><a href="#adb常用命令" class="headerlink" title="adb常用命令"></a>adb常用命令</h2><h3 id="获取应用包名"><a href="#获取应用包名" class="headerlink" title="获取应用包名"></a>获取应用包名</h3><ul>
+<h2 id="adb介绍"><a href="#adb介绍" class="headerlink" title="adb介绍"></a>adb介绍</h2><p>ADB（Android Debug Bridge）是一个命令行工具，它允许你与Android设备进行通信。它主要用于Android开发过程中，可以执行各种设备管理和调试任务，包括但不限于：</p>
+<ol>
+<li><strong>设备管理</strong>：安装和卸载应用程序，管理设备的文件系统，查看设备的日志等。</li>
+<li><strong>调试</strong>：运行shell命令，调试Android应用，查看系统状态等。</li>
+<li><strong>数据传输</strong>：在计算机和Android设备之间传输文件。</li>
+<li><strong>屏幕截图</strong>：捕获设备屏幕的图像。</li>
+<li><strong>端口转发</strong>：将请求从一个端口转发到另一个端口。</li>
+</ol>
+<p>使用ADB之前，你需要确保：</p>
+<ul>
+<li>设备已经开启USB调试模式。</li>
+<li>计算机上安装了ADB工具。</li>
+<li>设备已经通过USB连接到计算机，并且ADB可以识别该设备。</li>
+</ul>
+<p>基本的ADB命令包括：</p>
+<ul>
+<li><code>adb devices</code>：列出所有连接的设备。</li>
+<li><code>adb push &lt;local&gt; &lt;remote&gt;</code>：将文件从计算机复制到设备。</li>
+<li><code>adb pull &lt;remote&gt; &lt;local&gt;</code>：将文件从设备复制到计算机。</li>
+<li><code>adb shell</code>：启动一个远程shell命令行。</li>
+<li><code>adb install &lt;apk&gt;</code>：在设备上安装APK文件。</li>
+<li><code>adb uninstall &lt;package&gt;</code>：卸载设备上的应用程序。</li>
+</ul>
+<h2 id="adb常用命令"><a href="#adb常用命令" class="headerlink" title="adb常用命令"></a>adb常用命令</h2><h3 id="获取应用包名"><a href="#获取应用包名" class="headerlink" title="获取应用包名"></a>获取应用包名</h3><ul>
 <li>获取所有应用<ul>
 <li>adb shell pm list package </li>
 </ul>
