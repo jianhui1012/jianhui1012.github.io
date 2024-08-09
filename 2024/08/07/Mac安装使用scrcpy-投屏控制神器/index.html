@@ -176,6 +176,7 @@
 <li>使用感受非常惊艳，稳定反应快速，下面是来自官网的特性说明。</li>
 </ul>
 <h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><ul>
+<li>轻量：原生，仅显示设备屏幕</li>
 <li>性能：30~120fps，取决于设备</li>
 <li>画质：1920×1080或以上</li>
 <li>低延迟：35~70ms</li>
@@ -213,7 +214,152 @@
 
 <h3 id="录制音视频"><a href="#录制音视频" class="headerlink" title="录制音视频"></a>录制音视频</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#x2F;&#x2F;录制视频和音频流</span><br><span class="line">scrcpy --record&#x3D;file.mp4</span><br><span class="line">&#x2F;&#x2F;简写</span><br><span class="line">scrcpy -r file.mkv</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;仅录制视频</span><br><span class="line">scrcpy --no-audio --record&#x3D;file.mp4</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;仅录制音频</span><br><span class="line">scrcpy --no-video --record&#x3D;file.opus</span><br><span class="line">scrcpy --no-video --audio-codec&#x3D;aac --record&#x3D;file.aac</span><br><span class="line">scrcpy --no-video --audio-codec&#x3D;flac --record&#x3D;file.flac</span><br><span class="line">scrcpy --no-video --audio-codec&#x3D;raw --record&#x3D;file.wav</span><br><span class="line"># .m4a&#x2F;.mp4 and .mka&#x2F;.mkv are also supported for opus, aac and flac</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;禁用窗口录制</span><br><span class="line">scrcpy --no-playback --no-window --record&#x3D;file.mp4</span><br><span class="line"># interrupt recording with Ctrl+C</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;限制录制时间,该--time-limit选项不仅限于录制，还影响简单镜像</span><br><span class="line">scrcpy --record&#x3D;file.mkv --time-limit&#x3D;20  # in seconds</span><br></pre></td></tr></table></figure>
 
+<h3 id="窗口相关"><a href="#窗口相关" class="headerlink" title="窗口相关"></a>窗口相关</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;全屏</span><br><span class="line">scrcpy --fullscreen</span><br><span class="line">&#x2F;&#x2F;简写 如果已经运行了可以使用快捷键mac为cmd+f</span><br><span class="line">scrcpy -f</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;无边界</span><br><span class="line">scrcpy --window-borderless</span><br></pre></td></tr></table></figure>
 
+<h3 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h3><p>可以使用键盘和鼠标快捷键在 scrcpy 窗口上执行操作。</p>
+<p>在以下列表中，MOD是快捷键修饰符。默认情况下，它是 (left)Alt或 (left) Super。</p>
+<p><em><kbd><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Super_key_(keyboard_button)">Super</a></kbd> 通常是 <kbd>Windows</kbd> or <kbd>Cmd</kbd> 键.</em></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th align="left">快捷键</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>切换全屏模式</td>
+<td align="left"><kbd>MOD</kbd>+<kbd>f</kbd></td>
+</tr>
+<tr>
+<td>向左旋转显示屏</td>
+<td align="left"><kbd>MOD</kbd>+<kbd>←</kbd> <em>(left)</em></td>
+</tr>
+<tr>
+<td>向右旋转显示屏</td>
+<td align="left"><kbd>MOD</kbd>+<kbd>→</kbd> <em>(right)</em></td>
+</tr>
+<tr>
+<td>水平翻转显示</td>
+<td align="left"><kbd>MOD</kbd>+<kbd>Shift</kbd>+<kbd>←</kbd> <em>(left)</em> | <kbd>MOD</kbd>+<kbd>Shift</kbd>+<kbd>→</kbd> <em>(right)</em></td>
+</tr>
+<tr>
+<td>垂直翻转显示</td>
+<td align="left"><kbd>MOD</kbd>+<kbd>Shift</kbd>+<kbd>↑</kbd> <em>(up)</em> | <kbd>MOD</kbd>+<kbd>Shift</kbd>+<kbd>↓</kbd> <em>(down)</em></td>
+</tr>
+<tr>
+<td>暂停或重新暂停显示</td>
+<td align="left"><kbd>MOD</kbd>+<kbd>z</kbd></td>
+</tr>
+<tr>
+<td>取消暂停显示</td>
+<td align="left"><kbd>MOD</kbd>+<kbd>Shift</kbd>+<kbd>z</kbd></td>
+</tr>
+<tr>
+<td>将窗口大小调整为 1:1（等比像素）</td>
+<td align="left"><kbd>MOD</kbd>+<kbd>g</kbd></td>
+</tr>
+<tr>
+<td>调整窗口大小以消除黑色边框</td>
+<td align="left"><kbd>MOD</kbd>+<kbd>w</kbd> | <em>Double-left-click¹</em></td>
+</tr>
+<tr>
+<td>点击 <code>HOME</code></td>
+<td align="left"><kbd>MOD</kbd>+<kbd>h</kbd> | <em>Middle-click</em></td>
+</tr>
+<tr>
+<td>点击 <code>BACK</code></td>
+<td align="left"><kbd>MOD</kbd>+<kbd>b</kbd> | <kbd>MOD</kbd>+<kbd>Backspace</kbd> | <em>Right-click²</em></td>
+</tr>
+<tr>
+<td>点击 <code>APP_SWITCH</code></td>
+<td align="left"><kbd>MOD</kbd>+<kbd>s</kbd> | <em>4th-click³</em></td>
+</tr>
+<tr>
+<td>点击 <code>MENU</code> (unlock screen)⁴</td>
+<td align="left"><kbd>MOD</kbd>+<kbd>m</kbd></td>
+</tr>
+<tr>
+<td>点击 <code>VOLUME_UP</code></td>
+<td align="left"><kbd>MOD</kbd>+<kbd>↑</kbd> <em>(up)</em></td>
+</tr>
+<tr>
+<td>点击 <code>VOLUME_DOWN</code></td>
+<td align="left"><kbd>MOD</kbd>+<kbd>↓</kbd> <em>(down)</em></td>
+</tr>
+<tr>
+<td>点击 <code>POWER</code></td>
+<td align="left"><kbd>MOD</kbd>+<kbd>p</kbd></td>
+</tr>
+<tr>
+<td>开机</td>
+<td align="left"><em>Right-click²</em></td>
+</tr>
+<tr>
+<td>关闭设备屏幕（保持镜像）</td>
+<td align="left"><kbd>MOD</kbd>+<kbd>o</kbd></td>
+</tr>
+<tr>
+<td>打开设备屏幕</td>
+<td align="left"><kbd>MOD</kbd>+<kbd>Shift</kbd>+<kbd>o</kbd></td>
+</tr>
+<tr>
+<td>旋转设备屏幕</td>
+<td align="left"><kbd>MOD</kbd>+<kbd>r</kbd></td>
+</tr>
+<tr>
+<td>展开通知面板</td>
+<td align="left"><kbd>MOD</kbd>+<kbd>n</kbd> | <em>5th-click³</em></td>
+</tr>
+<tr>
+<td>展开设置面板</td>
+<td align="left"><kbd>MOD</kbd>+<kbd>n</kbd>+<kbd>n</kbd> | <em>Double-5th-click³</em></td>
+</tr>
+<tr>
+<td>折叠面板</td>
+<td align="left"><kbd>MOD</kbd>+<kbd>Shift</kbd>+<kbd>n</kbd></td>
+</tr>
+<tr>
+<td>复制到剪贴板⁵</td>
+<td align="left"><kbd>MOD</kbd>+<kbd>c</kbd></td>
+</tr>
+<tr>
+<td>剪切到剪贴板⁵</td>
+<td align="left"><kbd>MOD</kbd>+<kbd>x</kbd></td>
+</tr>
+<tr>
+<td>同步剪贴板并粘贴⁵</td>
+<td align="left"><kbd>MOD</kbd>+<kbd>v</kbd></td>
+</tr>
+<tr>
+<td>注入计算机剪贴板文本</td>
+<td align="left"><kbd>MOD</kbd>+<kbd>Shift</kbd>+<kbd>v</kbd></td>
+</tr>
+<tr>
+<td>打开键盘设置（仅限 HID 键盘）</td>
+<td align="left"><kbd>MOD</kbd>+<kbd>k</kbd></td>
+</tr>
+<tr>
+<td>启用/禁用 FPS 计数器（在标准输出上）</td>
+<td align="left"><kbd>MOD</kbd>+<kbd>i</kbd></td>
+</tr>
+<tr>
+<td>双指缩放/旋转</td>
+<td align="left"><kbd>Ctrl</kbd>+<em>click-and-move</em></td>
+</tr>
+<tr>
+<td>倾斜（用两根手指垂直滑动）</td>
+<td align="left"><kbd>Shift</kbd>+<em>click-and-move</em></td>
+</tr>
+<tr>
+<td>拖放 APK 文件</td>
+<td align="left">从电脑安装到手机</td>
+</tr>
+<tr>
+<td>拖放非 APK 文件</td>
+<td align="left"><a href="control.md#push-file-to-device">将文件推送至设备</a></td>
+</tr>
+</tbody></table>
+<p><em>¹双击黑色边框即可将其移除。</em><br><em>²如果屏幕关闭，则右键单击可打开屏幕，否则按“返回”。</em><br><em>³如果您的鼠标有第 4 和第 5 个鼠标按钮，则按它们。</em><br><em>⁴对于开发中的 react-native 应用，MENU触发开发菜单。</em><br><em>⁵仅适用于 Android &gt;= 7。</em></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/Genymobile/scrcpy/blob/master/doc/macos.md">官方文档安装</a></li>
 <li><a href="%5Bscrcpy%5D(https://guozh.net/install-scrcpy-on-macos/)">macOS 安装使用 scrcpy 教程</a></li>
@@ -280,7 +426,7 @@
             文章目录
         </h3>
         
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%80%A7"><span class="toc-text">特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A6%81%E6%B1%82"><span class="toc-text">要求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9C%A8%E7%BB%88%E7%AB%AF%E4%B8%AD%E5%AE%89%E8%A3%85brew%E5%91%BD%E4%BB%A4"><span class="toc-text">1.在终端中安装brew命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%9C%A8%E7%94%B5%E8%84%91%E4%B8%AD%E5%AE%89%E8%A3%85adb"><span class="toc-text">2.在电脑中安装adb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%89%8B%E6%9C%BA%E4%B8%8A%E5%BC%80%E5%90%AF%E5%BC%80%E5%8F%91%E8%80%85%E9%80%89%E9%A1%B9%EF%BC%8C%E6%89%93%E5%BC%80USB%E8%B0%83%E8%AF%95"><span class="toc-text">3.手机上开启开发者选项，打开USB调试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%BF%9E%E6%8E%A5%E8%AE%BE%E5%A4%87%E5%B9%B6%E5%90%AF%E5%8A%A8scrcpy"><span class="toc-text">4.连接设备并启动scrcpy</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%8C%87%E5%AE%9A%E8%AE%BE%E5%A4%87"><span class="toc-text">连接指定设备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%95%E5%88%B6%E9%9F%B3%E8%A7%86%E9%A2%91"><span class="toc-text">录制音视频</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%80%A7"><span class="toc-text">特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A6%81%E6%B1%82"><span class="toc-text">要求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9C%A8%E7%BB%88%E7%AB%AF%E4%B8%AD%E5%AE%89%E8%A3%85brew%E5%91%BD%E4%BB%A4"><span class="toc-text">1.在终端中安装brew命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%9C%A8%E7%94%B5%E8%84%91%E4%B8%AD%E5%AE%89%E8%A3%85adb"><span class="toc-text">2.在电脑中安装adb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%89%8B%E6%9C%BA%E4%B8%8A%E5%BC%80%E5%90%AF%E5%BC%80%E5%8F%91%E8%80%85%E9%80%89%E9%A1%B9%EF%BC%8C%E6%89%93%E5%BC%80USB%E8%B0%83%E8%AF%95"><span class="toc-text">3.手机上开启开发者选项，打开USB调试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%BF%9E%E6%8E%A5%E8%AE%BE%E5%A4%87%E5%B9%B6%E5%90%AF%E5%8A%A8scrcpy"><span class="toc-text">4.连接设备并启动scrcpy</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%8C%87%E5%AE%9A%E8%AE%BE%E5%A4%87"><span class="toc-text">连接指定设备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%95%E5%88%B6%E9%9F%B3%E8%A7%86%E9%A2%91"><span class="toc-text">录制音视频</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AA%97%E5%8F%A3%E7%9B%B8%E5%85%B3"><span class="toc-text">窗口相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-text">快捷键</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
         
     </div>
 </aside>
