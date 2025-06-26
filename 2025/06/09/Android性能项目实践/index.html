@@ -1,0 +1,403 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="jianhui1012的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.3.0">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://jianhui1012.github.io">
+    <!--SEO-->
+
+<meta name="keywords" content="内存优化,性能优化" />
+
+
+<meta name="description" content="本文主要结合实际项目讲解内存优化方面的内容。
+
+
+性能优化体系建立
+不管是C、Java、JavaScript、Kotlin等其他任何语言，当你开发出一个应用程序的时候，都会有可能要进行性能优化的..." />
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+<title>
+    
+    Android性能项目实践 |
+    
+    jianhui1012的博客
+</title>
+
+<link rel="alternate" href="/atom.xml" title="jianhui1012的博客" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header"  style="background-image:url(
+    https://hexo-theme-snippet-1251680922.cos.ap-beijing.myqcloud.com/img/banner.jpg)"
+     >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='golike'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                勤求古训,博采众方
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://jianhui1012.github.io">
+                        jianhui1012的博客</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                首页</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa "></i>
+                                时间轴</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Android性能项目实践">
+            
+            Android性能项目实践
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-none-link" href="/tags/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">内存优化,性能优化</a>
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2025/06/09</span>
+    </span>
+    
+    
+</div>
+        
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <p>本文主要结合实际项目讲解内存优化方面的内容。</p>
+<a id="more"></a>
+
+<h2 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h2><h3 id="体系建立"><a href="#体系建立" class="headerlink" title="体系建立"></a>体系建立</h3><ul>
+<li>不管是C、Java、JavaScript、Kotlin等其他任何语言，当你开发出一个应用程序的时候，都会有可能要进行性能优化的情况，而一般市面上听到的都是从应用程序的知识层面来讲的，这往往导致我们看问题的局限性。如果想要在遇到性能问题的时候，从容有节奏的深入优化应用程序的性能问题，那么我们的知识体系需要从硬件，操作系统底层开始了解和构建。</li>
+</ul>
+<h3 id="操作系统和硬件"><a href="#操作系统和硬件" class="headerlink" title="操作系统和硬件"></a>操作系统和硬件</h3><ul>
+<li>从计算机早期开始，应用程序和操作系统操作的都是物理内存，【应用程序调用操作系统的API,实际上多个应用程序都可能调用操作系统API,这部分物理内存都是共享的】。这里会衍生出新的问题？多个应用程序访问物理内存的时候，可能会相互覆盖，导致异常。Why?因为两个应用程序直接操作物理内存的时候，没有什么中间层去控制管理他们了。</li>
+<li>为了解决上面物理内存被随意修改的问题，后面出了虚拟内存的路子，从上面说的原因你也可以猜到，这其实是个中间层，也就是说，程序操作的是虚拟内存，虚拟内存映射物理内存，比如两个程序运行时申请两块不同的虚拟内存，这样就达到了隔离的目的。</li>
+</ul>
+<h3 id="内存描述"><a href="#内存描述" class="headerlink" title="内存描述"></a>内存描述</h3><ul>
+<li>使用adb命令获取当前进程占用的内存情况，会看核心指标，会用工具。</li>
+</ul>
+<h2 id="结合项目讲解"><a href="#结合项目讲解" class="headerlink" title="结合项目讲解"></a>结合项目讲解</h2><h3 id="使用中内存增长设备挂掉"><a href="#使用中内存增长设备挂掉" class="headerlink" title="使用中内存增长设备挂掉"></a>使用中内存增长设备挂掉</h3><h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><ul>
+<li>超高频人脸识别业务，涉及解析身份证图片和人脸特征值提取等。</li>
+</ul>
+<h4 id="性能监测"><a href="#性能监测" class="headerlink" title="性能监测"></a>性能监测</h4><ul>
+<li>使用AYA工具监测内存，CPU,FPS等指标，这个工具本质是使用adb命令包装做的GUI的工具，但是功能很全，很方便。</li>
+</ul>
+<h4 id="定位问题"><a href="#定位问题" class="headerlink" title="定位问题"></a>定位问题</h4><ul>
+<li>现场反馈问题之后，用监测工具定位到内存缓慢增长，其他指标正常，首先考虑到使用场景，因为频率很高，然后从这块业务切入，可以从审查代码+增加日志+注释代码，通过减少变量方法排查；另外是通过工具去排查，集成LeakCanry观察；</li>
+<li>从审查代码发现，发现一些问题，存在bitmap使用后没有回收的情况。</li>
+<li>但是加了回收的代码之后，实际使用还是会不断增长，然后看到保存图片中使用人脸识别sdk方法去获取图片转base64字符串，这里的话使用之后没有销毁，另外使用人脸识别sdk方法获取图像数据还有其他问题，看下个问题会展开来讲。</li>
+</ul>
+<h3 id="日志观察到GC频繁"><a href="#日志观察到GC频繁" class="headerlink" title="日志观察到GC频繁"></a>日志观察到GC频繁</h3><blockquote>
+<p>自从上面的问题之后，观察日志就不在于看应用日志，会看所有的日志，帮助我们更好提升性能，然后通过频繁测试刷身份证场景中，观测到日志中隔几秒就有gc相关的日志，有并发gc的日志。<br>就产生了好奇，到底是什么产生了这个gc?</p>
+</blockquote>
+<ul>
+<li>通过上面场景和jvm gc的机制里，看到一定是是new了大量的对象到堆里了。而通过场景猜测，人脸识别相关的对象有很大概率了。另外，通过仔细观察日志发现，gc产生的时候，往往是一次识别结束，这也可以佐证上面的猜测了。</li>
+<li>但是问题来了，我们如何找到源头呢？这个时候，AndroidStudio中的软件Android Profiler工具就派上用场了。</li>
+<li>用Android Profiler工具分析内存占用情况，可以看大内存占用类型分布情况，有些内存可以看到产生该内存的方法堆栈信息，那就更方便了。</li>
+<li>从上图中可以看到产生byte数据类型占用最大，并且它们的大小很多都是一样的，由此可以分析是摄像头原始数据，而这个原始数据没有复用之前内存，而是不断产生。</li>
+<li>这个时候正好想起之前看到的开源相机项目，里面从SurfaceView,TextureView，以及CameraAPI1,CameraApi2使用讲解等，看了这个项目使用CameraApi1中发现，取摄像头数据的方法是使用了<strong>setPreviewCallbackWithBuffer</strong>而不是<strong>setPreviewCallback</strong>。</li>
+<li>上面两个方法点进去可以看下方法说明，也可以使用deepseek等大模型分析下上面的两个方法。</li>
+</ul>
+<p><img src="/2025/06/09/Android%E6%80%A7%E8%83%BD%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/1.png" alt="setPreviewCallbackWithBuffer"><br><img src="/2025/06/09/Android%E6%80%A7%E8%83%BD%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/2.png" alt="setPreviewCallback"></p>
+<ul>
+<li>下面内容节选自deepseek的回答，讲的挺细的，简单来说的话<strong>setPreviewCallback</strong>没有复用内存，<strong>setPreviewCallbackWithBuffer</strong>则复用内存，不会创建大量字节数组内存。</li>
+</ul>
+<p>在 Android 相机框架中，<code>setPreviewCallback</code> 和 <code>setPreviewCallbackWithBuffer</code> 都用于接收相机预览数据，但它们在<strong>内存管理机制和性能</strong>上有本质区别：</p>
+<hr>
+<h3 id="1-setPreviewCallback"><a href="#1-setPreviewCallback" class="headerlink" title="1. setPreviewCallback"></a><strong>1. <code>setPreviewCallback</code></strong></h3><ul>
+<li><strong>工作原理</strong>：<br>系统为每一帧预览数据<strong>动态分配新内存</strong>，并将数据通过 <code>onPreviewFrame(byte[] data, Camera camera)</code> 回调返回。</li>
+<li><strong>内存行为</strong>：<ul>
+<li>每次回调都创建新的 <code>byte[]</code> 数组。</li>
+<li>旧数组依赖 GC 回收，频繁分配/释放易引发内存抖动。</li>
+</ul>
+</li>
+<li><strong>优点</strong>：使用简单，无需额外配置。</li>
+<li><strong>缺点</strong>：<ul>
+<li>高频帧率下内存分配开销大，可能导致卡顿或丢帧。</li>
+<li>不适合连续实时处理（如视频分析）。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-setPreviewCallbackWithBuffer"><a href="#2-setPreviewCallbackWithBuffer" class="headerlink" title="2. setPreviewCallbackWithBuffer"></a><strong>2. <code>setPreviewCallbackWithBuffer</code></strong></h3><ul>
+<li><strong>工作原理</strong>：<br>开发者<strong>预先分配固定缓冲区池</strong>，相机复用这些缓冲区传递数据。</li>
+<li><strong>使用步骤</strong>：<ol>
+<li><strong>计算帧大小</strong>：  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> width = camera.getParameters().getPreviewSize().width;</span><br><span class="line"><span class="keyword">int</span> height = camera.getParameters().getPreviewSize().height;</span><br><span class="line"><span class="keyword">int</span> bufferSize = width * height * ImageFormat.getBitsPerPixel(ImageFormat.NV21) / <span class="number">8</span>;</span><br></pre></td></tr></table></figure></li>
+<li><strong>初始化缓冲区池</strong>（通常 2-3 个）：  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[bufferSize];</span><br><span class="line">    camera.addCallbackBuffer(buffer); <span class="comment">// 注册缓冲区</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><strong>设置回调</strong>：  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">camera.setPreviewCallbackWithBuffer(<span class="keyword">this</span>);</span><br></pre></td></tr></table></figure></li>
+<li><strong>在回调中归还缓冲区</strong>：  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPreviewFrame</span><span class="params">(<span class="keyword">byte</span>[] data, Camera camera)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 处理 data...</span></span><br><span class="line">    camera.addCallbackBuffer(data); <span class="comment">// 关键：归还缓冲区复用！</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><strong>内存行为</strong>：<ul>
+<li>缓冲区重复利用，避免频繁内存分配。</li>
+<li>显著减少 GC 压力。</li>
+</ul>
+</li>
+<li><strong>优点</strong>：<ul>
+<li>内存开销稳定，适合高帧率或长时间预览。</li>
+<li>减少性能抖动，提升实时性。</li>
+</ul>
+</li>
+<li><strong>缺点</strong>：<ul>
+<li>需手动管理缓冲区（注册、归还）。</li>
+<li>逻辑稍复杂。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="关键区别总结"><a href="#关键区别总结" class="headerlink" title="关键区别总结"></a><strong>关键区别总结</strong></h3><table>
+<thead>
+<tr>
+<th><strong>特性</strong></th>
+<th><code>setPreviewCallback</code></th>
+<th><code>setPreviewCallbackWithBuffer</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>内存分配</strong></td>
+<td>系统自动分配（每帧新内存）</td>
+<td>开发者预分配缓冲区池</td>
+</tr>
+<tr>
+<td><strong>内存开销</strong></td>
+<td>高（频繁 GC）</td>
+<td>低（缓冲区复用）</td>
+</tr>
+<tr>
+<td><strong>性能</strong></td>
+<td>低帧率可用，高频易卡顿</td>
+<td>高帧率稳定，适合实时处理</td>
+</tr>
+<tr>
+<td><strong>使用复杂度</strong></td>
+<td>简单（一行设置）</td>
+<td>中等（需管理缓冲区）</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>低频抓帧（如拍照瞬间）</td>
+<td>视频流处理、AR、实时识别</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="选择建议"><a href="#选择建议" class="headerlink" title="选择建议"></a><strong>选择建议</strong></h3><ul>
+<li>若需<strong>逐帧处理预览数据</strong>（如二维码扫描、人脸识别），<strong>务必使用 <code>setPreviewCallbackWithBuffer</code></strong> 避免性能瓶颈。</li>
+<li>仅在<strong>极低频</strong>或测试场景中使用 <code>setPreviewCallback</code>。</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：现代 Android 开发推荐使用 <strong>CameraX</strong> 或 <strong>Camera2 API</strong> 替代已废弃的 <code>Camera</code> 类。例如 CameraX 的 <code>ImageAnalysis</code> 抽象了底层优化，无需手动管理缓冲区。</p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>总的来说，对于面向高频场景的性能优化往往需要分析场景中产生内存的情况，包括字符串拼接打印，图片等大对象。</li>
+<li>对于性能问题来说，知识体系升级可以帮助我们更全面的分析问题，游刃有余，</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://juejin.cn/book/7153836660768292878?enter_from=course_center&utm_source=course_center">Android性能优化</a></p>
+
+    </div>
+    
+    <div class="post-footer">
+        <div>
+            
+            转载声明：
+            商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+    <a href="/2025/02/05/2%E4%B8%AA%E6%9C%88%E4%B8%80%E6%AC%A1%E8%BF%87%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88-%E4%B8%AD%E7%BA%A7/" class="next-post btn btn-default" title='2个月一次过软件设计师(中级)'>
+        <span class="hidden-lg">下一篇</span>
+        <span class="hidden-xs">
+            2个月一次过软件设计师(中级)</span><i class="fa fa-angle-right fa-fw"></i>
+    </a>
+    
+</div>
+
+<div id="comments">
+    
+    
+<div class="utteranc">
+  
+  <script
+    src='https://utteranc.es/client.js'
+    repo='shenliyang/snippet-comment'
+    issue-term='pathname'
+    issue-number=''
+    theme='github-light'
+    label=''
+    crossorigin='anonymous'
+    async
+  ></script>
+</div>
+
+
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            文章目录
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-text">性能优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%93%E7%B3%BB%E5%BB%BA%E7%AB%8B"><span class="toc-text">体系建立</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%92%8C%E7%A1%AC%E4%BB%B6"><span class="toc-text">操作系统和硬件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%8F%8F%E8%BF%B0"><span class="toc-text">内存描述</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E5%90%88%E9%A1%B9%E7%9B%AE%E8%AE%B2%E8%A7%A3"><span class="toc-text">结合项目讲解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%86%85%E5%AD%98%E5%A2%9E%E9%95%BF%E8%AE%BE%E5%A4%87%E6%8C%82%E6%8E%89"><span class="toc-text">使用中内存增长设备挂掉</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E7%9B%91%E6%B5%8B"><span class="toc-text">性能监测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98"><span class="toc-text">定位问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E8%A7%82%E5%AF%9F%E5%88%B0GC%E9%A2%91%E7%B9%81"><span class="toc-text">日志观察到GC频繁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-setPreviewCallback"><span class="toc-text">1. setPreviewCallback</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-setPreviewCallbackWithBuffer"><span class="toc-text">2. setPreviewCallbackWithBuffer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%8C%BA%E5%88%AB%E6%80%BB%E7%BB%93"><span class="toc-text">关键区别总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E5%BB%BA%E8%AE%AE"><span class="toc-text">选择建议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2017
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+</body>
+</html>
